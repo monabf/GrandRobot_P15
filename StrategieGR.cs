@@ -15,12 +15,20 @@ namespace GR
 #if HOMOLOGATION
             Tracage.Ecrire("Homologation");
 
-            AllerEn(Position.x, Equipe == Couleur.Bleu ? 1150 : 1850,
-                Plateforme.sens.avancer, vitesse.premiere, false, true);
-            AllerEn(Position.x, Position.y + (Equipe == Couleur.Bleu ? -100 : 100),
-                Plateforme.sens.reculer, vitesse.premiere, false, true);
-            SortieOK = true;
-//Il faudra voir ce à quoi doit ressembler l'homologation !! À changer en fonction !!!
+            Tourner(12);
+            AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, Plateforme.sens.avancer);
+            Tracage.Ecrire("Recuperation du cylindre");
+            Pince.ouvrir(Equipe); //À CODER : doit rentrer la pince et ouvrir en intermédiaire pour que le bras vienne récupérer le cylindre (le début du robot est à 5.8cm du cylindre)
+            Tourner(Equipe==Couleur.Bleu ? 78 : -78);
+            Pince.fermer(Equipe); //À CODER : doit sortir et fermer
+            Pince.ouvrir(Equipe);
+            Bras.attraper(Equipe); //À CODER : doit descendre, attraper le cylindre laissé par la pince, remonter
+            SortieOK = AllerEn(205, Equipe == Couleur.Bleu ? 870 : 2120, Plateforme.sens.avancer) == etat.arrive;
+            Bras.reposer(Equipe); //À CODER : doit redescendre et lâcher le cylindre qu'il tient
+            //il faudra voir expérimentalement si les emplacements pour redéposer le cylindre conviennent, sinon les bouger un peu
+
+//Homologation : récupérer le 1er cylindre et retourner dans la zone bleue pour l'y reposer, sans le mettre dans le réservoir
+//entre les deux (le bras le garde simplement), s'arrêter si le capteur ultrasons réagit (l'arrêt est codé dans la classe capteur ultrasons)
 
 #else
             Tracage.Ecrire("Sortie de la zone de depart");
