@@ -9,24 +9,44 @@ namespace GR.Membres
 {
     class CPince
     {
-        CAX_12 m_ax12Pince;
-
-        public CPince(ControleurAX12 controleur, byte idPince)
+        struct configPince
         {
-            m_ax12Pince = new CAX_12(idPince, controleur.m_port, controleur.m_direction);
+            public byte idAx12PinceSupport;
+            public byte idAx12PinceModule;
+        };
+
+        enum positionPince
+        {
+          avancee = ,
+          rangee = ,
+          ouverte = ,
+          intermediaire = ,
+          fermee = ,
+        };
+
+        CAX_12 m_ax12PinceSupport;
+        CAX_12 m_ax12PinceModule;
+
+        public CPince(ControleurAX12 controleur, configPince config)
+        {
+            m_ax12PinceSupport = new CAX_12(config.idAx12PinceSupport, controleur.m_port, controleur.m_direction);
+            m_ax12PinceModule = new CAX_12(config.idAx12PinceModule, controleur.m_port, controleur.m_direction);
            // m_ax12Pince.setMode(CAX_12.AX12Mode.joint);
-            m_ax12Pince.move(818); //position initiale        
+            //position initiale
+            // m_ax12Pince.setMode(CAX_12.AX12Mode.joint);
+
         }
 
         public void ouvrir(Couleur equipe)
         {
-            //m_ax12Pince.move(894);
-            m_ax12Pince.move(equipe == Couleur.Violet ? 866 : 770);
+            m_ax12PinceSupport.move((int)positionPince.rangee);
+            m_ax12PinceModule.move((int)positionPince.intermediaire);
         }
+
         public void fermer(Couleur equipe)
         {
-            m_ax12Pince.move(equipe == Couleur.Violet ? 790 : 846);
-            
+            m_ax12PinceSupport.move((int)positionPince.avancee);
+            m_ax12PinceModule.move((int)positionPince.fermee);
         }
     }
 }
