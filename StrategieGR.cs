@@ -23,7 +23,7 @@ namespace GR
             Pince.fermer(Equipe); //À CODER : doit sortir et fermer
             Pince.ouvrir(Equipe);
             Bras.attraper(Equipe); //À CODER : doit descendre, attraper le cylindre laissé par la pince, remonter
-            SortieOK = AllerEn(205, Equipe == Couleur.Bleu ? 870 : 2120, Plateforme.sens.avancer) == etat.arrive;
+            bool SortieOK = AllerEn(205, Equipe == Couleur.Bleu ? 870 : 2120, Plateforme.sens.avancer) == etat.arrive;
             Bras.reposer(Equipe); //À CODER : doit redescendre et lâcher le cylindre qu'il tient
             //il faudra voir expérimentalement si les emplacements pour redéposer le cylindre conviennent, sinon les bouger un peu
 
@@ -83,7 +83,7 @@ namespace GR
 
         private bool RecupererCylindre1()
         {
-          CylindresRecup++; //int à créer pour en faire un indice
+          CylindresRecup++; //À CODER (pas essentiel) : un entier haut niveau qui compte le nombre de cylindres déjà récupérés
 
           Tracage.Ecrire("Recuperation du 1er cylindre");
           Pince.ouvrir(Equipe); //À CODER : doit rentrer la pince et ouvrir en intermédiaire pour que le bras vienne récupérer le cylindre (le début du robot est à 5.8cm du cylindre)
@@ -179,7 +179,7 @@ namespace GR
           return true;
         }
 
-  private bool DeployerParasol()
+  /*private bool DeployerParasol()
         {
             Tracage.Ecrire("Attente de la fin du temps imparti");
             while ((DateTime.Now - InstantDebut).Ticks < new TimeSpan(0, 1, 30).Ticks)
@@ -189,7 +189,7 @@ namespace GR
             Parasol.deployer();
 
             return true;
-        }
+        }*/
 
         private void InitialiserStrategie()
         {
