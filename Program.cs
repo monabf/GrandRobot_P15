@@ -29,9 +29,14 @@ namespace GR
             ports.confBras.idAX12Coude = 6;
             ports.confBras.idAX12Poignet = 5;*/
             // initialisation des ports
+
+            // numéros de ports à corriger
+
+            
+
             var ports = new ConfigurationPorts
             {
-                BaseRoulante = 8,
+                Plateforme = 10,
                 IO = 5,
                 Jack = 4,
                 InfrarougeAVG = 6,
@@ -40,13 +45,17 @@ namespace GR
                 InfrarougeARD = 9,
                 CapteurUltrason = 6,
                 AX12 = 11,
-                SlotCanne = 9,
-                IdPince = 1,
-                IdParasol = 2
+                IdFunnyBras = 3,
             };
 
-            ports.ConfigCanne.idMx64 = 1;
-            ports.ConfigCanne.idRx64 = 2;
+            ports.bras.idAx12BrasSupport = 1;
+            ports.bras.idAx12BrasModule = 2;
+
+            ports.pince.idAx12PinceSupport = 3;
+            ports.pince.idAx12PinceModule = 4;
+
+            ports.reservoir.idAx12Poussoir = 12;
+            ports.reservoir.idAx12Rotateur = 13;
             
             // initialisation de GHI Glide pour les IHMs
             GlideTouch.Initialize();
@@ -64,8 +73,7 @@ namespace GR
             // initialisation du robot
             robot = new GrandRobot(
                 ports,
-                selection.Equipe,
-                new ConfigurationTable(selection.Equipe, selection.Disposition)
+                selection.Equipe
             );
 
             // attente du jack

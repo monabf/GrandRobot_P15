@@ -9,19 +9,21 @@ namespace GR.Membres
 {
     class CPince
     {
-        struct configPince
+       public struct configPince
         {
             public byte idAx12PinceSupport;
             public byte idAx12PinceModule;
         };
 
+        // A COMPLETER
+
         enum positionPince
         {
-          avancee = ,
-          rangee = ,
-          ouverte = ,
-          intermediaire = ,
-          fermee = ,
+          avancee = 10,
+          rangee = 10,
+          ouverte = 10,
+          intermediaire = 10,
+          fermee = 10
         };
 
         CAX_12 m_ax12PinceSupport;

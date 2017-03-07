@@ -13,11 +13,10 @@ namespace GR
         public int DetecteurIR;
         public int Plateforme;
         public int AX12;
-        public configPince IdPince;
-        public configBras IdBras;
-        public byte IdPoussoir;
+        public CPince.configPince pince;
+        public CBras.configBras bras;
+        public CReservoir.configReservoir reservoir;
         public byte IdFunnyBras;
-        public byte IdRotateur;
         public int InfrarougeAVD;
         public int InfrarougeAVG;
         public int InfrarougeARD;
