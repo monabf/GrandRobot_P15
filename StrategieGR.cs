@@ -46,40 +46,7 @@ namespace GR
             return SortieOK;
         }
 
-      /*  private bool PecherPoissons()
-        {
-            int posX = Table.Aquarium.Position.X - (Equipe == Couleur.Bleu ? 200 : 225);
 
-            TentativesPeche++;
-
-            Tracage.Ecrire("Deplacement vers l'aquarium");
-            if (AllerEn(Table.Aquarium.Position.X - 250, Table.Aquarium.Position.Y,
-                Plateforme.sens.avancer) != etat.arrive) return false;
-            AllerEn(posX, Table.Aquarium.Position.Y + (Equipe == Couleur.Bleu ? 300 : -400),
-                Equipe == Couleur.Bleu ? Plateforme.sens.reculer : Plateforme.sens.avancer);
-            Tourner(-90 - Position.alpha);
-
-            Tracage.Ecrire("Peche des poissons");
-            CanneAPeche.baisser();
-            AllerEn(posX, Table.Aquarium.Position.Y + (Equipe == Couleur.Bleu ? 100 : -200),
-                Equipe == Couleur.Bleu ? Plateforme.sens.avancer : Plateforme.sens.reculer);
-            AllerEn(posX, Table.Aquarium.Position.Y + (Equipe == Couleur.Bleu ? 300 : -450),
-                Equipe == Couleur.Bleu ? Plateforme.sens.reculer : Plateforme.sens.avancer);
-            CanneAPeche.ranger();
-
-            Tracage.Ecrire("Depot des poissons");
-            AllerEn(posX, Table.Filet.Position.Y + (Equipe == Couleur.Bleu ? 200 : -300),
-                Equipe == Couleur.Bleu ? Plateforme.sens.reculer : Plateforme.sens.avancer);
-
-            CanneAPeche.lacherPoisson();
-            Thread.Sleep(1000);
-            CanneAPeche.ranger();
-
-            AllerEn(Table.Aquarium.Position.X - 285, Table.Aquarium.Position.Y + (Equipe == Couleur.Bleu ? -50 : 50),
-                Equipe == Couleur.Bleu ? Plateforme.sens.avancer : Plateforme.sens.reculer);
-
-            return true;
-        }*/
 
         private bool RecupererCylindre1()
         {
@@ -179,7 +146,7 @@ namespace GR
           return true;
         }
 
-  /*private bool DeployerParasol()
+  /*private bool DeployerParasol()  NE PAS OUBLIER LA FUNNY ACTION
         {
             Tracage.Ecrire("Attente de la fin du temps imparti");
             while ((DateTime.Now - InstantDebut).Ticks < new TimeSpan(0, 1, 30).Ticks)
@@ -194,35 +161,30 @@ namespace GR
         private void InitialiserStrategie()
         {
 
-            /*  Strategie.Ajouter(new ActionRobot(() =>
-              {
-                  Tracage.Ecrire("getPosition");
-                  BaseRoulante.getPosition(ref Position);
-                  Tracage.Ecrire("TOurner");
-               //   AllerEn(Position.x, Position.y + (Equipe == Couleur.Bleu ? 1000 : -1000), BR.sens.avancer);
-                  int tempo = 0;
-                  BaseRoulante.tourner(90, vitesse.vitesseRotationMax, ref tempo);
-                  Tracage.Ecrire("ok");
-
-
-                  return true;
-              }, executionUnique: true));
-              return;*/
-
             Strategie.Ajouter(new ActionRobot(SortirZoneDepart, executionUnique: true));
+            /*Permet de gérer l'enchaînement des actions : on ajoute une par une les actions qu'on veut exécuter, sous la forme
+            new ActionRobot(nom, condition, priorité, exécution unique (tous ces param sauf le nom sont optionnels)). La condition
+            est soit une fonction booléenne du type de celles au-dessus  (la suivante n'est exécutée que si la précédente a été appelée
+            avant), soit une condition temporelle du type ci-dessous dans le code P14*/
+
         #if HOMOLOGATION
               return;
         #endif
-            Strategie.Ajouter(new ActionRobot(PecherPoissons,
+            Strategie.Ajouter(new ActionRobot(RecupererCylindre1, SortirZoneDepart, () => 100-CylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindresFusee, RecupererCylindre1, () => 100-CylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindre2, RecupererCylindresFusee, () => 100 - CylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(DeposerCylindres, RecupererCylindre2, () => 100 - CylindresRecup -1, true));
+
+            
+            /*Strategie.Ajouter(new ActionRobot(DeplacerChateaux,
             () => SortieOK && (DateTime.Now - InstantDebut).Ticks < new TimeSpan(0, 1, 30).Ticks,
-            () => 100 - TentativesPeche * 2, true));
-            Strategie.Ajouter(new ActionRobot(DeplacerChateaux,
-            () => SortieOK && (DateTime.Now - InstantDebut).Ticks < new TimeSpan(0, 1, 30).Ticks,
-            () => 99 - TentativesChateaux * 2, true));
-            /*Strategie.Ajouter(new ActionRobot(DeployerParasol,
-            () => Strategie.NombreAction == 1 || (DateTime.Now - InstantDebut).Ticks >= new TimeSpan(0, 1, 30).Ticks,
-            executionUnique: true));*/ // déplacé
+            () => 99 - TentativesChateaux * 2, true));*/
         }
+
+
+
+
+
 
         /*private void InitialiserStrategie()
         {
