@@ -2,7 +2,6 @@ using System;
 using Microsoft.SPOT;
 using System.Threading;
 using System.Collections;
-using GR.Plateforme;
 using GR.Membres;
 
 namespace GR
@@ -50,7 +49,7 @@ namespace GR
 
         private bool RecupererCylindre1()
         {
-          CylindresRecup++; //À CODER (pas essentiel) : un entier haut niveau qui compte le nombre de cylindres déjà récupérés
+          cylindresRecup++;
 
           Tracage.Ecrire("Recuperation du 1er cylindre");
           Pince.ouvrir(Equipe); //À CODER : doit rentrer la pince et ouvrir en intermédiaire pour que le bras vienne récupérer le cylindre (le début du robot est à 5.8cm du cylindre)
@@ -66,7 +65,7 @@ namespace GR
 
         private bool RecupererCylindresFusee()
         {
-          CylindresRecup+=4; //int à créer pour en faire un indice
+          cylindresRecup+=4; //int défini dans GrandRobot.cs
 
           Tracage.Ecrire("Positionnement devant la fusee et recuperation des 4 cylindres");
 
@@ -101,7 +100,7 @@ namespace GR
 
         private bool RecupererCylindre2()
         {
-          CylindresRecup++; //int à créer pour en faire un indice
+          cylindresRecup++; //int défini dans GrandRobot.cs
 
           Tracage.Ecrire("Recuperation du 2eme cylindre");
 
@@ -110,7 +109,7 @@ namespace GR
           Tourner(Equipe==Couleur.Bleu ? -45 : 45);
           AllerEn(1100, Equipe==Couleur.Bleu ? 900 : 2100, Plateforme.sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? 45 : -45);
-          AllerEn(1136, Equipe==Couleur.Bleu ? 900 : 2100);
+          AllerEn(1136, Equipe==Couleur.Bleu ? 900 : 2100, Plateforme.sens.avancer);
 
           Pince.ouvrir(Equipe);
           Pince.fermer(Equipe); //On garde le 6eme cylindre dans le petit bras jusqu'à avoir fait de la place dans le réservoir !
@@ -169,10 +168,10 @@ namespace GR
         #if HOMOLOGATION
               return;
         #endif
-            Strategie.Ajouter(new ActionRobot(RecupererCylindre1, SortirZoneDepart, () => 100-CylindresRecup, true));
-            Strategie.Ajouter(new ActionRobot(RecupererCylindresFusee, RecupererCylindre1, () => 100-CylindresRecup, true));
-            Strategie.Ajouter(new ActionRobot(RecupererCylindre2, RecupererCylindresFusee, () => 100 - CylindresRecup, true));
-            Strategie.Ajouter(new ActionRobot(DeposerCylindres, RecupererCylindre2, () => 100 - CylindresRecup -1, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindre1, SortirZoneDepart, () => 100 - cylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindresFusee, RecupererCylindre1, () => 100 - cylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindre2, RecupererCylindresFusee, () => 100 - cylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(DeposerCylindres, RecupererCylindre2, () => 100 - cylindresRecup -1, true));
 
 
             /*Exemple P14 :
@@ -211,7 +210,7 @@ namespace GR
 
         private bool RecupererCylindre1()
         {
-          CylindresRecup++; //À CODER (pas essentiel) : un entier haut niveau qui compte le nombre de cylindres déjà récupérés
+          cylindresRecup++; //À CODER (pas essentiel) : un entier haut niveau qui compte le nombre de cylindres déjà récupérés
 
           Tracage.Ecrire("Recuperation du 1er cylindre");
           Tourner(Equipe==Couleur.Bleu ? 78 : -78);
@@ -220,7 +219,7 @@ namespace GR
 
         private bool RecupererCylindresFusee()
         {
-          CylindresRecup+=4; //int à créer pour en faire un indice
+          cylindresRecup+=4; //int à créer pour en faire un indice
 
           Tracage.Ecrire("Positionnement devant la fusee et recuperation des 4 cylindres");
 
@@ -233,7 +232,7 @@ namespace GR
 
         private bool RecupererCylindre2()
         {
-          CylindresRecup++; //int à créer pour en faire un indice
+          cylindresRecup++; //int à créer pour en faire un indice
 
           Tracage.Ecrire("Recuperation du 2eme cylindre");
 
@@ -272,10 +271,10 @@ namespace GR
             est soit une fonction booléenne du type de celles au-dessus  (la suivante n'est exécutée que si la précédente a été appelée
             avant), soit une condition temporelle du type ci-dessous dans le code P14*/
 /*
-            Strategie.Ajouter(new ActionRobot(RecupererCylindre1, SortirZoneDepart, () => 100-CylindresRecup, true));
-            Strategie.Ajouter(new ActionRobot(RecupererCylindresFusee, RecupererCylindre1, () => 100-CylindresRecup, true));
-            Strategie.Ajouter(new ActionRobot(RecupererCylindre2, RecupererCylindresFusee, () => 100 - CylindresRecup, true));
-            Strategie.Ajouter(new ActionRobot(DeposerCylindres, RecupererCylindre2, () => 100 - CylindresRecup -1, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindre1, SortirZoneDepart, () => 100-cylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindresFusee, RecupererCylindre1, () => 100-cylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindre2, RecupererCylindresFusee, () => 100 - cylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(DeposerCylindres, RecupererCylindre2, () => 100 - cylindresRecup -1, true));
         }
 
 
