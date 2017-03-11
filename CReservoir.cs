@@ -9,7 +9,6 @@ namespace GR.Membres
 {
     class CReservoir
     {
-        const int PAS_DE_ROTATION = 10; 
 
         public struct configReservoir
         {
@@ -25,17 +24,15 @@ namespace GR.Membres
         };
 
         CAX_12 m_ax12Poussoir;
-        CAX_12 m_ax12Rotateur;
-        CCapteurCouleur m_capteurCouleur;
+        CRouletteIntelligente m_rouletteIntelligente;
 
         public CReservoir(ControleurAX12 controleur, configReservoir config)
         {
-            m_capteurCouleur = new CCapteurCouleur(config.idCapteurReservoir);
+            CCapteurCouleur capteurCouleur = new CCapteurCouleur(config.idCapteurReservoir);
+            CAX_12 ax12Rotateur = new CAX_12(config.idAx12Rotateur, controleur.m_port, controleur.m_direction);
+            m_ax12Poussoir.setMode(CAX_12.AX12Mode.joint);
+            m_rouletteIntelligente = CRouletteIntelligente(capteurCouleur, ax12Rotateur);
             m_ax12Poussoir = new CAX_12(config.idAx12Poussoir, controleur.m_port, controleur.m_direction);
-            m_ax12Rotateur = new CAX_12(config.idAx12Rotateur, controleur.m_port, controleur.m_direction);
-           //m_ax12Pince.setMode(CAX_12.AX12Mode.wheel);
-            //position initiale
-            // m_ax12Pince.setMode(CAX_12.AX12Mode.joint);
         }
 
         public void rentrer(Couleur equipe)
@@ -56,10 +53,7 @@ namespace GR.Membres
 
         public void tourner(Couleur equipe)
         {
-            while (m_capteurCouleur.continuerRotation()) 
-            {
-                m_ax12Rotateur.move(PAS_DE_ROTATION);
-            }
+            m_rouletteIntelligente.mettreBonneCouleur(equipe);
         }
 
     }
