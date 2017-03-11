@@ -1,11 +1,16 @@
 using System;
 using Microsoft.SPOT;
+using System.IO.Ports;
+using GT = Gadgeteer;
+using System.Threading;
+using Microsoft.SPOT.Hardware;
 
-namespace RobotWallE
+namespace GR.Membres
 {
     class CReservoir
     {
-        struct configReservoir
+
+        public struct configReservoir
         {
             public byte idAx12Poussoir;
             public byte idAx12Rotateur;
@@ -15,7 +20,7 @@ namespace RobotWallE
         enum positionReservoir
         {
           rentre = 10,
-          deploye = 10,
+          deploye = 10
         };
 
         CAX_12 m_ax12Poussoir;
@@ -25,25 +30,25 @@ namespace RobotWallE
         {
             CCapteurCouleur capteurCouleur = new CCapteurCouleur(config.idCapteurReservoir);
             CAX_12 ax12Rotateur = new CAX_12(config.idAx12Rotateur, controleur.m_port, controleur.m_direction);
+            m_ax12Poussoir.setMode(CAX_12.AX12Mode.joint);
             m_rouletteIntelligente = CRouletteIntelligente(capteurCouleur, ax12Rotateur);
             m_ax12Poussoir = new CAX_12(config.idAx12Poussoir, controleur.m_port, controleur.m_direction);
-            m_ax12Poussoir.setMode(CAX_12.AX12Mode.joint);
         }
 
         public void rentrer(Couleur equipe)
         {
-            m_ax12Poussoir.move((int)positionReservoir.rentree);
+            m_ax12Poussoir.move((int)positionReservoir.rentre);
         }
 
         public void deployer(Couleur equipe)
         {
-            m_ax12Poussoir.move((int)positionReservoir.deployee);
+            m_ax12Poussoir.move((int)positionReservoir.deploye);
         }
 
         public void sortir(Couleur equipe) 
         {
-            m_ax12Poussoir.deployer(equipe);
-            m_ax12Poussoir.rentrer(equipe);
+            deployer(equipe);
+            rentrer(equipe);
         }
 
         public void tourner(Couleur equipe)
