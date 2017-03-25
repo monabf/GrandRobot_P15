@@ -18,7 +18,7 @@ namespace GR.Membres;
 
     public void mettreBonneCouleur(Couleur equipe) {
       m_ax12Roulette.setMovingSpeed(speed.forward);
-      while (m_capteurCouleur.continuerRotation())
+      while (m_capteurCouleur.continuerRotation(equipe))
       {
         // Mettre un Thread.sleep?
         Thread.sleep(100);
