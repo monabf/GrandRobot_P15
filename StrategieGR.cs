@@ -3,6 +3,9 @@ using Microsoft.SPOT;
 using System.Threading;
 using System.Collections;
 using GR.Membres;
+using CPince.cs;
+using CReservoir.cs;
+using CBras.cs;
 
 namespace GR
 {
@@ -17,13 +20,13 @@ namespace GR
             Tourner(12);
             AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, Plateforme.sens.avancer);
             Tracage.Ecrire("Recuperation du cylindre");
-            Pince.ouvrir(Equipe); //À CODER : doit rentrer la pince et ouvrir en intermédiaire pour que le bras vienne récupérer le cylindre (le début du robot est à 5.8cm du cylindre)
+            pince.ouvrir(Equipe); //À CODER : doit rentrer la pince et ouvrir en intermédiaire pour que le bras vienne récupérer le cylindre (le début du robot est à 5.8cm du cylindre)
             Tourner(Equipe==Couleur.Bleu ? 78 : -78);
-            Pince.fermer(Equipe); //À CODER : doit sortir et fermer
-            Pince.ouvrir(Equipe);
-            Bras.attraper(Equipe); //À CODER : doit descendre, attraper le cylindre laissé par la pince, remonter
+            pince.fermer(Equipe); //À CODER : doit sortir et fermer
+            pince.ouvrir(Equipe);
+            bras.attraper(Equipe); //À CODER : doit descendre, attraper le cylindre laissé par la pince, remonter
             bool SortieOK = AllerEn(205, Equipe == Couleur.Bleu ? 870 : 2120, Plateforme.sens.avancer) == etat.arrive;
-            Bras.reposer(Equipe); //À CODER : doit redescendre et lâcher le cylindre qu'il tient
+            bras.reposer(Equipe); //À CODER : doit redescendre et lâcher le cylindre qu'il tient
             //il faudra voir expérimentalement si les emplacements pour redéposer le cylindre conviennent, sinon les bouger un peu
 
 //Homologation : récupérer le 1er cylindre et retourner dans la zone bleue pour l'y reposer, sans le mettre dans le réservoir
@@ -52,12 +55,12 @@ namespace GR
           cylindresRecup++;
 
           Tracage.Ecrire("Recuperation du 1er cylindre");
-          Pince.ouvrir(Equipe);
+          pince.ouvrir(Equipe);
           Tourner(Equipe==Couleur.Bleu ? 78 : -78);
-          Pince.fermer(Equipe);
-          Bras.attraper(Equipe);
-          Bras.lacher(Equipe);
-          CReservoir.tourner(Equipe);
+          pince.fermer(Equipe);
+          bras.attraper(Equipe);
+          bras.lacher(Equipe);
+          reservoir.tourner(Equipe);
 
           return true;
         }
@@ -71,28 +74,28 @@ namespace GR
           AllerEn(341,Equipe==Couleur.Bleu ? 1150 : 1850, Plateforme.sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? 90 : -90);
           AllerEn(310, Equipe==Couleur.Bleu ? 1150 : 1850, Plateforme.sens.avancer);
-          Pince.ouvrir(Equipe);
-          Pince.fermer(Equipe);
-          Pince.ouvrir(Equipe);
-          Bras.attraper(Equipe);
-          Bras.lacher(Equipe);
+          pince.ouvrir(Equipe);
+          pince.fermer(Equipe);
+          pince.ouvrir(Equipe);
+          bras.attraper(Equipe);
+          bras.lacher(Equipe);
 
-          Pince.ouvrir(Equipe);
-          Pince.fermer(Equipe);
-          Pince.ouvrir(Equipe);
-          Bras.attraper(Equipe);
-          Bras.lacher(Equipe);
+          pince.ouvrir(Equipe);
+          pince.fermer(Equipe);
+          pince.ouvrir(Equipe);
+          bras.attraper(Equipe);
+          bras.lacher(Equipe);
 
-          Pince.ouvrir(Equipe);
-          Pince.fermer(Equipe);
-          Pince.ouvrir(Equipe);
-          Bras.attraper(Equipe);
-          Bras.lacher(Equipe);
+          pince.ouvrir(Equipe);
+          pince.fermer(Equipe);
+          pince.ouvrir(Equipe);
+          bras.attraper(Equipe);
+          bras.lacher(Equipe);
 
-          Pince.ouvrir(Equipe);
-          Pince.fermer(Equipe);
-          Pince.ouvrir(Equipe);
-          Bras.attraper(Equipe); //On garde le 5eme cylindre dans le grand bras jusqu'à avoir fait de la place dans le réservoir !
+          pince.ouvrir(Equipe);
+          pince.fermer(Equipe);
+          pince.ouvrir(Equipe);
+          bras.attraper(Equipe); //On garde le 5eme cylindre dans le grand bras jusqu'à avoir fait de la place dans le réservoir !
 
           return true;
         }
@@ -110,8 +113,8 @@ namespace GR
           Tourner(Equipe==Couleur.Bleu ? 45 : -45);
           AllerEn(1136, Equipe==Couleur.Bleu ? 900 : 2100, Plateforme.sens.avancer);
 
-          Pince.ouvrir(Equipe);
-          Pince.fermer(Equipe); //On garde le 6eme cylindre dans le petit bras jusqu'à avoir fait de la place dans le réservoir !
+          pince.ouvrir(Equipe);
+          pince.fermer(Equipe); //On garde le 6eme cylindre dans le petit bras jusqu'à avoir fait de la place dans le réservoir !
 
           return true;
         }
@@ -126,19 +129,19 @@ namespace GR
           AllerEn(1275, Equipe==Couleur.Bleu ? 750 : 2250, Plateforme.sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? -90 : 90);
           AllerEn(1427, Equipe==Couleur.Bleu ? 927 : 2073, Plateforme.sens.reculer);
-          CReservoir.sortir(Equipe); //À CODER : doit utiliser le petit poussoir pour faire sortir les cylindres du réservoir
-          CReservoir.sortir(Equipe);
-          CReservoir.sortir(Equipe);
-          CReservoir.sortir(Equipe);
+          reservoir.sortir(Equipe); //À CODER : doit utiliser le petit poussoir pour faire sortir les cylindres du réservoir
+          reservoir.sortir(Equipe);
+          reservoir.sortir(Equipe);
+          reservoir.sortir(Equipe);
 
-          Bras.lacher(Equipe); //on laisse tomber l'avant-dernier cylindre dans le réservoir et on le sort
-          Reservoir.sortir(Equipe);
+          bras.lacher(Equipe); //on laisse tomber l'avant-dernier cylindre dans le réservoir et on le sort
+          reservoir.sortir(Equipe);
 
-          Pince.ouvrir(Equipe); //on récupère le dernier cylindre avec le grand bras, puis on le lâche dans le réservoir, on le tourne avec la bonne oculeur dessus et on le sort
-          Bras.attraper(Equipe);
-          Bras.lacher(Equipe);
-          CReservoir.tourner(Equipe);
-          CReservoir.sortir(Equipe);
+          pince.ouvrir(Equipe); //on récupère le dernier cylindre avec le grand bras, puis on le lâche dans le réservoir, on le tourne avec la bonne oculeur dessus et on le sort
+          bras.attraper(Equipe);
+          bras.lacher(Equipe);
+          reservoir.tourner(Equipe);
+          reservoir.sortir(Equipe);
 
           return true;
         }
