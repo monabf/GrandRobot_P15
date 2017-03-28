@@ -10,7 +10,7 @@ namespace GR
     {
         private bool SortirZoneDepart()
         {
-
+//IL FAUT UN CONSTRUCTEUR QUELQUE PART QUI CRÉE TOUTES LES INSTANCES des classes CPince etc
 #if HOMOLOGATION
             Tracage.Ecrire("Homologation");
 
@@ -52,13 +52,12 @@ namespace GR
           cylindresRecup++;
 
           Tracage.Ecrire("Recuperation du 1er cylindre");
-          Pince.ouvrir(Equipe); //À CODER : doit rentrer la pince et ouvrir en intermédiaire pour que le bras vienne récupérer le cylindre (le début du robot est à 5.8cm du cylindre)
-          Tourner(Equipe==Couleur.Bleu ? 78 : -78);
-          Pince.fermer(Equipe); //À CODER : doit sortir et fermer
           Pince.ouvrir(Equipe);
-          Bras.attraper(Equipe); //À CODER : doit descendre, attraper le cylindre laissé par la pince, remonter
-          Bras.lacher(Equipe); //À CODER : doit lâcher le cylindre attrapé dans le réservoir
-          Reservoir.tourner(Equipe); //À CODER : doit utiliser le capteur de couleur et la petite roue pour mettre le cylindre dans le bon sens
+          Tourner(Equipe==Couleur.Bleu ? 78 : -78);
+          Pince.fermer(Equipe);
+          Bras.attraper(Equipe);
+          Bras.lacher(Equipe);
+          CReservoir.tourner(Equipe);
 
           return true;
         }
@@ -127,10 +126,10 @@ namespace GR
           AllerEn(1275, Equipe==Couleur.Bleu ? 750 : 2250, Plateforme.sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? -90 : 90);
           AllerEn(1427, Equipe==Couleur.Bleu ? 927 : 2073, Plateforme.sens.reculer);
-          Reservoir.sortir(Equipe); //À CODER : doit utiliser le petit poussoir pour faire sortir les cylindres du réservoir
-          Reservoir.sortir(Equipe);
-          Reservoir.sortir(Equipe);
-          Reservoir.sortir(Equipe);
+          CReservoir.sortir(Equipe); //À CODER : doit utiliser le petit poussoir pour faire sortir les cylindres du réservoir
+          CReservoir.sortir(Equipe);
+          CReservoir.sortir(Equipe);
+          CReservoir.sortir(Equipe);
 
           Bras.lacher(Equipe); //on laisse tomber l'avant-dernier cylindre dans le réservoir et on le sort
           Reservoir.sortir(Equipe);
@@ -138,8 +137,8 @@ namespace GR
           Pince.ouvrir(Equipe); //on récupère le dernier cylindre avec le grand bras, puis on le lâche dans le réservoir, on le tourne avec la bonne oculeur dessus et on le sort
           Bras.attraper(Equipe);
           Bras.lacher(Equipe);
-          Reservoir.tourner(Equipe);
-          Reservoir.sortir(Equipe);
+          CReservoir.tourner(Equipe);
+          CReservoir.sortir(Equipe);
 
           return true;
         }
