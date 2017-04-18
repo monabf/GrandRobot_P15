@@ -31,9 +31,8 @@ namespace GR
         private readonly CBaseRoulante BaseRoulante;
         private readonly ControleurAX12 ControleurAX12;
         private readonly CPince Pince;
-        private readonly CParasol Parasol;
+        private readonly CCapteurCouleur CapteurCouleur;
         private readonly OutputPort m_direction;
-        private readonly CCanneAPeche CanneAPeche;
         private readonly GroupeInfrarouge IR;
         //private readonly CTelemetreLaser TelemetreLaser;
         private readonly CCapteurUltrason CapteurUltrason;
@@ -60,9 +59,9 @@ namespace GR
             Tracage = new IHMTracage();
 
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
-            BaseRoulante = new CBaseRoulante(Ports.BaseRoulante);
+            BaseRoulante = new CBaseRoulante(Ports.Plateforme);
             ControleurAX12 = new ControleurAX12(Ports.AX12);
-            Pince = new CPince(ControleurAX12, Ports.IdPince);
+            Pince = new CPince(ControleurAX12, Ports.pince);
      
 
             //Ports.ConfigCanne.direction = m_direction;
@@ -213,8 +212,13 @@ namespace GR
             return obstacle;
         }
 
+        /**
+               * il faut recoder cette méthode
+               * */
         private void Recaler(Axe axe = Axe.Null)
         {
+              
+            /*
             var posBR = new positionBaseRoulante();
             etatBR retour;
 
@@ -238,6 +242,6 @@ namespace GR
             }
 
             Tracage.Ecrire(retour == etatBR.arrive ? "Succes" : "Echec");
-        }
+        */}
     }
 }

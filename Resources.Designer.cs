@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GR
+namespace Grand_Robot
 {
     
     internal partial class Resources
@@ -20,7 +20,7 @@ namespace GR
             {
                 if ((Resources.manager == null))
                 {
-                    Resources.manager = new System.Resources.ResourceManager("GR.Resources", typeof(Resources).Assembly);
+                    Resources.manager = new System.Resources.ResourceManager("Grand_Robot.Resources", typeof(Resources).Assembly);
                 }
                 return Resources.manager;
             }
