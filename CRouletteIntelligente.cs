@@ -1,7 +1,8 @@
 using System;
 using Microsoft.SPOT;
+using GadgeteerApp4;
 
-namespace GR.Membres;
+namespace GR.Membres
 {
   class CRouletteIntelligente
   {
@@ -9,7 +10,7 @@ namespace GR.Membres;
     CAX_12 m_ax12Roulette;
     CCapteurCouleur m_capteurCouleur;
 
-    public CRoulette(CCapteurCouleur capteurCouleur, CAX_12 ax12Roulette)
+    public void CRoulette(CCapteurCouleur capteurCouleur, CAX_12 ax12Roulette)
     {
       m_capteurCouleur = capteurCouleur;
       m_ax12Roulette = ax12Roulette;

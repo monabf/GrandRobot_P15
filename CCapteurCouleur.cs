@@ -3,7 +3,8 @@ using Microsoft.SPOT;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using Gadgeteer.Modules;
-using GHIElectronics.Gadgeteer.FEZSpider;
+using Gadgeteer.Modules.GHIElectronics;
+
 namespace GadgeteerApp4
 {
     class CCapteurCouleur

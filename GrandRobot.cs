@@ -1,17 +1,18 @@
-using GHIElectronics.Gadgeteer.FEZSpider;
+using Gadgeteer.Modules.GHIElectronics;
 using System;
 using System.Collections;
 using System.Threading;
 using GR.BR;
 using GR.Membres;
 using GR.Vision;
-//using GHI.Processor;
+using GHI.Processor;
 using GHI.Pins;
 using System.IO.Ports;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
+using GadgeteerApp4;
 
 namespace GR
 {

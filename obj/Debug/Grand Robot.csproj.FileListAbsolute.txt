@@ -1,0 +1,6 @@
+D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\Grand Robot.csprojResolveAssemblyReference.cache
+D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\TinyCLR_DebugReferences.cache
+D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\Grand_Robot.Resources.resources
+D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\Grand Robot.csproj.GenerateResource.Cache
+D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\Grand_Robot.Resources.tinyresources
+D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\TinyResGen.cache
