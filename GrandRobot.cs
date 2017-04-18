@@ -1,11 +1,11 @@
-using Gadgeteer.Modules.GHIElectronics;
+using GHIElectronics.Gadgeteer.FEZSpider;
 using System;
 using System.Collections;
 using System.Threading;
 using GR.BR;
 using GR.Membres;
 using GR.Vision;
-using GHI.Processor;
+//using GHI.Processor;
 using GHI.Pins;
 using System.IO.Ports;
 using Microsoft.SPOT;
@@ -26,25 +26,24 @@ namespace GR
         private readonly IHMTracage Tracage;
 
         private readonly Couleur Equipe;
-
         private readonly ConfigurationPorts Ports;
         private readonly Jack JackDemarrage;
-        private readonly CPlateforme Plateforme;
+        private readonly CBaseRoulante BaseRoulante;
         private readonly ControleurAX12 ControleurAX12;
         private readonly CPince Pince;
-        private readonly CBras Bras;
-        private readonly CFunnyBras FunnyBras;
-        private readonly CReservoir Reservoir;
-        private readonly RS485 m_RS485;
+        private readonly CParasol Parasol;
+        private readonly OutputPort m_direction;
+        private readonly CCanneAPeche CanneAPeche;
         private readonly GroupeInfrarouge IR;
         //private readonly CTelemetreLaser TelemetreLaser;
         private readonly CCapteurUltrason CapteurUltrason;
 
-        private positionPlateforme Position = new positionPlateforme();
+        private positionBaseRoulante Position = new positionBaseRoulante();
         private bool SortieOK = false;
 
         private DateTime InstantDebut;
-        private int cylindresRecup = 0;
+        private int TentativesPeche = 0;
+        private int TentativesChateaux = 0;
 
         /// <summary>
         /// Initialise le robot
@@ -61,26 +60,28 @@ namespace GR
             Tracage = new IHMTracage();
 
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
-            Plateforme = new CPlateforme(Ports.Plateforme);
+            BaseRoulante = new CBaseRoulante(Ports.BaseRoulante);
             ControleurAX12 = new ControleurAX12(Ports.AX12);
-            Pince = new CPince(ControleurAX12, Ports.pince);
-            FunnyBras = new CFunnyBras(ControleurAX12, Ports.IdFunnyBras);
-            Bras = new CBras(ControleurAX12, Ports.bras);
-            Reservoir = new CReservoir(ControleurAX12, Ports.reservoir);
+            Pince = new CPince(ControleurAX12, Ports.IdPince);
+     
 
+            //Ports.ConfigCanne.direction = m_direction;
+            m_direction = new OutputPort((Cpu.Pin)EMX.IO46, false);  //IO26 si 11
             /* m_RS485 = new RS485(9);
               m_RS485.Configure(500000, GT.SocketInterfaces.SerialParity.None, GT.SocketInterfaces.SerialStopBits.One, 8, GT.SocketInterfaces.HardwareFlowControl.NotRequired);
               m_RS485.Port.Open();*/
+
 
             IR = new GroupeInfrarouge(Ports.IO, Ports.InfrarougeAVD, Ports.InfrarougeAVG, Ports.InfrarougeARD, ports.InfrarougeARG);
             //TelemetreLaser = new CTelemetreLaser(Ports.TelemetreLaser, 9600);
             CapteurUltrason = new CCapteurUltrason(Ports.CapteurUltrason);
 
-            Plateforme.setCouleur(equipe);
-            Plateforme.getPosition(ref Position);
+            BaseRoulante.setCouleur(equipe);
+            BaseRoulante.getPosition(ref Position);
 
             Tracage.Afficher();
             Tracage.Ecrire("Equipe " + (equipe == Couleur.Vert ? "verte" : "violette"));
+
         }
 
         /// <summary>
@@ -125,8 +126,7 @@ namespace GR
             {
                 Tracage.Ecrire("Fin du temps imparti.");
                 if (thStrat.IsAlive) thStrat.Abort();
-                Plateforme.stop();
-                DeployerParasol();
+                BaseRoulante.stop();
 
             }, null, (int)(tempsImparti * 1000), -1);
         }
@@ -159,7 +159,7 @@ namespace GR
                     if (obstacle = DetecterObstacle(s))
                     {
                         if (obstacle != diff) Tracage.Ecrire("Obstacle detecte");
-                        Plateforme.stop();
+                        BaseRoulante.stop();
                     }
 
                     Thread.Sleep(delaiDetection);
@@ -172,15 +172,15 @@ namespace GR
 
             if(detection) thDetection.Start();
             while ((DateTime.Now - debut).Seconds < tempsMax &&
-                (retour = Plateforme.allerEn(x, y, s, speedDistance, speedRotation)) == etatBR.stope)
+                (retour = BaseRoulante.allerEn(x, y, s, speedDistance, speedRotation)) == etatBR.stope)
                 while ((DateTime.Now - debut).Seconds < tempsMax && obstacle)
                     Thread.Sleep(1);
             if (thDetection.IsAlive) thDetection.Abort();
 
             if (reculSiBlocage && retour != etatBR.arrive)
-                Plateforme.allerEn(Position.x, Position.y, s == BR.sens.avancer ? BR.sens.reculer : BR.sens.avancer);
+                BaseRoulante.allerEn(Position.x, Position.y, s == BR.sens.avancer ? BR.sens.reculer : BR.sens.avancer);
 
-            Plateforme.getPosition(ref Position);
+            BaseRoulante.getPosition(ref Position);
 
             return retour;
         }
@@ -188,9 +188,9 @@ namespace GR
         public etatBR Tourner(double angle, vitesse v = vitesse.vitesseRotationMin)
         {
             int alphaReel = 0;
-            var retour = Plateforme.tourner(angle, v, ref alphaReel);
+            var retour = BaseRoulante.tourner(angle, v, ref alphaReel);
 
-            Plateforme.getPosition(ref Position);
+            BaseRoulante.getPosition(ref Position);
 
             return retour;
         }
@@ -213,13 +213,12 @@ namespace GR
             return obstacle;
         }
 
-        /*
         private void Recaler(Axe axe = Axe.Null)
         {
-            var posBR = new positionPlateforme();
+            var posBR = new positionBaseRoulante();
             etatBR retour;
 
-            Plateforme.getPosition(ref posBR);
+            BaseRoulante.getPosition(ref posBR);
             switch (axe)
             {
                 case Axe.X:
@@ -240,6 +239,5 @@ namespace GR
 
             Tracage.Ecrire(retour == etatBR.arrive ? "Succes" : "Echec");
         }
-         */
     }
 }
