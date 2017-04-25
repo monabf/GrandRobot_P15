@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.TouchL12</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchL12">
+            <summary>A multi-function touch sensor for .Net Gadgeteer.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchL12.#ctor(System.Int32)">
+            <summary>Constructs a new TouchL12 sensor.</summary>
+            <param name="socketNumber">The socket number the sensor is plugged into.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchL12.IsSliderPressed">
+            <summary>Gets whether or not the slider is being touched by the user.</summary>
+            <returns>Whether or not the slider is being touched.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchL12.GetSliderPosition">
+            <summary>Gets the current position of the user on the slider.</summary>
+            <returns>The position of the user's location on the slider between 0 and 11 where 0 is the far left and 11 is the far right.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchL12.GetSliderDirection">
+            <summary>Gets the current direction the user is moving on the slider.</summary>
+            <returns>The direction the user is moving.</returns>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderPressed">
+            <summary>Fires when the slider is pressed.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderReleased">
+            <summary>Fires when the slider is released.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderPositionChanged">
+            <summary>Fires when the position of the touch on the slider changes.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderTouchedHandler">
+            <summary>Delegate representing the slider touch event.</summary>
+            <param name="sender">The sensor that the event occured on.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderPositionChangedHandler">
+            <summary>Delegate representing the slider position changed event.</summary>
+            <param name="sender">The sensor that the event occured on.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchL12.Direction">
+            <summary>Represents the direction of motion on the slider.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.TouchL12.Direction.Left">
+            <summary>Moving towards the left end of the device</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.TouchL12.Direction.Right">
+            <summary>Moving towards the right end of the device</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderPositionChangedEventArgs">
+            <summary>Event arguments for the SliderPositionChanged event.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderPositionChangedEventArgs.Position">
+            <summary>The position of the touch on the slider between 0 and 11.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderPositionChangedEventArgs.Direction">
+            <summary>The direction of movement on the slider.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderTouchedEventArgs">
+            <summary>Event arguments for the SliderTouched event.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.TouchL12.SliderTouchedEventArgs.State">
+            <summary>Whether or not the slider was touched.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.Accelerometer</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Accelerometer">
+            <summary>A Accelerometer module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Accelerometer.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Accelerometer.Calibrate(System.Int32,System.Int32,System.Int32)">
+            <summary>Calibrates the accelerometer with the given references.</summary>
+            <param name="refX">An acceleration in the x axis representing the resting orientation of the accelerometer.</param>
+            <param name="refY">An acceleration in the y axis representing the resting orientation of the accelerometer.</param>
+            <param name="refZ">An acceleration in the z axis representing the resting orientation of the accelerometer.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Accelerometer.Calibrate">
+            <summary>Calibrates the accelerometer. Make sure that the accelerometer is not moving and is resting on a flat surface when calling this method.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Accelerometer.EnableThresholdDetection(System.Double,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Enables automatic detection and notification when an acceleration threshold is exceeded resulting in the ThresholdExceeded event being raised. Continous measurement is disabled when
+            threshold detection mode is enabled.
+            </summary>
+            <param name="threshold">The acceleration threshold, between -8.0 and 8.0 G.</param>
+            <param name="enableX">The enable threshold detection in the X axis.</param>
+            <param name="enableY">The enable threshold detection in the Y axis.</param>
+            <param name="enableZ">The enable threshold detection in the Z axis.</param>
+            <param name="absolute">
+            The absoulte threshold detection. If set to true the sign of the threshold is ignored, and the absolute value of the acceleration is compared with the absolute value of the threshold. If
+            set to false, the sign of the threshold will be taken into account, the event will only be raised if the acceleration falls below a negative threshold or above a positive threshold.
+            </param>
+            <param name="detectFreefall">
+            Freefall detection. If set to true, the ThresholdExceeded event will be raised when the acceleration in all the enabled axes is less than the absolute threshold. In order to detect
+            freefall correctly, set the threshold to a small value and enable detection on all axes.
+            </param>
+            <param name="autoReset">
+            Automatically reset the thershold detection. If set to false, the ThresholdExceeded will be raised only once, until the ResetThresholdDetection method is called manually. If set to true,
+            the ResetThresholdDetection will be called automatically, and the event will be continously raised as long as the thershold conditions are exceeded.
+            </param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Accelerometer.ResetThresholdDetection">
+            <summary>Reset the threshold detection process.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Accelerometer.RequestSingleMeasurement">
+            <summary>Obtains a single measurement and raises the event when complete.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Accelerometer.StartTakingMeasurements">
+            <summary>Starts taking measurements and fires MeasurementComplete when a new measurement is available.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Accelerometer.StopTakingMeasurements">
+            <summary>Stops taking measurements.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.Accelerometer.MeasurementComplete">
+            <summary>Raised when a measurement reading is complete.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.Accelerometer.ThresholdExceeded">
+            <summary>Raised when an acceleration threshold is exceeded.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Accelerometer.MeasurementRange">
+            <summary>The actual measurement range.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Accelerometer.MeasurementInterval">
+            <summary>The interval at which measurements are taken.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Accelerometer.IsTakingMeasurements">
+            <summary>Whether or not the driver is currently taking measurements.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Accelerometer.MeasurementCompleteEventHandler">
+            <summary>Represents the delegate used for the MeasurementComplete event.</summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Accelerometer.ThresholdExceededEventHandler">
+            <summary>Represents the delegate used for the ThresholdExceeded event.</summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Accelerometer.Range">
+            <summary>The possible measurement ranges.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Accelerometer.Range.TwoG">
+            <summary>+ /- 2G measurement range</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Accelerometer.Range.FourG">
+            <summary>+ /- 4G measurement range</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Accelerometer.Range.EightG">
+            <summary>+ /- 8G measurement range</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Accelerometer.MeasurementCompleteEventArgs">
+            <summary>Event arguments for the MeasurementComplete event.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Accelerometer.MeasurementCompleteEventArgs.ToString">
+            <summary>Provides a string representation of the instance.</summary>
+            <returns>A string describing the values contained in the object.</returns>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Accelerometer.MeasurementCompleteEventArgs.X">
+            <summary>X-axis sensor data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Accelerometer.MeasurementCompleteEventArgs.Y">
+            <summary>Y-axis sensor data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Accelerometer.MeasurementCompleteEventArgs.Z">
+            <summary>Z-axis sensor data.</summary>
+        </member>
+    </members>
+</doc>

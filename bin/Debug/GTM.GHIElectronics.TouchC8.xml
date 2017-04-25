@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.TouchC8</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8">
+            <summary>A TouchC8 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchC8.#ctor(System.Int32)">
+            <summary>Constructs a new TouchC8 sensor.</summary>
+            <param name="socketNumber">The socket number the sensor is plugged into.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchC8.IsButtonPressed(Gadgeteer.Modules.GHIElectronics.TouchC8.Button)">
+            <summary>Gets whether or not the given button is being touched by the user</summary>
+            <param name="button">The button to check.</param>
+            <returns>Whether or not the given button is being touched.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchC8.IsWheelPressed">
+            <summary>Gets whether or not the wheel is being touched by the user.</summary>
+            <returns>Whether or not the wheel is being touched.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchC8.IsProximityDetected">
+            <summary>Gets whether or not the proximity detector is detecting a nearby object.</summary>
+            <returns>Whether or not the sensor is detecting anything.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchC8.GetWheelPosition">
+            <summary>Gets the current position of the user on the wheel in degrees.</summary>
+            <returns>The degree measure of the user's location on the wheel between 0 and 360.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.TouchC8.GetWheelDirection">
+            <summary>Gets the current direction the user is moving on the wheel.</summary>
+            <returns>The direction the user is moving.</returns>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchC8.ProximityEnter">
+            <summary>Fires when the proximity sensor detects an object.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchC8.ProximityExit">
+            <summary>Fires when the proximity sensor no longer detects an object after detecting one.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchC8.ButtonPressed">
+            <summary>Fires when a button is pressed.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchC8.ButtonReleased">
+            <summary>Fires when a button is released.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelPressed">
+            <summary>Fires when the wheel is pressed.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelReleased">
+            <summary>Fires when the wheel is released.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelPositionChanged">
+            <summary>Fires when the position of the touch on the wheel changes.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.PromixityDetectedHandler">
+            <summary>Delegate representing the proximity detected event.</summary>
+            <param name="sender">The sensor that the detection occured on.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.ButtonTouchedHandler">
+            <summary>Delegate representing the button touch event.</summary>
+            <param name="sender">The sensor that the event occured on.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelTouchedHandler">
+            <summary>Delegate representing the wheel touch event.</summary>
+            <param name="sender">The sensor that the event occured on.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelPositionChangedHandler">
+            <summary>Delegate representing the wheel position changed event.</summary>
+            <param name="sender">The sensor that the event occured on.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.Button">
+            <summary>Represents the buttons on the sensor.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.TouchC8.Button.Up">
+            <summary>The up button.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.TouchC8.Button.Middle">
+            <summary>The middle button.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.TouchC8.Button.Down">
+            <summary>The down button.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.Direction">
+            <summary>Represents the direction of motion on the wheel.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.TouchC8.Direction.Clockwise">
+            <summary>Clockwise motion</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.TouchC8.Direction.Counterclockwise">
+            <summary>Counterclockwise motion</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelPositionChangedEventArgs">
+            <summary>Event arguments for the WheelPositionChanged event.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelPositionChangedEventArgs.Position">
+            <summary>The position of the touch on the wheel between 0 and 360 degrees.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelPositionChangedEventArgs.Direction">
+            <summary>The direction of movement on the wheel.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.ButtonTouchedEventArgs">
+            <summary>Event arguments for the ButtonTouched event.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.TouchC8.ButtonTouchedEventArgs.State">
+            <summary>The new state of the button.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.TouchC8.ButtonTouchedEventArgs.Button">
+            <summary>The button pressed or released.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.PromixityDetectedEventArgs">
+            <summary>Event arguments for the PromixityDetected event.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.TouchC8.PromixityDetectedEventArgs.State">
+            <summary>Whether or not the proximity was detected.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelTouchedEventArgs">
+            <summary>Event arguments for the WheelTouched event.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.TouchC8.WheelTouchedEventArgs.State">
+            <summary>Whether or not the wheel was touched.</summary>
+        </member>
+    </members>
+</doc>

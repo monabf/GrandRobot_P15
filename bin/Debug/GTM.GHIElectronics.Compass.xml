@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.Compass</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Compass">
+            <summary>A Compass module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Compass.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Compass.SetGain(Gadgeteer.Modules.GHIElectronics.Compass.Gain)">
+            <summary>Sets the sensor gain value.</summary>
+            <param name="gain">The gain value.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Compass.RequestSingleMeasurement">
+            <summary>Obtains a single measurement and raises the event when complete.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Compass.StartTakingMeasurements">
+            <summary>Starts taking measurements and fires MeasurementComplete when a new measurement is available.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Compass.StopTakingMeasurements">
+            <summary>Stops taking measurements.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.Compass.MeasurementComplete">
+            <summary>Raised when a measurement reading is complete.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Compass.MeasurementInterval">
+            <summary>The interval at which measurements are taken.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Compass.IsTakingMeasurements">
+            <summary>Whether or not the driver is currently taking measurements.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Compass.MeasurementCompleteEventHandler">
+            <summary>Represents the delegate used for the MeasurementComplete event.</summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Compass.Gain">
+            <summary>Possible sensing gain values.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Compass.Gain.Gain1">
+            <summary>+ /- 0.88 Ga</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Compass.Gain.Gain2">
+            <summary>+ /- 1.2 Ga (default)</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Compass.Gain.Gain3">
+            <summary>+ /- 1.9 Ga</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Compass.Gain.Gain4">
+            <summary>+ /- 2.5 Ga</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Compass.Gain.Gain5">
+            <summary>+ /- 4.0 Ga</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Compass.Gain.Gain6">
+            <summary>+ /- 4.7 Ga</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Compass.Gain.Gain7">
+            <summary>+ /- 5.6 Ga</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Compass.Gain.Gain8">
+            <summary>+ /- 8.1 Ga</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Compass.MeasurementCompleteEventArgs">
+            <summary>Event arguments for the MeasurementComplete event.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Compass.MeasurementCompleteEventArgs.ToString">
+            <summary>Provides a string representation of the instance.</summary>
+            <returns>A string describing the values contained in the object.</returns>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Compass.MeasurementCompleteEventArgs.X">
+            <summary>X-axis sensor data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Compass.MeasurementCompleteEventArgs.Y">
+            <summary>Y-axis sensor data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Compass.MeasurementCompleteEventArgs.Z">
+            <summary>Z-axis sensor data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Compass.MeasurementCompleteEventArgs.Angle">
+            <summary>Angle of heading in the XY plane in radians.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.IRReceiver</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.IRReceiver">
+            <summary>An IRReceiver module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.IRReceiver.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.IRReceiver.SignalReceived">
+            <summary>Raised when the module detects an IR signal.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.IRReceiver.SignalReceivedEventHandler">
+            <summary>The delegate that is used to handle the IR event.</summary>
+            <param name="sender">The <see cref="T:Gadgeteer.Modules.GHIElectronics.IRReceiver"/> object that raised the event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.IRReceiver.SignalReceivedEventArgs">
+            <summary>Event arguments for the signal received event.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.IRReceiver.SignalReceivedEventArgs.Button">
+            <summary>The button that was pressed.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.IRReceiver.SignalReceivedEventArgs.ReadTime">
+            <summary>The time that the button was read.</summary>
+        </member>
+    </members>
+</doc>

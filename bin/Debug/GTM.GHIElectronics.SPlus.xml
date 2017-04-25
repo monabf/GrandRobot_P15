@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.SPlus</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.SPlus">
+            <summary>An SPlus module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.SPlus.#ctor(System.Int32,System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+            <param name="socketNumberTwo">The second socket that this module is plugged in to.</param>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.SPlus.SPlusSocket1">
+            <summary>Returns the socket number for socket 1 on the module.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.SPlus.SPlusSocket2">
+            <summary>Returns the socket number for socket 2 on the module.</summary>
+        </member>
+    </members>
+</doc>

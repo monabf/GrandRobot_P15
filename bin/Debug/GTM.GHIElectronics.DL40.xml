@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.DL40</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.DL40">
+            <summary>A DL40 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.DL40.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.DL40.WriteRegister(System.Byte,System.Byte)">
+            <summary>Writes to the byte to the specified address.</summary>
+            <param name="address">The address to write to.</param>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.DL40.ReadRegister(System.Byte)">
+            <summary>Reads a byte at the specified address.</summary>
+            <param name="address">The address to read from.</param>
+            <returns>The read value.</returns>
+        </member>
+    </members>
+</doc>

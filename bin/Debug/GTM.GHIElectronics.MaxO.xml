@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.MaxO</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.MaxO">
+            <summary>A MaxO module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.MaxO.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.MaxO.Clear">
+            <summary>Clears all registers.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.MaxO.Write(System.Byte[])">
+            <summary>Writes the buffer to the modules.</summary>
+            <param name="buffer">The buffer to write.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.MaxO.SetPin(System.Int32,System.Int32,System.Boolean)">
+            <summary>Sets the state of the specified pin on the specified board.</summary>
+            <param name="board">The board to write to.</param>
+            <param name="pin">The pin to write.</param>
+            <param name="value">The value to write to the pin.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.MaxO.Read">
+            <summary>The data currently on the modules.</summary>
+            <returns>The data.</returns>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.MaxO.Boards">
+            <summary>The number modules chained together.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.MaxO.ArraySize">
+            <summary>The size of the array to be filled.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.MaxO.OutputEnabled">
+            <summary>Sets the state of the module output.</summary>
+        </member>
+    </members>
+</doc>

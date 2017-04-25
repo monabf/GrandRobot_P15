@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.FLASH</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.FLASH">
+            <summary>A FLASH module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.WriteEnable">
+            <summary>Attempts to enable writing to the flash.</summary>
+            <returns>If writing is enabled or not.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.GetIdentification">
+            <summary>Gets the ID of the chip.</summary>
+            <returns>The chip ID.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.IsWriteInProgress">
+            <summary>Checks if a write is in progress.</summary>
+            <returns>Whether or not a write is in progress.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.EraseChip">
+            <summary>Erases the entire chip.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.EraseBlock(System.Int32,System.Int32)">
+            <summary>Erases the specified blocks.</summary>
+            <param name="block">The block to begin erasing at.</param>
+            <param name="count">The number of blocks to erase.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.EraseSector(System.Int32,System.Int32)">
+            <summary>Erases the specified sectors.</summary>
+            <param name="sector">The sector to begin erasing at.</param>
+            <param name="count">The number of sectors to erase.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.Write(System.Int32,System.Byte[])">
+            <summary>Writes data to a specific address.</summary>
+            <param name="address">The address to write to.</param>
+            <param name="buffer">The data to write.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.Write(System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>Writes data to a specific address.</summary>
+            <param name="address">The address to write to.</param>
+            <param name="buffer">The data to write.</param>
+            <param name="offset">The offset to begin writing from.</param>
+            <param name="count">The nubmer of bytes to write.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.Read(System.Int32,System.Int32)">
+            <summary>Reads data from the specific address.</summary>
+            <param name="address">The address to read from.</param>
+            <param name="length">The number of bytes to read.</param>
+            <returns>The data that was read.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.FLASH.ReadFast(System.UInt32,System.Int32)">
+            <summary>Reads data from a specific address in fast mode.</summary>
+            <param name="address">Address to read from.</param>
+            <param name="length">The length to read.</param>
+            <returns>The data that was read.</returns>
+        </member>
+    </members>
+</doc>

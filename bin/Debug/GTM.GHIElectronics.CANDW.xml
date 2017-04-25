@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.CANDW</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.CANDW">
+            <summary>A CANDW module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.Initialize(GHI.IO.ControllerAreaNetwork.Speed)">
+            <summary>Initializes the CAN bus.</summary>
+            <param name="speed">The desired bus speed.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.Initialize(GHI.IO.ControllerAreaNetwork.Timings)">
+            <summary>Initializes the CAN bus.</summary>
+            <param name="timings">The desired bus timings.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.Initialize(GHI.IO.ControllerAreaNetwork.Speed,GHI.IO.ControllerAreaNetwork.Channel)">
+            <summary>Initializes the CAN bus.</summary>
+            <param name="speed">The desired bus speed.</param>
+            <param name="channel">The CAN channel to use.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.Initialize(GHI.IO.ControllerAreaNetwork.Timings,GHI.IO.ControllerAreaNetwork.Channel)">
+            <summary>Initializes the CAN bus.</summary>
+            <param name="timings">The desired bus timings.</param>
+            <param name="channel">The CAN channel to use.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.SendMessage(GHI.IO.ControllerAreaNetwork.Message)">
+            <summary>Sends the given message over the CAN bus.</summary>
+            <param name="message">The message to send.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.SendMessages(GHI.IO.ControllerAreaNetwork.Message[])">
+            <summary>Sends the given messages over the CAN bus.</summary>
+            <param name="messages">The messages to send.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.SendMessages(GHI.IO.ControllerAreaNetwork.Message[],System.Int32,System.Int32)">
+            <summary>Sends the given messages over the CAN bus.</summary>
+            <param name="messages">The messages to send.</param>
+            <param name="offset">Offset into the buffer to start sending from.</param>
+            <param name="count">Number of messages to send.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.CancelSend">
+            <summary>Cancels sending the messages queued by SendMessages.</summary>
+            <returns>The number of messages sent so far.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.Reset">
+            <summary>Resets the CAN controller.</summary>
+            <remarks>All hardware buffered messages will be lost. The software receive buffer is not affected.</remarks>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.SetExplicitFilters(System.UInt32[])">
+            <summary>Sets the explicit filters.</summary>
+            <param name="filters">The message ids to filter.</param>
+            <remarks>Any id not matching one of the filters is discarded. Pass null to disable the filter.</remarks>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CANDW.SetGroupFilters(System.UInt32[],System.UInt32[])">
+            <summary>Sets group filters.</summary>
+            <param name="lowerBounds">The lower bounds to filter</param>
+            <param name="upperBounds">The upper bounds to filter</param>
+            <remarks>
+            Each entry in lowerBounds corresponds to the same-indexed entry in upperBounds. The bounds are inclusive, that is the provided bounds are valid ids. For example, to only receive messages
+            with these two groups of IDs [0x1200 to 0x1248] and [0x500 to 0x1000], do the following: <br />
+            </remarks>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.CANDW.MessagesReceived">
+            <summary>Raised when data is received.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.CANDW.ErrorReceived">
+            <summary>Raised when an error is received.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.CANDW.MessagesSent">
+            <summary>Raised when the messages have been successfully sent.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.CANDW.Can">
+            <summary>The underlying ControllerAreaNetwork object.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.CANDW.CanSend">
+            <summary>Whether or not transmission is currently possible.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.CANDW.IsTransmitBufferEmpty">
+            <summary>Whether or not the transmit buffer is empty.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.CANDW.AvailableMessages">
+            <summary>The number of received messages available.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.CANDW.ReceiveErrorCount">
+            <summary>The number of receive errors encountered.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.CANDW.TransmitErrorCount">
+            <summary>The number of transmit errors encountered.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.CANDW.MessagesReceivedEventHandler">
+            <summary>The delegate that is used to handle the data received event.</summary>
+            <param name="sender">The <see cref="T:Gadgeteer.Modules.GHIElectronics.CANDW"/> object that raised the event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.CANDW.ErrorReceivedEventHandler">
+            <summary>The delegate that is used to handle the error received event.</summary>
+            <param name="sender">The <see cref="T:Gadgeteer.Modules.GHIElectronics.CANDW"/> object that raised the event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.CANDW.MessagesSentEventHandler">
+            <summary>The delegate that is used to handle the posted messages done event.</summary>
+            <param name="sender">The <see cref="T:Gadgeteer.Modules.GHIElectronics.CANDW"/> object that raised the event.</param>
+            <param name="e">The number of messages posted.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.CANDW.MessagesReceivedEventArgs">
+            <summary>Event arguments for the MessagesReceived event.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.CANDW.MessagesReceivedEventArgs.Messages">
+            <summary>The messages received.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.CANDW.MessagesReceivedEventArgs.MessageCount">
+            <summary>The number of messages received.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.CANDW.ErrorReceivedEventArgs">
+            <summary>Event arguments for the ErrorReceived event.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.CANDW.ErrorReceivedEventArgs.Error">
+            <summary>The error received.</summary>
+        </member>
+    </members>
+</doc>

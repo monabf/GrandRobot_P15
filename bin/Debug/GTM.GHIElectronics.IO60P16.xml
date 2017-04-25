@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.IO60P16</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.IO60P16">
+            <summary>A IO60P16 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.IO60P16.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.IO60P16.CreateDigitalInput(System.Int32,System.Int32,Gadgeteer.SocketInterfaces.GlitchFilterMode,Gadgeteer.SocketInterfaces.ResistorMode)">
+            <summary>Creates a digital input on the given pin.</summary>
+            <param name="port">The port to create the interface on.</param>
+            <param name="pin">The pin to create the interface on.</param>
+            <param name="glitchFilterMode">The glitch filter mode for the interface.</param>
+            <param name="resistorMode">The resistor mode for the interface.</param>
+            <returns>The new interface.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.IO60P16.CreateDigitalOutput(System.Int32,System.Int32,System.Boolean)">
+            <summary>Creates a digital output on the given pin.</summary>
+            <param name="port">The port to create the interface on.</param>
+            <param name="pin">The pin to create the interface on.</param>
+            <param name="initialState">The initial state for the interface.</param>
+            <returns>The new interface.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.IO60P16.CreateDigitalIO(System.Int32,System.Int32,System.Boolean,Gadgeteer.SocketInterfaces.GlitchFilterMode,Gadgeteer.SocketInterfaces.ResistorMode)">
+            <summary>Creates a digital input/output on the given pin.</summary>
+            <param name="port">The port to create the interface on.</param>
+            <param name="pin">The pin to create the interface on.</param>
+            <param name="initialState">The initial state for the interface.</param>
+            <param name="glitchFilterMode">The glitch filter mode for the interface.</param>
+            <param name="resistorMode">The resistor mode for the interface.</param>
+            <returns>The new interface.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.IO60P16.CreateInterruptInput(System.Int32,System.Int32,Gadgeteer.SocketInterfaces.GlitchFilterMode,Gadgeteer.SocketInterfaces.ResistorMode,Gadgeteer.SocketInterfaces.InterruptMode)">
+            <summary>Creates an interrupt input on the given pin.</summary>
+            <param name="port">The port to create the interface on.</param>
+            <param name="pin">The pin to create the interface on.</param>
+            <param name="glitchFilterMode">The glitch filter mode for the interface.</param>
+            <param name="resistorMode">The resistor mode for the interface.</param>
+            <param name="interruptMode">The interrupt mode for the interface.</param>
+            <returns>The new interface.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.IO60P16.CreatePwmOutput(System.Int32)">
+            <summary>Creates a pwm output on the given pin.</summary>
+            <param name="pwm">The pwm to create the interface on.</param>
+            <returns>The new interface.</returns>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.IO60P16.InterruptHandler">
+            <summary>The delegate that represents interrupt events.</summary>
+            <param name="state">The pin state.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.IO60P16.IOState">
+            <summary>The possible IOStates a pin can be in.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.IOState.InputInterrupt">
+            <summary>The pin is an interrupt input.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.IOState.Input">
+            <summary>The pin is an input.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.IOState.Output">
+            <summary>The pin is an output.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.IOState.Pwm">
+            <summary>The pin is a pwm output.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.IO60P16.ResistorMode">
+            <summary>The possible resistor modes for a pin.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.ResistorMode.ResistivePullUp">
+            <summary>Pull up.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.ResistorMode.ResistivePullDown">
+            <summary>Pull down.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.ResistorMode.OpenDrainHigh">
+            <summary>Open drain high.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.ResistorMode.OpenDrainLow">
+            <summary>Open drain low.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.ResistorMode.StrongDrive">
+            <summary>Strong drive.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.ResistorMode.SlowStrongDrive">
+            <summary>Slow strong drive.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.IO60P16.ResistorMode.HighImpedence">
+            <summary>High impedance.</summary>
+        </member>
+    </members>
+</doc>

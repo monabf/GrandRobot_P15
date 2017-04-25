@@ -4,9 +4,9 @@ D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\Grand_Robot.Resou
 D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\Grand Robot.csproj.GenerateResource.Cache
 D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\Grand_Robot.Resources.tinyresources
 D:\Mines\2A\Mecatro\info\Grand Robot_P15\Grand Robot\obj\Debug\TinyResGen.cache
-C:\Users\Ali\Documents\Visual Studio 2013\Projects\Mécatro\GadgeteerApp2\GrandRobot_P15\obj\Debug\Grand Robot.csprojResolveAssemblyReference.cache
-C:\Users\Ali\Documents\Visual Studio 2013\Projects\Mécatro\GadgeteerApp2\GrandRobot_P15\obj\Debug\TinyCLR_DebugReferences.cache
-C:\Users\Ali\Documents\Visual Studio 2013\Projects\Mécatro\GadgeteerApp2\GrandRobot_P15\obj\Debug\Grand_Robot.Resources.resources
-C:\Users\Ali\Documents\Visual Studio 2013\Projects\Mécatro\GadgeteerApp2\GrandRobot_P15\obj\Debug\Grand Robot.csproj.GenerateResource.Cache
-C:\Users\Ali\Documents\Visual Studio 2013\Projects\Mécatro\GadgeteerApp2\GrandRobot_P15\obj\Debug\Grand_Robot.Resources.tinyresources
-C:\Users\Ali\Documents\Visual Studio 2013\Projects\Mécatro\GadgeteerApp2\GrandRobot_P15\obj\Debug\TinyResGen.cache
+D:\Mines\2A\Mecatro\info\GrandRobot_P15-master\obj\Debug\Grand Robot.csprojResolveAssemblyReference.cache
+D:\Mines\2A\Mecatro\info\GrandRobot_P15-master\obj\Debug\TinyCLR_DebugReferences.cache
+D:\Mines\2A\Mecatro\info\GrandRobot_P15-master\obj\Debug\Grand_Robot.Resources.resources
+D:\Mines\2A\Mecatro\info\GrandRobot_P15-master\obj\Debug\Grand Robot.csproj.GenerateResource.Cache
+D:\Mines\2A\Mecatro\info\GrandRobot_P15-master\obj\Debug\Grand_Robot.Resources.tinyresources
+D:\Mines\2A\Mecatro\info\GrandRobot_P15-master\obj\Debug\TinyResGen.cache

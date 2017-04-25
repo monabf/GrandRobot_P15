@@ -33,21 +33,19 @@ namespace GR
         public  Jack JackDemarrage;
         public  CBaseRoulante BaseRoulante;
         public  ControleurAX12 controleurAX12;
-        //public  CAX12 CAX12;
         public  CPince pince;
+        public  CReservoir reservoir;
+        public CBras bras;
         public  CCapteurCouleur CapteurCouleur;
         public  OutputPort m_direction;
         public  GroupeInfrarouge IR;
-        //public  CTelemetreLaser TelemetreLaser;
         public  CCapteurUltrason CapteurUltrason;
-
+       
         public positionBaseRoulante Position = new positionBaseRoulante();
         public bool SortieOK = false;
 
         public DateTime InstantDebut;
-        public int TentativesPeche = 0;
-        public int TentativesChateaux = 0;
-
+        public int cylindresRecup;
         /// <summary>
         /// Initialise le robot
         /// </summary>
@@ -61,12 +59,12 @@ namespace GR
 
             Strategie = new GestionnaireStrategie();
             Tracage = new IHMTracage();
-
+            bras = new CBras(controleurAX12, Ports.bras);
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
             BaseRoulante = new CBaseRoulante(Ports.Plateforme);
             controleurAX12 = new ControleurAX12(Ports.AX12);
             pince = new CPince(controleurAX12, Ports.pince);
-     
+            cylindresRecup = 0;
 
             //Ports.ConfigCanne.direction = m_direction;
             m_direction = new OutputPort((Cpu.Pin)EMX.IO46, false);  //IO26 si 11
@@ -145,8 +143,7 @@ namespace GR
             }
 
             Tracage.Ecrire("Fin de l'execution de la strategie.");
-            Tracage.Ecrire("Peche realisee en " + TentativesPeche + " tentative(s).");
-            Tracage.Ecrire("Chateaux realises en " + TentativesChateaux + " tentative(s).");
+            Tracage.Ecrire("Nombre de cylindres " + cylindresRecup);
         }
 
         public etatBR AllerEn(double x, double y, BR.sens s, vitesse speedDistance = vitesse.premiere, bool reculSiBlocage = true,

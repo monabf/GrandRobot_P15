@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.Music</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Music">
+            <summary>A Music module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Music.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Music.SetVolume(System.Int32,System.Int32)">
+            <summary>Sets the volume for both channels.</summary>
+            <param name="left">The volume between 0, silence, and 255, loudest.</param>
+            <param name="right">The volume between 0, silence, and 255, loudest.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Music.RunSineTest">
+            <summary>Runs a sine test</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Music.Play(System.String)">
+            <summary>Play the music in the given file.</summary>
+            <param name="filePath">The path to the file to open and play.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Music.Play(System.Byte[])">
+            <summary>Play the music in the given buffer.</summary>
+            <param name="data">The music to play.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Music.StopPlaying">
+            <summary>Stops playback.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Music.Record(System.IO.Stream,System.UInt16[])">
+            <summary>Begins recording to the given stream.</summary>
+            <param name="stream">The stream to write the recorded data to.</param>
+            <param name="patch">The ogg patch to use.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Music.StopRecording">
+            <summary>Stops recording.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.Music.MusicFinished">
+            <summary>Raised when a sound file has finished playing.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Music.LeftChannelVolume">
+            <summary>The left channel volume.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Music.RightChannelVolume">
+            <summary>The right channel volume.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Music.IsBusy">
+            <summary>Whether or not the module is playing or recording audio.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Music.OggPatch">
+            <summary>The default Ogg patch.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Music.MusicFinishedPlayingEventHandler">
+            <summary>Represents the delegate that is used to handle the <see cref="E:Gadgeteer.Modules.GHIElectronics.Music.MusicFinished"/> event.</summary>
+            <param name="sender">The sending module.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+    </members>
+</doc>

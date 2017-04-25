@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.HubAP5</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.HubAP5">
+            <summary>A HubAP5 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.HubAP5.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.HubAP5.HubSocket1">
+            <summary>Returns the socket number for socket 1 on the hub.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.HubAP5.HubSocket2">
+            <summary>Returns the socket number for socket 2 on the hub.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.HubAP5.HubSocket3">
+            <summary>Returns the socket number for socket 3 on the hub.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.HubAP5.HubSocket4">
+            <summary>Returns the socket number for socket 4 on the hub.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.HubAP5.HubSocket5">
+            <summary>Returns the socket number for socket 5 on the hub.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.HubAP5.HubSocket6">
+            <summary>Returns the socket number for socket 6 on the hub.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.HubAP5.HubSocket7">
+            <summary>Returns the socket number for socket 7 on the hub.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.HubAP5.HubSocket8">
+            <summary>Returns the socket number for socket 8 on the hub.</summary>
+        </member>
+    </members>
+</doc>

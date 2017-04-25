@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.OneWireX1</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.OneWireX1">
+            <summary>A OneWireX1 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.OneWireX1.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.OneWireX1.Interface">
+            <summary>Returns the native NETMF OneWire interface object.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.Thermocouple</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Thermocouple">
+            <summary>A Thermocouple module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Thermocouple.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Thermocouple.GetExternalTemperature">
+            <summary>Reads the external temperature.</summary>
+            <returns>The temperature.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.Thermocouple.GetInternalTemperature">
+            <summary>Reads the internal temperature of the chip.</summary>
+            <returns>The temperature.</returns>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.Thermocouple.Scale">
+            <summary>The temperature scale to measure in.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.Thermocouple.TemperatureScale">
+            <summary>The possible temperature scales to return data in.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Thermocouple.TemperatureScale.Celsius">
+            <summary>Measure in celsius.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.Thermocouple.TemperatureScale.Fahrenheit">
+            <summary>Measure in fahrenheit.</summary>
+        </member>
+    </members>
+</doc>

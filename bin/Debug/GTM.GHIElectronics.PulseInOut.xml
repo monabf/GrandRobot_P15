@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.PulseInOut</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.PulseInOut">
+            <summary>A PulseInOut module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.PulseInOut.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.PulseInOut.ReadChannel(System.Int32,System.Int32@,System.Int32@)">
+            <summary>Reads the current PWM wave on the given input.</summary>
+            <param name="input">The input to read from.</param>
+            <param name="highTime">The amount of time the wave is high in microseconds.</param>
+            <param name="lowTime">The amount of time the wave is low in microseconds.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.PulseInOut.SetPulse(System.Int32,System.UInt32,System.UInt32)">
+            <summary>Starts a pulse on the given pwm channel.</summary>
+            <param name="pwm">The channel to pulse on.</param>
+            <param name="period">The period of the pulse.</param>
+            <param name="highTime">The amount of time for the pin to be high in microseconds.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.PulseInOut.SetPulse(System.Int32,System.UInt32)">
+            <summary>Starts a pulse on the given pwm channel.</summary>
+            <param name="pwm">The channel to pulse on.</param>
+            <param name="highTime">The amount of time for the pin to be high in microseconds.</param>
+        </member>
+    </members>
+</doc>

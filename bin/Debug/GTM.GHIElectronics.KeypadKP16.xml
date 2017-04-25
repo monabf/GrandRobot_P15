@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.KeypadKP16</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.KeypadKP16">
+            <summary>A Keypad KP16 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.KeypadKP16.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.KeypadKP16.IsPressed(Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key)">
+            <summary>Determines whether or not a given key is pressed.</summary>
+            <param name="key">The key whose state we want to check.</param>
+            <returns>Whether or not the key is pressed.</returns>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key">
+            <summary>The possible keys that can be pressed.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.A">
+            <summary>The A key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.B">
+            <summary>The B key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.C">
+            <summary>The C key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.D">
+            <summary>The D key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Pound">
+            <summary>The # key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Star">
+            <summary>The * key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Zero">
+            <summary>The 0 key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.One">
+            <summary>The 1 key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Two">
+            <summary>The 2 key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Three">
+            <summary>The 3 key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Four">
+            <summary>The 4 key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Five">
+            <summary>The 5 key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Six">
+            <summary>The 6 key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Seven">
+            <summary>The 7 key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Eight">
+            <summary>The 8 key.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.KeypadKP16.Key.Nine">
+            <summary>The 9 key.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.ButtonS7</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.ButtonS7">
+            <summary>A ButtonS7 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.ButtonS7.#ctor(System.Int32)">
+            <summary>Constructs a new ButtonS7 instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.ButtonS7.IsPressed(Gadgeteer.Modules.GHIElectronics.ButtonS7.Button)">
+            <summary>Gets a value that indicates whether the given button of the ButtonS7 is pressed.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.ButtonS7.OnEnterEvent(Gadgeteer.Modules.GHIElectronics.ButtonS7,Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterStates)">
+            <summary>Raises the <see cref="E:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterPressed"/> or <see cref="E:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterReleased"/> event.</summary>
+            <param name="sender">The <see cref="T:Gadgeteer.Modules.GHIElectronics.ButtonS7"/> that raised the event.</param>
+            <param name="buttonState">The state of the button.</param>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterPressed">
+            <summary>Raised when the button of the <see cref="T:Gadgeteer.Modules.GHIElectronics.ButtonS7"/> is pressed.</summary>
+            <remarks>
+            Implement this event handler and/or the <see cref="E:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterReleased"/> event handler when you want to provide an action associated with button events. Since the state of the button is passed
+            to the <see cref="T:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterEventHandler"/> delegate, so you can use the same event handler for both button states.
+            </remarks>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterReleased">
+            <summary>Raised when the button of the <see cref="T:Gadgeteer.Modules.GHIElectronics.ButtonS7"/> is released.</summary>
+            <remarks>
+            Implement this event handler and/or the <see cref="E:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterPressed"/> event handler when you want to provide an action associated with button events. Since the state of the button is passed
+            to the <see cref="T:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterEventHandler"/> delegate, you can use the same event handler for both button states.
+            </remarks>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.ButtonS7.Item(Gadgeteer.Modules.GHIElectronics.ButtonS7.Button)">
+            <summary>Gets a value that indicates whether the given button of the ButtonS7 is pressed.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterEventHandler">
+            <summary>Represents the delegate that is used to handle the <see cref="E:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterPressed"/> and <see cref="E:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterReleased"/> events.</summary>
+            <param name="sender">The <see cref="T:Gadgeteer.Modules.GHIElectronics.ButtonS7"/> object that raised the event.</param>
+            <param name="state">The state of the button of the <see cref="T:Gadgeteer.Modules.GHIElectronics.ButtonS7"/></param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.ButtonS7.Button">
+            <summary>The buttons on the module.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.ButtonS7.Button.Back">
+            <summary>The back button.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.ButtonS7.Button.Left">
+            <summary>The left button.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.ButtonS7.Button.Up">
+            <summary>The up button.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.ButtonS7.Button.Down">
+            <summary>The down button.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.ButtonS7.Button.Right">
+            <summary>The right button.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.ButtonS7.Button.Forward">
+            <summary>The forward button.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.ButtonS7.Button.Enter">
+            <summary>The enter button.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterStates">
+            <summary>Represents the state of the enter button of the <see cref="T:Gadgeteer.Modules.GHIElectronics.ButtonS7"/>.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterStates.Released">
+            <summary>The button is released.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.ButtonS7.EnterStates.Pressed">
+            <summary>The button is pressed.</summary>
+        </member>
+    </members>
+</doc>

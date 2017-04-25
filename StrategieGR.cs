@@ -4,6 +4,7 @@ using System.Threading;
 using System.Collections;
 using GR.Membres;
 using PR;
+using GR.BR;
 
 namespace GR
 {
@@ -16,14 +17,14 @@ namespace GR
             Tracage.Ecrire("Homologation");
 
             Tourner(12);
-            AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, Plateforme.sens.avancer);
+            AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, sens.avancer);
             Tracage.Ecrire("Recuperation du cylindre");
             pince.ouvrir(Equipe); //À CODER : doit rentrer la pince et ouvrir en intermédiaire pour que le bras vienne récupérer le cylindre (le début du robot est à 5.8cm du cylindre)
             Tourner(Equipe==Couleur.Bleu ? 78 : -78);
             pince.fermer(Equipe); //À CODER : doit sortir et fermer
             pince.ouvrir(Equipe);
             bras.attraper(Equipe); //À CODER : doit descendre, attraper le cylindre laissé par la pince, remonter
-            bool SortieOK = AllerEn(205, Equipe == Couleur.Bleu ? 870 : 2120, Plateforme.sens.avancer) == etat.arrive;
+            bool SortieOK = AllerEn(205, Equipe == Couleur.Bleu ? 870 : 2120, sens.avancer) == etat.arrive;
             bras.reposer(Equipe); //À CODER : doit redescendre et lâcher le cylindre qu'il tient
             //il faudra voir expérimentalement si les emplacements pour redéposer le cylindre conviennent, sinon les bouger un peu
 
@@ -34,7 +35,7 @@ namespace GR
             Tracage.Ecrire("Sortie de la zone de depart");
 
             Tourner(12);
-            bool SortieOK = AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, Plateforme.sens.avancer) == etat.arrive;
+            bool SortieOK = AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, sens.avancer) == etatBR.arrive;
             //on prend la convention Couleur.Bleu == zone de départ bleue, sinon zone de départ jaune ; en cm pour l'instant, à voir ! Attention aussi aux conventions de repère, ici on a pris y vers le bas et angle positif en sens horaire mais pas forcément vrai
             //rappeler à PED de coder etat car permet savoir si arrive/perdu... et adapter le nom en fonction de ce qu'il choisit
 
@@ -69,9 +70,9 @@ namespace GR
 
           Tracage.Ecrire("Positionnement devant la fusee et recuperation des 4 cylindres");
 
-          AllerEn(341,Equipe==Couleur.Bleu ? 1150 : 1850, Plateforme.sens.avancer);
+          AllerEn(341,Equipe==Couleur.Bleu ? 1150 : 1850, sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? 90 : -90);
-          AllerEn(310, Equipe==Couleur.Bleu ? 1150 : 1850, Plateforme.sens.avancer);
+          AllerEn(310, Equipe==Couleur.Bleu ? 1150 : 1850, sens.avancer);
           pince.ouvrir(Equipe);
           pince.fermer(Equipe);
           pince.ouvrir(Equipe);
@@ -104,12 +105,12 @@ namespace GR
 
           Tracage.Ecrire("Recuperation du 2eme cylindre");
 
-          AllerEn(850,1150, Equipe==Couleur.Bleu ? Plateforme.sens.avancer : Plateforme.sens.reculer);
+          AllerEn(850,1150, Equipe==Couleur.Bleu ? sens.avancer : sens.reculer);
           Tourner(180);
           Tourner(Equipe==Couleur.Bleu ? -45 : 45);
-          AllerEn(1100, Equipe==Couleur.Bleu ? 900 : 2100, Plateforme.sens.avancer);
+          AllerEn(1100, Equipe==Couleur.Bleu ? 900 : 2100, sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? 45 : -45);
-          AllerEn(1136, Equipe==Couleur.Bleu ? 900 : 2100, Plateforme.sens.avancer);
+          AllerEn(1136, Equipe==Couleur.Bleu ? 900 : 2100, sens.avancer);
 
           pince.ouvrir(Equipe);
           pince.fermer(Equipe); //On garde le 6eme cylindre dans le petit bras jusqu'à avoir fait de la place dans le réservoir !
@@ -122,11 +123,11 @@ namespace GR
 
           Tracage.Ecrire("Depot des cylindres");
 
-          AllerEn(1125, Equipe==Couleur.Bleu ? 900 : 2100, Plateforme.sens.reculer);
+          AllerEn(1125, Equipe==Couleur.Bleu ? 900 : 2100, sens.reculer);
           Tourner(Equipe==Couleur.Bleu ? -45 : 45);
-          AllerEn(1275, Equipe==Couleur.Bleu ? 750 : 2250, Plateforme.sens.avancer);
+          AllerEn(1275, Equipe==Couleur.Bleu ? 750 : 2250, sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? -90 : 90);
-          AllerEn(1427, Equipe==Couleur.Bleu ? 927 : 2073, Plateforme.sens.reculer);
+          AllerEn(1427, Equipe==Couleur.Bleu ? 927 : 2073, sens.reculer);
           reservoir.sortir(Equipe); //À CODER : doit utiliser le petit poussoir pour faire sortir les cylindres du réservoir
           reservoir.sortir(Equipe);
           reservoir.sortir(Equipe);
@@ -198,7 +199,7 @@ namespace GR
           Tracage.Ecrire("Sortie de la zone de depart");
 
           Tourner(12);
-          bool SortieOK = AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, Plateforme.sens.avancer) == etat.arrive;
+          bool SortieOK = AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, sens.avancer) == etat.arrive;
           //on prend la convention Couleur.Bleu == zone de départ bleue, sinon zone de départ jaune ; en cm pour l'instant, à voir ! Attention aussi aux conventions de repère, ici on a pris y vers le bas et angle positif en sens horaire mais pas forcément vrai
           //rappeler à PED de coder etat car permet savoir si arrive/perdu... et adapter le nom en fonction de ce qu'il choisit
 
@@ -223,9 +224,9 @@ namespace GR
 
           Tracage.Ecrire("Positionnement devant la fusee et recuperation des 4 cylindres");
 
-          AllerEn(341,Equipe==Couleur.Bleu ? 1150 : 1850, Plateforme.sens.avancer);
+          AllerEn(341,Equipe==Couleur.Bleu ? 1150 : 1850, sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? 90 : -90);
-          AllerEn(310, Equipe==Couleur.Bleu ? 1150 : 1850, Plateforme.sens.avancer);
+          AllerEn(310, Equipe==Couleur.Bleu ? 1150 : 1850, sens.avancer);
 
           return true;
         }
@@ -236,10 +237,10 @@ namespace GR
 
           Tracage.Ecrire("Recuperation du 2eme cylindre");
 
-          AllerEn(850,1150, Equipe==Couleur.Bleu ? Plateforme.sens.avancer : Plateforme.sens.reculer);
+          AllerEn(850,1150, Equipe==Couleur.Bleu ? sens.avancer : sens.reculer);
           Tourner(180);
           Tourner(Equipe==Couleur.Bleu ? -45 : 45);
-          AllerEn(1100, Equipe==Couleur.Bleu ? 900 : 2100, Plateforme.sens.avancer);
+          AllerEn(1100, Equipe==Couleur.Bleu ? 900 : 2100, sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? 45 : -45);
           AllerEn(1136, Equipe==Couleur.Bleu ? 900 : 2100);
 
@@ -252,11 +253,11 @@ namespace GR
 
           Tracage.Ecrire("Depot des cylindres");
 
-          AllerEn(1125, Equipe==Couleur.Equipe ? 900 : 2100, Plateforme.sens.reculer);
+          AllerEn(1125, Equipe==Couleur.Equipe ? 900 : 2100, sens.reculer);
           Tourner(Equipe==Couleur.Bleu ? -45 : 45);
-          AllerEn(1275, Equipe==Couleur.Bleu ? 750 : 2250, Plateforme.sens.avancer);
+          AllerEn(1275, Equipe==Couleur.Bleu ? 750 : 2250, sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? -90 : 90);
-          AllerEn(1427, Equipe==Couleur.Bleu ? 927 : 2073, Plateforme.sens.reculer);
+          AllerEn(1427, Equipe==Couleur.Bleu ? 927 : 2073, sens.reculer);
 
 
           return true;

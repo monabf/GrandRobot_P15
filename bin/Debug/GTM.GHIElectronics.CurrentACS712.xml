@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.CurrentACS712</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.CurrentACS712">
+            <summary>A CurrentACS712 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CurrentACS712.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CurrentACS712.ReadACCurrent">
+            <summary>Reads the alternating current value.</summary>
+            <returns>The AC reading.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CurrentACS712.ReadACCurrent(System.Int32)">
+            <summary>Reads the alternating current value using an average of multiple samples.</summary>
+            <param name="samples">The number of times to sample the sensor.</param>
+            <returns>The AC reading.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CurrentACS712.ReadDCCurrent">
+            <summary>Reads the direct current value.</summary>
+            <returns>The DC reading.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.CurrentACS712.ReadDCCurrent(System.Int32)">
+            <summary>Reads the direct current value using an average of multiple samples.</summary>
+            <param name="samples">The number of times to sample the sensor.</param>
+            <returns>The DC reading.</returns>
+        </member>
+    </members>
+</doc>

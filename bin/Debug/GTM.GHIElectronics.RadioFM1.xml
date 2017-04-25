@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.RadioFM1</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.RadioFM1">
+            <summary>An RadioFM1 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.INVALID_CHANNEL">
+            <summary>The channel returned by <see cref="M:Gadgeteer.Modules.GHIElectronics.RadioFM1.Seek(Gadgeteer.Modules.GHIElectronics.RadioFM1.SeekDirection)"/> when no Channel is found.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.MIN_VOLUME">
+            <summary>The minimum volume the device can output.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.MAX_VOLUME">
+            <summary>The maximum volume the device can output.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RadioFM1.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RadioFM1.Seek(Gadgeteer.Modules.GHIElectronics.RadioFM1.SeekDirection)">
+            <summary>Tells the radio to Seek in the given direction until it finds a station.</summary>
+            <param name="direction">The direction to Seek the radio.</param>
+            <remarks>It does wrap around when seeking.</remarks>
+            <returns>The Channel that was tuned to or <see cref="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.INVALID_CHANNEL"/> if no Channel was found.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RadioFM1.IncreaseVolume">
+            <summary>Increases the Volume by one.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RadioFM1.DecreaseVolume">
+            <summary>Decreases the Volume by one.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RadioFM1.SetChannelConfiguration(Gadgeteer.Modules.GHIElectronics.RadioFM1.Spacing,Gadgeteer.Modules.GHIElectronics.RadioFM1.Band)">
+            <summary>Sets the channel spacing and band of the device.</summary>
+            <param name="spacing">The channel spacing.</param>
+            <param name="band">The channel base band.</param>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.RadioFM1.RadioTextChanged">
+            <summary>Raised when new Radio Text is available.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.RadioFM1.Volume">
+            <summary>Gets or sets the Volume of the radio.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.RadioFM1.MaxChannel">
+            <summary>The maximum channel the radio and be tuned to.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.RadioFM1.MinChannel">
+            <summary>The minimum channel the radio and be tuned to.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.RadioFM1.Channel">
+            <summary>Gets or sets the Channel of the radio.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.RadioFM1.RadioText">
+            <summary>Gets the current Radio Text.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.RadioFM1.RadioTextChangedHandler">
+            <summary>Represents the delegate that is used to handle the <see cref="E:Gadgeteer.Modules.GHIElectronics.RadioFM1.RadioTextChanged"/> event.</summary>
+            <param name="sender">The <see cref="T:Gadgeteer.Modules.GHIElectronics.RadioFM1"/> that raised the event.</param>
+            <param name="newRadioText">The new Radio Text.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.RadioFM1.SeekDirection">
+            <summary>The enumeration that determines which direction to Seek when calling Seek(direction);</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.SeekDirection.Forward">
+            <summary>Seeks for a higher station number.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.SeekDirection.Backward">
+            <summary>Seeks for a lower station number.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.RadioFM1.Band">
+            <summary>The radio frequency band.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.Band.USAEurope">
+            <summary>The band used in the United States and Europe (87.5-108MHz).</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.Band.JapanWide">
+            <summary>The wide band used in the Japan (76-108MHz).</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.Band.Japan">
+            <summary>The band used in Japan (76-90MHz).</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.RadioFM1.Spacing">
+            <summary>The radio channel spacing.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.Spacing.USAAustrailia">
+            <summary>Spacing in USA and Austrailia (200KHz).</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RadioFM1.Spacing.EuropeJapan">
+            <summary>Spacing in Europe and Japan (100KHz).</summary>
+        </member>
+    </members>
+</doc>

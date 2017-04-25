@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.PulseCount</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.PulseCount">
+            <summary>A PulseCount module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.PulseCount.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.PulseCount.CreateInput(Gadgeteer.SocketInterfaces.GlitchFilterMode,Gadgeteer.SocketInterfaces.ResistorMode)">
+            <summary>Creates an input on the input port on the module.</summary>
+            <param name="glitchFilterMode">The glitch filter mode for the input.</param>
+            <param name="resistorMode">The resistor mode for the input.</param>
+            <returns>The new input.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.PulseCount.CreateInterruptInput(Gadgeteer.SocketInterfaces.GlitchFilterMode,Gadgeteer.SocketInterfaces.ResistorMode,Gadgeteer.SocketInterfaces.InterruptMode)">
+            <summary>Creates an interrrupt input on the input port on the module.</summary>
+            <param name="glitchFilterMode">The glitch filter mode for the input.</param>
+            <param name="resistorMode">The resistor mode for the input.</param>
+            <param name="interruptMode">The interrupt mode for the input.</param>
+            <returns>The new input.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.PulseCount.GetCount">
+            <summary>Gets the current count from the module.</summary>
+            <returns>The current count on the module.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.PulseCount.ResetCount">
+            <summary>Resets the count on the module to 0.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.PulseCount.Mode">
+            <summary>The count mode the module uses.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.PulseCount.Direction">
+            <summary>The direction the encoder is being turned.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.PulseCount.Direction.CounterClockwise">
+            <summary>The encoder is moving in a counter-clockwise direction.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.PulseCount.Direction.Clockwise">
+            <summary>The encoder is moving in a clockwise direction.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.PulseCount.CountMode">
+            <summary>The possible count modes the module can use.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.PulseCount.CountMode.NoneQuad">
+            <summary>Non-quadrature mode.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.PulseCount.CountMode.Quad1">
+            <summary>1x quadrature mode.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.PulseCount.CountMode.Quad2">
+            <summary>2x quadrature mode.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.PulseCount.CountMode.Quad4">
+            <summary>4x quadrature mode.</summary>
+        </member>
+    </members>
+</doc>

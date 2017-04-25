@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.RotaryH1</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.RotaryH1">
+            <summary>A RotaryH1 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RotaryH1.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RotaryH1.GetCount">
+            <summary>Gets the current count of the encoder.</summary>
+            <returns>An integer representing the count.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RotaryH1.GetDirection">
+            <summary>Gets the current direction that the encoder count is going.</summary>
+            <returns>The direction the encoder count is going.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RotaryH1.ResetCount">
+            <summary>Resets the count on the module to 0.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.RotaryH1.Direction">
+            <summary>The direction the encoder is being turned.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RotaryH1.Direction.CounterClockwise">
+            <summary>The encoder is moving in a counter-clockwise direction.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RotaryH1.Direction.Clockwise">
+            <summary>The encoder is moving in a clockwise direction.</summary>
+        </member>
+    </members>
+</doc>

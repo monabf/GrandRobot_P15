@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.RelayISOx16</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.RelayISOx16">
+            <summary>A RelayISOx16 for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RelayISOx16.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RelayISOx16.DisableAllRelays">
+            <summary>Clears all relays.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RelayISOx16.EnableRelay(Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays)">
+            <summary>Enables the given relays.</summary>
+            <param name="relays">The relays to turn on.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RelayISOx16.DisableRelay(Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays)">
+            <summary>Disables the given relays.</summary>
+            <param name="relays">The relays to turn off.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RelayISOx16.EnableOutputs">
+            <summary>Enables the relay outputs.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.RelayISOx16.DisableOutputs">
+            <summary>Disables the relay outputs.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays">
+            <summary>The relays on the module.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay1">
+            <summary>Relay 1</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay2">
+            <summary>Relay 2</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay3">
+            <summary>Relay 3</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay4">
+            <summary>Relay 4</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay5">
+            <summary>Relay 5</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay6">
+            <summary>Relay 6</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay7">
+            <summary>Relay 7</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay8">
+            <summary>Relay 8</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay9">
+            <summary>Relay 9</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay10">
+            <summary>Relay 10</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay11">
+            <summary>Relay 11</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay12">
+            <summary>Relay 12</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay13">
+            <summary>Relay 13</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay14">
+            <summary>Relay 14</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay15">
+            <summary>Relay 15</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.RelayISOx16.Relays.Relay16">
+            <summary>Relay 16</summary>
+        </member>
+    </members>
+</doc>

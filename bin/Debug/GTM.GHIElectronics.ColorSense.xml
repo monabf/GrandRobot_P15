@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.ColorSense</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.ColorSense">
+            <summary>A ColorSense module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.ColorSense.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.ColorSense.ReadColor">
+            <summary>Reads the current color from the sensor.</summary>
+            <returns>The measured color.</returns>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.ColorSense.LedEnabled">
+            <summary>Sets the state of the onboard LED.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.ColorSense.ColorData">
+            <summary>Holds the color data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.ColorSense.ColorData.Green">
+            <summary>Intensity of green-filtered channel</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.ColorSense.ColorData.Red">
+            <summary>Intensity of red-filtered channel</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.ColorSense.ColorData.Blue">
+            <summary>Intensity of blue-filtered channel</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.ColorSense.ColorData.Clear">
+            <summary>Intensity of non-filtered channel</summary>
+        </member>
+    </members>
+</doc>

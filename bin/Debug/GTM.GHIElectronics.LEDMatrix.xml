@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.LEDMatrix</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.LEDMatrix">
+            <summary>An LEDMatrix module for .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.LEDMatrix.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.LEDMatrix.DrawBitmap(System.Byte[])">
+            <summary>Draws an 8x8 bitmap to the module.</summary>
+            <param name="bitmap">The array of 8 bytes to display on the LED Matrix.</param>
+        </member>
+    </members>
+</doc>

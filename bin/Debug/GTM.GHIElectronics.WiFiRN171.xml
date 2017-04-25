@@ -1,0 +1,378 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTM.GHIElectronics.WiFiRN171</name>
+    </assembly>
+    <members>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171">
+            <summary>A WiFiRN171 module for Microsoft .NET Gadgeteer</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.#ctor(System.Int32)">
+            <summary>Constructs a new instance.</summary>
+            <param name="socketNumber">The socket that this module is plugged in to.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.Reboot">
+            <summary>Reboots the module.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.UpdateFirmware">
+            <summary>Updates the firmware.</summary>
+            <returns>Whether it was successful or not.</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.CreateAccessPoint(System.String)">
+            <summary>Creates an access point with the given SSID.</summary>
+            <param name="ssid">The SSID to use.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.EnableDhcp(System.String,System.String,System.String)">
+            <summary>Enables DHCP mode.</summary>
+            <param name="gateway">The gateway address.</param>
+            <param name="subnetMask">The subnet mask.</param>
+            <param name="dnsAddress">The DNS address.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.EnableStaticIP(System.String,System.String,System.String,System.String)">
+            <summary>Enables static ip mode.</summary>
+            <param name="ipAddress">The ip address</param>
+            <param name="gateway">The gateway address.</param>
+            <param name="subnetMask">The subnet mask.</param>
+            <param name="dnsAddress">The DNS address.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.JoinWirelessNetwork(System.String,System.String)">
+            <summary>Attempt to join a wireless network with given parameters.</summary>
+            <param name="ssid">The ssid.</param>
+            <param name="passphrase">The passphrase.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.JoinWirelessNetwork(System.String,System.String,System.Int32,Gadgeteer.Modules.GHIElectronics.WiFiRN171.WirelessEncryptionMode)">
+            <summary>Attempt to join a wireless network with given parameters.</summary>
+            <param name="ssid">The ssid.</param>
+            <param name="passphrase">The passphrase.</param>
+            <param name="channel">The channel.</param>
+            <param name="authenticationMode">The authentication mode.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.SetProtocol(Gadgeteer.Modules.GHIElectronics.WiFiRN171.SocketProtocol)">
+            <summary>Sets the socket protocol.</summary>
+            <param name="protocol">The desired protocol.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.SetListenPort(System.Int32)">
+            <summary>Set the port the WiFly module should listen for connections on.</summary>
+            <param name="port">The port to listen on.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.EnableHttpServer">
+            <summary>Sets the device to listen port on port 80 and allow HTTP request parsing.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.Send(System.Byte[])">
+            <summary>Sends data to the currently connected client.</summary>
+            <param name="data">The data to send.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.Send(System.Byte[],System.Int32,System.Int32)">
+            <summary>Sends data to the currently connected client.</summary>
+            <param name="data">The data to send.</param>
+            <param name="offset">The offset into the buffer to send at.</param>
+            <param name="count">The number of bytes to send.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.ExecuteCommand(System.String)">
+            <summary>Executes the command.</summary>
+            <param name="command">The command to execute.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.EnterCommandMode">
+            <summary>Enters command mode.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.ExitCommandMode">
+            <summary>Exits command mode.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.WriteCommand(System.String)">
+            <summary>Writes to the device.</summary>
+            <param name="command">The command to write.</param>
+            <returns>Whether or not it was successful</returns>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.WriteCommand(System.Byte[])">
+            <summary>Writes to the device.</summary>
+            <param name="command">The command to write.</param>
+            <returns>Whether or not it was successful</returns>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequestReceived">
+            <summary>Fired when a HTTP Request is received</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.WiFiRN171.DataReceived">
+            <summary>Fired when any data is received</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.WiFiRN171.LineReceived">
+            <summary>Fired when a complete line of data has been received</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.WiFiRN171.ConnectionEstablished">
+            <summary>Fired when an connection has been establised to a remote client.</summary>
+        </member>
+        <member name="E:Gadgeteer.Modules.GHIElectronics.WiFiRN171.ConnectionClosed">
+            <summary>Fired when an connection to a remote client has closed.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.BaudRate">
+            <summary>The baudrate of the device.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.Timeout">
+            <summary>The timeout of the device.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.Ready">
+            <summary>If the device is ready.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.LocalIP">
+            <summary>The local IP of the device.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.LocalListenPort">
+            <summary>The local listening port of the device.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.SerialPort">
+            <summary>The raw underlying serial port object.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.DebugPort">
+            <summary>The port to print debug messages to when DebugPrintEnabled is true. If null, messages are sent to Debug.Print.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequestReceivedHandler">
+            <summary>A delegate representing receipt of an HTTP request.</summary>
+            <param name="sender">The object that sent this event.</param>
+            <param name="e">The HTTP session.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.DataReceivedHandler">
+            <summary>A delegate representing data received.</summary>
+            <param name="sender">The object that sent this event.</param>
+            <param name="e">The data received.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.LineReceivedHandler">
+            <summary>A delegate representing line received.</summary>
+            <param name="sender">The object that sent this event.</param>
+            <param name="e">The line received.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.ConnectionEstablishedHandler">
+            <summary>A delegate representing connection opening.</summary>
+            <param name="sender">The object that sent this event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.ConnectionClosedHandler">
+            <summary>A delegate representing connection closure.</summary>
+            <param name="sender">The object that sent this event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.SocketProtocol">
+            <summary>Represents the socket protocal.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.SocketProtocol.UDP">
+            <summary>UPD Mode: Connection-less protocol with no handshaking</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.SocketProtocol.TCPServer">
+            <summary>TCP Server Mode: TCP Connection with handshaking (Client and Server)</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.SocketProtocol.SecureConnection">
+            <summary>Secure Connection Mode: Only send to the stored host-ip</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.SocketProtocol.TCPClient">
+            <summary>TCP Client Mode: TCP Connection with handshaking (Client Only)</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.WirelessEncryptionMode">
+            <summary>Represents the encyrption mode to use.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.WirelessEncryptionMode.Open">
+            <summary>Open Authentication (No Passphrase required)</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.WirelessEncryptionMode.WEP_128">
+            <summary>128-bit Wired Equivalent Privacy (WEP)</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.WirelessEncryptionMode.WPA1">
+            <summary>Wi-Fi Protected Access (WPA)</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.WirelessEncryptionMode.MixedWPA1_WPA2">
+            <summary>Mixed WPA1 and WPA2-PSK</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.WirelessEncryptionMode.WPA2_PSK">
+            <summary>Wi-Fi Protected Access (WPA) II (uses preshared key)</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.TimeoutException">
+            <summary>An exception thrown when a timeout occurs.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.ErrorReceivedException">
+            <summary>An exception thrown when an errror is received.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.StringHashtable">
+            <summary>A Hashtable that works with strings.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.StringHashtable.#ctor">
+            <summary>Constructs a new instance.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.StringHashtable.Item(System.String)">
+            <summary>Indexer for the value with the given key.</summary>
+            <param name="i">The key.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest">
+            <summary>Represents an HTTP request.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.#ctor">
+            <summary>Constructs a new instance.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.Type">
+            <summary>The request type.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.HeaderData">
+            <summary>The header data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.QueryData">
+            <summary>The query data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.Url">
+            <summary>The URL.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.PostData">
+            <summary>The posted data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.PostLength">
+            <summary>The length of the posted data.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.HasPostData">
+            <summary>Whether or not there was posted data.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.RequestType">
+            <summary>Represents an HTTP request type.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.RequestType.Get">
+            <summary>A GET request.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest.RequestType.Post">
+            <summary>A POST request.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse">
+            <summary>An HTTP response.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.#ctor(Gadgeteer.SocketInterfaces.Serial)">
+            <summary>Constructs a new instance.</summary>
+            <param name="stream">The stream to use.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.Send(System.Byte[])">
+            <summary>Sends a response.</summary>
+            <param name="document">The body of the response.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.Send(System.Byte[],System.Boolean)">
+            <summary>Sends a response.</summary>
+            <param name="document">The body of the response.</param>
+            <param name="sendHeader">Whether or not to send the header as part of the response.</param>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.Send(System.Byte[],System.Int32,System.Int32,System.Boolean)">
+            <summary>Sends a response.</summary>
+            <param name="document">The body of the response.</param>
+            <param name="offset">The offset into the document.</param>
+            <param name="count">The amount to transfer starting at offset from the document.</param>
+            <param name="sendHeader">Whether or not to send the header as part of the response.</param>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.HeaderData">
+            <summary>The header data of the response.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.StatusCode">
+            <summary>The status code of the reponse.</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus">
+            <summary>The possible response statuses.</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.Continue">
+            <summary>The Continue status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.SwitchingProtocols">
+            <summary>The SwitchingProtocols status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.Ok">
+            <summary>The OK status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.Created">
+            <summary>The Created status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.Accepted">
+            <summary>The Accepted status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.NonAuthoritativeInformation">
+            <summary>The NonAuthoritativeInformation status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.NoContent">
+            <summary>The NoContent status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.ResetContent">
+            <summary>The ResetContent status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.BadRequest">
+            <summary>The BadRequest status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.Unauthorized">
+            <summary>The Unauthorized status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.Forbidden">
+            <summary>The Forbidden status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.NotFound">
+            <summary>The NotFound status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.MethodNotAllowed">
+            <summary>The MethodNotAllowed status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.NotAcceptable">
+            <summary>The NotAcceptable status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.ProxyAuthenticationRequired">
+            <summary>The ProxyAuthenticationRequired status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.RequestTimeout">
+            <summary>The RequestTimeout status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.Conflict">
+            <summary>The Conflict status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.Gone">
+            <summary>The Gone status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.LengthRequired">
+            <summary>The LengthRequired status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.PreconditionFailed">
+            <summary>The PreconditionFailed status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.RequestEntityTooLarge">
+            <summary>The RequestEntityTooLarge status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.RequestUriTooLong">
+            <summary>The RequestUriTooLong status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.UnsupportedMediaType">
+            <summary>The UnsupportedMediaType status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.RequestedRangeNotSatisfiable">
+            <summary>The RequestedRangeNotSatisfiable status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.ExpectationFailed">
+            <summary>The ExpectationFailed status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.InternalServerError">
+            <summary>The InternalServerError status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.NotImplemented">
+            <summary>The NotImplemented status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.BadGateway">
+            <summary>The BadGateway status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.ServiceUnavailable">
+            <summary>The ServiceUnavailable status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.GatewayTimeout">
+            <summary>The GatewayTimeout status</summary>
+        </member>
+        <member name="F:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpResponse.ResponseStatus.HttpVersionNotSupported">
+            <summary>The HttpVersionNotSupported status</summary>
+        </member>
+        <member name="T:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpSession">
+            <summary>Represents an HTTP session.</summary>
+        </member>
+        <member name="M:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpSession.#ctor(Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpRequest,Gadgeteer.SocketInterfaces.Serial)">
+            <summary>Constructs a new instance.</summary>
+            <param name="request">The http request the session will represent.</param>
+            <param name="stream">The stream of serial data.</param>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpSession.Response">
+            <summary>The response.</summary>
+        </member>
+        <member name="P:Gadgeteer.Modules.GHIElectronics.WiFiRN171.HttpSession.Request">
+            <summary>The request.</summary>
+        </member>
+    </members>
+</doc>
