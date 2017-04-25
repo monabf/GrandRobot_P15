@@ -10,7 +10,6 @@ namespace GR
     {
         public int IO;
         public int Jack;
-        public int DetecteurIR;
         public int Plateforme;
         public int AX12;
         public CPince.configPince pince;

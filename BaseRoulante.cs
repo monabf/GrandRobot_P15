@@ -149,10 +149,10 @@ public etatBR allerEn(double x, double y, sens s, vitesse speedDistance = vitess
 int erreur = 0;
 int dureeBlocage = 0;
 double distanceConsigne = 0;
-int distanceReelle = 0, distanceReelle_tm1=0, ecartDistance = 0;
+int distanceReelle = 0, ecartDistance = 0;
 double alphaConsigne = 0;
 int alphaReel = 0;
-double delta = 0;
+
 
 
 alphaConsigne = System.Math.Atan2((y - m_posBR.y), (x - m_posBR.x)) * 180 / System.Math.PI - m_posBR.alpha; //angle en degre

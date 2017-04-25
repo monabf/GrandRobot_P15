@@ -48,11 +48,9 @@
     <Compile Include="CFunnyBras.cs" />
     <Compile Include="ConfigurationPorts.cs" />
     <Compile Include="ControleurAX12.cs" />
-    <Compile Include="CParasol.cs" />
     <Compile Include="CPince.cs" />
     <Compile Include="CReservoir.cs" />
     <Compile Include="CRouletteIntelligente.cs" />
-    <Compile Include="CTelemetreLaser.cs" />
     <Compile Include="GestionnaireStrategie.cs" />
     <Compile Include="GrandRobot.cs" />
     <Compile Include="GroupeInfrarouge.cs" />
