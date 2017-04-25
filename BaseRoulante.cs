@@ -177,7 +177,7 @@ do
 
 //calcul inutile qui ne mène à rien ! il faudrait faire :
 erreur = getDistanceParcourue (ref distanceReelle);
-ecartDistance = System.Math.abs(distanceReelle - distanceConsigne);
+ecartDistance = (int)System.Math.Abs(distanceReelle - distanceConsigne);
 //la variable distanceReelle_tm1 en devient alors obsolète me semble-t-il
 // PE@M je plussoie, ils ont fait la même chose que pour la fonction tourner ;)
 

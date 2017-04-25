@@ -13,6 +13,8 @@ using Microsoft.SPOT.Hardware;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using GadgeteerApp4;
+using Grand_Robot;
+using PR;
 
 namespace GR
 {
@@ -30,7 +32,8 @@ namespace GR
         private readonly ConfigurationPorts Ports;
         private readonly Jack JackDemarrage;
         private readonly CBaseRoulante BaseRoulante;
-        private readonly ControleurAX12 ControleurAX12;
+        private readonly ControleurAX12 controleurAX12;
+        //private readonly CAX12 CAX12;
         private readonly CPince Pince;
         private readonly CCapteurCouleur CapteurCouleur;
         private readonly OutputPort m_direction;
@@ -61,8 +64,8 @@ namespace GR
 
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
             BaseRoulante = new CBaseRoulante(Ports.Plateforme);
-            ControleurAX12 = new ControleurAX12(Ports.AX12);
-            Pince = new CPince(ControleurAX12, Ports.pince);
+            controleurAX12 = new ControleurAX12(Ports.AX12);
+            Pince = new CPince(controleurAX12, Ports.pince);
      
 
             //Ports.ConfigCanne.direction = m_direction;

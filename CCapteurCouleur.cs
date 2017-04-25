@@ -19,6 +19,23 @@ namespace GadgeteerApp4
             float pricisionAngle = (float) (System.Math.PI / 10);
             float defaultAngle = (float) (System.Math.PI / 4); //Toujours Pi/4
 
+            //Constructeur
+            void CCapteurCouleur(int Id, int ourcolor)
+            {
+                myColorSense = new ColorSense(Id);
+                /* Choix de la couleur 'par defaut la couleur est Bleu' */
+              //  int config;
+                if (ourcolor == Yellow)
+                {
+                    c1 = -3; c2 = 1; c3 = 3; c4 = -1;
+                }
+                else
+                {
+                    c1 = 1; c2 = -3; c3 = -1; c4 = 3;
+                }
+            }
+
+
         public static int getHue(int red, int green, int blue)
         {
 
@@ -50,22 +67,7 @@ namespace GadgeteerApp4
       
 
         
-        //Constructeur
-        void CCapteurCouleur(int id, int ourColor)
-        {
-            myColorSense = new ColorSense(id);
-            /* Choix de la couleur 'par defaut la couleur est Bleu' */
-            int config;
-                        if (ourColor == Yellow)
-            {
-                c1 = -3; c2 = 1; c3 = 3; c4 = -1;
-            }
-            else
-            {
-                c1 = 1; c2 = -3; c3 = -1; c4 = 3;
-            }
-        }
-
+    
 
         //Continuer la rotation
         bool ContinuerRotation(ref int couleurInitiale)

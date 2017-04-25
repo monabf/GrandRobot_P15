@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="ActionRobot.cs" />
     <Compile Include="BaseRoulante.cs" />
-    <Compile Include="CAX_12.cs" />
+    <Compile Include="CAX12.cs" />
     <Compile Include="CBras.cs" />
     <Compile Include="CCapteurCouleur.cs" />
     <Compile Include="CCapteurUltrason.cs" />
@@ -52,7 +52,6 @@
     <Compile Include="CPince.cs" />
     <Compile Include="CReservoir.cs" />
     <Compile Include="CRouletteIntelligente.cs" />
-    <Compile Include="CRX-64.cs" />
     <Compile Include="CTelemetreLaser.cs" />
     <Compile Include="GestionnaireStrategie.cs" />
     <Compile Include="GrandRobot.cs" />

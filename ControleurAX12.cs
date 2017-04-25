@@ -9,7 +9,7 @@ using Microsoft.SPOT.Hardware;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GHI.Processor;
+//using GHI.Processor;
 using GHI.Pins;
 
 namespace GR.Membres

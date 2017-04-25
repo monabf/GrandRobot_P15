@@ -3,9 +3,7 @@ using Microsoft.SPOT;
 using System.Threading;
 using System.Collections;
 using GR.Membres;
-using CPince.cs;
-using CReservoir.cs;
-using CBras.cs;
+using PR;
 
 namespace GR
 {
@@ -124,7 +122,7 @@ namespace GR
 
           Tracage.Ecrire("Depot des cylindres");
 
-          AllerEn(1125, Equipe==Couleur.Equipe ? 900 : 2100, Plateforme.sens.reculer);
+          AllerEn(1125, Equipe==Couleur.Bleu ? 900 : 2100, Plateforme.sens.reculer);
           Tourner(Equipe==Couleur.Bleu ? -45 : 45);
           AllerEn(1275, Equipe==Couleur.Bleu ? 750 : 2250, Plateforme.sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? -90 : 90);

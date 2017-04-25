@@ -4,6 +4,8 @@ using System.IO.Ports;
 using GT = Gadgeteer;
 using System.Threading;
 using Microsoft.SPOT.Hardware;
+using PR;
+using GadgeteerApp4;
 
 namespace GR.Membres
 {
@@ -23,16 +25,16 @@ namespace GR.Membres
           deploye = 10
         };
 
-        CAX_12 m_ax12Poussoir;
+        CAX12 m_ax12Poussoir;
         CRouletteIntelligente m_rouletteIntelligente;
 
         public CReservoir(ControleurAX12 controleur, configReservoir config)
         {
             CCapteurCouleur capteurCouleur = new CCapteurCouleur(config.idCapteurReservoir);
-            CAX_12 ax12Rotateur = new CAX_12(config.idAx12Rotateur, controleur.m_port, controleur.m_direction);
-            m_ax12Poussoir.setMode(CAX_12.AX12Mode.joint);
+            CAX12 ax12Rotateur = new CAX12(config.idAx12Rotateur, controleur.m_port, controleur.m_direction);
+            m_ax12Poussoir.setMode(AX12Mode.joint);
             m_rouletteIntelligente = CRouletteIntelligente(capteurCouleur, ax12Rotateur);
-            m_ax12Poussoir = new CAX_12(config.idAx12Poussoir, controleur.m_port, controleur.m_direction);
+            m_ax12Poussoir = new CAX12(config.idAx12Poussoir, controleur.m_port, controleur.m_direction);
         }
 
         public void rentrer(Couleur equipe)

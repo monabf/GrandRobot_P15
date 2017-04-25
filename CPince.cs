@@ -4,6 +4,7 @@ using System.IO.Ports;
 using GT = Gadgeteer;
 using System.Threading;
 using Microsoft.SPOT.Hardware;
+using PR;
 
 namespace GR.Membres
 {
@@ -26,16 +27,16 @@ namespace GR.Membres
           fermee = 10
         };
 
-        CAX_12 m_ax12PinceSupport;
-        CAX_12 m_ax12PinceModule;
+        CAX12 m_ax12PinceSupport;
+        CAX12 m_ax12PinceModule;
 
         public CPince(ControleurAX12 controleur, configPince config)
         {
-            m_ax12PinceSupport = new CAX_12(config.idAx12PinceSupport, controleur.m_port, controleur.m_direction);
-            m_ax12PinceModule = new CAX_12(config.idAx12PinceModule, controleur.m_port, controleur.m_direction);
-           // m_ax12Pince.setMode(CAX_12.AX12Mode.joint);
+            m_ax12PinceSupport = new CAX12(config.idAx12PinceSupport, controleur.m_port, controleur.m_direction);
+            m_ax12PinceModule = new CAX12(config.idAx12PinceModule, controleur.m_port, controleur.m_direction);
+           // m_ax12Pince.setMode(CAX12.AX12Mode.joint);
             //position initiale
-            // m_ax12Pince.setMode(CAX_12.AX12Mode.joint);
+            // m_ax12Pince.setMode(CAX12.AX12Mode.joint);
 
         }
 
