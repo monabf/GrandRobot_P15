@@ -13,7 +13,7 @@ namespace GR.Membres
     CAX12 m_ax12Roulette;
     CCapteurCouleur m_capteurCouleur;
 
-    public void CRoulette(CCapteurCouleur capteurCouleur, CAX12 ax12Roulette)
+    public CRouletteIntelligente(CCapteurCouleur capteurCouleur, CAX12 ax12Roulette)
     {
       m_capteurCouleur = capteurCouleur;
       m_ax12Roulette = ax12Roulette;
@@ -22,10 +22,10 @@ namespace GR.Membres
 
     public void mettreBonneCouleur(Couleur equipe) {
       m_ax12Roulette.setMovingSpeed(speed.forward);
-      while (m_capteurCouleur.ContinuerRotation(equipe))
+      while (m_capteurCouleur.ContinuerRotation())
       {
         // Mettre un Thread.sleep?
-        Thread.sleep(100);
+        Thread.Sleep(100);
       }
       m_ax12Roulette.setMovingSpeed(speed.stop);
     }

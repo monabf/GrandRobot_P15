@@ -8,7 +8,7 @@ using Microsoft.SPOT.Hardware;
 //using GHI.Premium.Hardware.LowLevel;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-//using GHI.Processor;
+using GHI.Processor;
 
 namespace PR
 {

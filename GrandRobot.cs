@@ -23,30 +23,30 @@ namespace GR
     /// </summary>
     partial class GrandRobot
     {
-        private enum Axe { Null = 0, X, Y }
+        public enum Axe { Null = 0, X, Y }
 
-        private readonly GestionnaireStrategie Strategie;
-        private readonly IHMTracage Tracage;
+        public  GestionnaireStrategie Strategie;
+        public  IHMTracage Tracage;
 
-        private readonly Couleur Equipe;
-        private readonly ConfigurationPorts Ports;
-        private readonly Jack JackDemarrage;
-        private readonly CBaseRoulante BaseRoulante;
-        private readonly ControleurAX12 controleurAX12;
-        //private readonly CAX12 CAX12;
-        private readonly CPince Pince;
-        private readonly CCapteurCouleur CapteurCouleur;
-        private readonly OutputPort m_direction;
-        private readonly GroupeInfrarouge IR;
-        //private readonly CTelemetreLaser TelemetreLaser;
-        private readonly CCapteurUltrason CapteurUltrason;
+        public  Couleur Equipe;
+        public  ConfigurationPorts Ports;
+        public  Jack JackDemarrage;
+        public  CBaseRoulante BaseRoulante;
+        public  ControleurAX12 controleurAX12;
+        //public  CAX12 CAX12;
+        public  CPince pince;
+        public  CCapteurCouleur CapteurCouleur;
+        public  OutputPort m_direction;
+        public  GroupeInfrarouge IR;
+        //public  CTelemetreLaser TelemetreLaser;
+        public  CCapteurUltrason CapteurUltrason;
 
-        private positionBaseRoulante Position = new positionBaseRoulante();
-        private bool SortieOK = false;
+        public positionBaseRoulante Position = new positionBaseRoulante();
+        public bool SortieOK = false;
 
-        private DateTime InstantDebut;
-        private int TentativesPeche = 0;
-        private int TentativesChateaux = 0;
+        public DateTime InstantDebut;
+        public int TentativesPeche = 0;
+        public int TentativesChateaux = 0;
 
         /// <summary>
         /// Initialise le robot
@@ -65,7 +65,7 @@ namespace GR
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
             BaseRoulante = new CBaseRoulante(Ports.Plateforme);
             controleurAX12 = new ControleurAX12(Ports.AX12);
-            Pince = new CPince(controleurAX12, Ports.pince);
+            pince = new CPince(controleurAX12, Ports.pince);
      
 
             //Ports.ConfigCanne.direction = m_direction;
@@ -134,7 +134,7 @@ namespace GR
             }, null, (int)(tempsImparti * 1000), -1);
         }
 
-        private void EffectuerStrategie()
+        public void EffectuerStrategie()
         {
             Tracage.Ecrire("Debut de l'execution de la strategie.");
 
@@ -149,7 +149,7 @@ namespace GR
             Tracage.Ecrire("Chateaux realises en " + TentativesChateaux + " tentative(s).");
         }
 
-        private etatBR AllerEn(double x, double y, BR.sens s, vitesse speedDistance = vitesse.premiere, bool reculSiBlocage = true,
+        public etatBR AllerEn(double x, double y, BR.sens s, vitesse speedDistance = vitesse.premiere, bool reculSiBlocage = true,
             bool detection = false, vitesse speedRotation = vitesse.vitesseRotationMin, int distanceMax = 30, int delaiDetection = 100, int tempsMax = 5)
         {
             var obstacle = false;
@@ -198,7 +198,7 @@ namespace GR
             return retour;
         }
 
-        private bool DetecterObstacle(BR.sens s, int distanceMax = 30, int nbMesuresUS = 5, int angleLaser = 60)
+        public bool DetecterObstacle(BR.sens s, int distanceMax = 30, int nbMesuresUS = 5, int angleLaser = 60)
         {
             var obstacle = false;
 
@@ -219,7 +219,7 @@ namespace GR
         /**
                * il faut recoder cette méthode
                * */
-        private void Recaler(Axe axe = Axe.Null)
+        public void Recaler(Axe axe = Axe.Null)
         {
               
             /*

@@ -4,6 +4,7 @@ using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using Gadgeteer.Modules;
 using Gadgeteer.Modules.GHIElectronics;
+using GR;
 
 namespace GadgeteerApp4
 {
@@ -13,19 +14,20 @@ namespace GadgeteerApp4
         static int White = 2, Yellow = 1, Blue = 0;
         int c1, c2, c3, c4;
         int ourColor = Blue;
-
+        int couleurInitiale;
         int config = -1; int i = -1;
             // sens de rotation direct
             float pricisionAngle = (float) (System.Math.PI / 10);
             float defaultAngle = (float) (System.Math.PI / 4); //Toujours Pi/4
 
             //Constructeur
-            void CCapteurCouleur(int Id, int ourcolor)
+            public CCapteurCouleur(int Id, Couleur ourcolor)
             {
+                couleurInitiale = -1;
                 myColorSense = new ColorSense(Id);
                 /* Choix de la couleur 'par defaut la couleur est Bleu' */
               //  int config;
-                if (ourcolor == Yellow)
+                if (ourcolor == Couleur.Jaune)
                 {
                     c1 = -3; c2 = 1; c3 = 3; c4 = -1;
                 }
@@ -70,7 +72,7 @@ namespace GadgeteerApp4
     
 
         //Continuer la rotation
-        bool ContinuerRotation(ref int couleurInitiale)
+        public bool ContinuerRotation()
         {
 
             //Lire les couleurs 
@@ -98,7 +100,6 @@ namespace GadgeteerApp4
                     if (HUE > 150) { config = 4; return false; }
                     else { config = 3; return false; }
                     //TurnAngle(-3 * pricisionAngle);
-                    return true;
                 }
                 i++;
                 return true;
