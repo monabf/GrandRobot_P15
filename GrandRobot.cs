@@ -12,13 +12,11 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GadgeteerApp4;
-using Grand_Robot;
 
 namespace GR
 {
     /// <summary>
-    /// Classe repr�sentant le grand robot
+    /// Classe représentant le grand robot
     /// </summary>
     partial class GrandRobot
     {
@@ -35,14 +33,14 @@ namespace GR
         public  CPince pince;
         public  CReservoir reservoir;
         public  CBras bras;
-        public  CFunnyBras funnybras;
         public  CCapteurCouleur CapteurCouleur;
        // public  OutputPort m_direction;
         public  GroupeInfrarouge IR;
         public  CCapteurUltrason CapteurUltrason;
-
+       
         public positionBaseRoulante Position = new positionBaseRoulante();
         public bool SortieOK = false;
+        public static bool obstacle = false;
 
         public DateTime InstantDebut;
         public int cylindresRecup;
@@ -50,7 +48,7 @@ namespace GR
         /// Initialise le robot
         /// </summary>
         /// <param name="ports">Configuration des ports</param>
-        /// <param name="equipe">Couleur de l'�quipe</param>
+        /// <param name="equipe">Couleur de l'équipe</param>
         /// <param name="table">Configuration de la table</param>
         public GrandRobot(ConfigurationPorts ports, Couleur equipe)
         {
@@ -61,16 +59,20 @@ namespace GR
             Debug.Print("Gestionnaire actif");
            // Tracage = new IHMTracage();
             Debug.Print(Ports.bras.idAx12BrasModule + "");
-            bras = new CBras(controleurAX12, Ports.bras);
-            Debug.Print("Bras actif");
+
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
             Debug.Print("Jack actif");
-            BaseRoulante = new CBaseRoulante(Ports.Plateforme);
-            Debug.Print("Base roulante actif");
+            Debug.Print(Ports.Plateforme+"");
+
             controleurAX12 = new ControleurAX12(Ports.contAX12);
             Debug.Print("Controleur actif");
             pince = new CPince(controleurAX12, Ports.pince);
+            funnyBras = new FunnyBras(controleurAX12, Ports.funnyBras);
             Debug.Print("Pince actif");
+            bras = new CBras(controleurAX12, Ports.bras);
+            Debug.Print("Bras actif");
+            BaseRoulante = new CBaseRoulante(Ports.Plateforme);
+            Debug.Print("Base roulante actif");
             cylindresRecup = 0;
 
             //Ports.ConfigCanne.direction = m_direction;
@@ -83,6 +85,7 @@ namespace GR
             IR = new GroupeInfrarouge(Ports.IO, Ports.InfrarougeAVD, Ports.InfrarougeAVG, Ports.InfrarougeARD, ports.InfrarougeARG);
             //TelemetreLaser = new CTelemetreLaser(Ports.TelemetreLaser, 9600);
 //            CapteurUltrason = new CCapteurUltrason(Ports.CapteurUltrason);
+            Debug.Print("infrarouge actif");
 
             BaseRoulante.setCouleur(equipe);
             BaseRoulante.getPosition(ref Position);
@@ -103,9 +106,9 @@ namespace GR
         }
 
         /// <summary>
-        /// D�marre asynchronement le robot
+        /// Démarre asynchronement le robot
         /// </summary>
-        /// <param name="tempsImparti">Temps en secondes au bout du quel l'arr�t du robot est forc�</param>
+        /// <param name="tempsImparti">Temps en secondes au bout du quel l'arrêt du robot est forcé</param>
         public void Demarrer(double tempsImparti)
         {
 
@@ -114,18 +117,19 @@ namespace GR
             DateTime fin = new DateTime();
             var thDecompte = new Thread(() =>
             {
-                while (Strategie.ExecutionPossible && DateTime.Now < fin)
+                while (Strategie.ExecutionPossible() && DateTime.Now < fin)
                 {
               //      Tracage.Ecrire("Temps restant: " + (fin - DateTime.Now).ToString().Substring(3, 5) + ".");
                     Thread.Sleep(10000);
                 }
             });
+            InitialiserStrategie();
+
             var thStrat = new Thread(() => EffectuerStrategie());
 
             InstantDebut = DateTime.Now;
             fin = InstantDebut.AddSeconds(tempsImparti);
 
-            InitialiserStrategie();
 
             thDecompte.Start();
             thStrat.Start();
@@ -135,7 +139,7 @@ namespace GR
             //    Tracage.Ecrire("Fin du temps imparti.");
                 if (thStrat.IsAlive) thStrat.Abort();
                 BaseRoulante.stop();
-                funnybras.lancer();
+                funnyBras.lancer();
 
             }, null, (int)(tempsImparti * 1000), -1);
         }
@@ -143,9 +147,11 @@ namespace GR
         public void EffectuerStrategie()
         {
          //   Tracage.Ecrire("Debut de l'execution de la strategie.");
-
-            while (Strategie.ExecutionPossible)
+            Debug.Print("Debut de l'execution de la strategie.");
+            Debug.Print(Strategie.NombreAction+" nombre d'actions");
+            while (Strategie.ExecutionPossible())
             {
+                Debug.Print("execution possible");
            //     Tracage.Ecrire("Execution de l'action suivante.");
                 Strategie.ExecuterSuivante();
             }
@@ -153,53 +159,87 @@ namespace GR
           //  Tracage.Ecrire("Fin de l'execution de la strategie.");
           //  Tracage.Ecrire("Nombre de cylindres " + cylindresRecup);
         }
-
-        public etatBR AllerEn(double x, double y, BR.sens s, vitesse speedDistance = vitesse.premiere, bool reculSiBlocage = true,
-            bool detection = false, vitesse speedRotation = vitesse.vitesseRotationMin, int distanceMax = 30, int delaiDetection = 100, int tempsMax = 5)
+        etatBR robotGoToXY(ushort x, ushort y, sens s, bool boolDetection = false, int speed = 10)
         {
-            var obstacle = false;
-            var thDetection = new Thread(() =>
+            etatBR retour;
+            if (boolDetection)
             {
-                while (true)
+                // on passe le sens "dir" au timer via la variable "state"
+                // analogue au timeout-callback pour les amoureux du js
+                //Timer t = new Timer(new TimerCallback(Detecter), s, 0, 1000);
+                obstacle = false; // paramètre pour savoir si il y'a bien un obstacle
+                var thDetection = new Thread(() =>
                 {
-                    var diff = obstacle;
-
-                    if (obstacle = DetecterObstacle(s))
+                    while (true)
                     {
-                  //      if (obstacle != diff) Tracage.Ecrire("Obstacle detecte");
-                        BaseRoulante.stop();
+                        Detecter(s);
+                        //Thread.Sleep(20);
                     }
-
-                    Thread.Sleep(delaiDetection);
-                }
-            });
-            etatBR retour = etatBR.stope;
-            DateTime debut;
-
-            debut = DateTime.Now;
-
-            if(detection) thDetection.Start();
-            while ((DateTime.Now - debut).Seconds < tempsMax &&
-                (retour = BaseRoulante.allerEn(x, y, s, speedDistance, speedRotation)) == etatBR.stope)
-                while ((DateTime.Now - debut).Seconds < tempsMax && obstacle)
-                    Thread.Sleep(1);
-            if (thDetection.IsAlive) thDetection.Abort();
-
-            if (reculSiBlocage && retour != etatBR.arrive)
-                BaseRoulante.allerEn(Position.x, Position.y, s == BR.sens.avancer ? BR.sens.reculer : BR.sens.avancer);
-
-            BaseRoulante.getPosition(ref Position);
-
+                });
+                thDetection.Start();
+                retour = BaseRoulante.allerDect(y, x, s, speed);// x,y,s
+                thDetection.Suspend();
+                obstacle = false;
+                //t.Dispose();
+            }
+            else
+            {
+                retour = BaseRoulante.allerEn(y, x, s, speed);
+            }
             return retour;
         }
 
-        public etatBR Tourner(double angle, vitesse v = vitesse.vitesseRotationMin)
+
+        public void Detecter(object o)
         {
-            int alphaReel = 0;
-            var retour = BaseRoulante.tourner(angle, v, ref alphaReel);
+            sens dir = (sens)o;
+            // si on avance, les ultrasons sont utiles
 
-            BaseRoulante.getPosition(ref Position);
+            if (dir == sens.avancer)
+            {
+                // on teste les capteurs IR avants puis le capteur laser en appui
+                double distance = 0d;
+                bool obstacleUS = false;
+                // mesure une distance moyenne avec 5 mesures rapides
+                //Ultrason désactivé pour l'instant, ils prennent beaucoup trop de temps pour acquérir l'information.
+                /*
+                m_ultrason.getDistance(1, ref distance);
+                if (distance < 30 && distance != -1)
+                    obstacleUS = true;
+                */
 
+                if ((!IR.AVG.Read() || !IR.AVD.Read()))// infrarouge OK.. et c'est une condition et && obstacleUS
+                {
+                    //m_baseRoulante.stop();
+                    obstacle = true;
+
+
+                }
+                else obstacle = false;
+
+            }
+            // si on recule, les ultrasons ne sont plus utiles
+            else
+            {
+                // on teste les capteurs IR arrières
+                if (!IR.ARG.Read() || !IR.ARD.Read())
+                {
+                    //Debug.Print("Détection obstacle après");
+                    //m_baseRoulante.stop();
+                    obstacle = true;
+
+
+                }
+                else obstacle = false;
+
+            }
+
+        }
+
+        etatBR robotRotate(int alpha)
+        {
+            etatBR retour;
+            retour = BaseRoulante.tourner(alpha);
             return retour;
         }
 
@@ -222,11 +262,11 @@ namespace GR
         }
 
         /**
-               * il faut recoder cette m�thode
+               * il faut recoder cette méthode
                * */
         public void Recaler(Axe axe = Axe.Null)
         {
-
+              
             /*
             var posBR = new positionBaseRoulante();
             etatBR retour;
