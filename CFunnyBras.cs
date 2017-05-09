@@ -23,10 +23,9 @@ namespace GR.Membres
            // m_ax12Pince.setMode(CAX_12.AX12Mode.joint);
             //position initiale
             // m_ax12Pince.setMode(CAX_12.AX12Mode.joint);
-
         }
 
-        public void lancer(Couleur equipe)
+        public void lancer()
         {
             m_ax12FunnyBras.move((int)positionFunnyBras.deverouille);
         }
