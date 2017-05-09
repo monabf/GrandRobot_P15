@@ -12,8 +12,6 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GadgeteerApp4;
-using Grand_Robot;
 
 namespace GR
 {
