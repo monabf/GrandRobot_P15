@@ -19,11 +19,11 @@ namespace GR.Membres
 
         enum positionPince
         {
-          avancee = 10,
-          rangee = 10,
-          ouverte = 10,
-          intermediaire = 10,
-          fermee = 10
+          avancee = 200,
+          rangee = 0,
+          ouverte = 200,
+          intermediaire = 100,
+          fermee = 0
         };
 
         CAX12 m_ax12PinceSupport;
@@ -42,13 +42,17 @@ namespace GR.Membres
         public void ouvrir(Couleur equipe)
         {
             m_ax12PinceSupport.move((int)positionPince.rangee);
+            Thread.Sleep(1000);
             m_ax12PinceModule.move((int)positionPince.intermediaire);
+            Thread.Sleep(1000);
         }
 
         public void fermer(Couleur equipe)
         {
             m_ax12PinceSupport.move((int)positionPince.avancee);
+            Thread.Sleep(1000);
             m_ax12PinceModule.move((int)positionPince.fermee);
+            Thread.Sleep(1000);
         }
     }
 }

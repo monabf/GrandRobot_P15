@@ -44,17 +44,20 @@ namespace GR
                 InfrarougeARG = 5,
                 InfrarougeARD = 4,
                 contAX12 = 9,
-               // IdFunnyBras = 3,
             };
 
-            ports.bras.idAx12BrasSupport = 1;
-            ports.bras.idAx12BrasModule = 2;
-
+            ports.bras.idAx12BrasSupport = 1; // num servo
+            ports.bras.idAx12BrasModule = 2; // idem
             ports.pince.idAx12PinceSupport = 3;
             ports.pince.idAx12PinceModule = 4;
-
-            ports.reservoir.idAx12Poussoir = 6;
             ports.reservoir.idAx12Rotateur = 5;
+            ports.reservoir.idAx12Poussoir = 6;
+            ports.idFunnyBras = 7; // idem
+
+        //    ports.reservoir.idCapteurCouleur = ; // pin de la spider
+
+
+
             
             // initialisation de GHI Glide pour les IHMs
             GlideTouch.Initialize();

@@ -109,6 +109,7 @@ namespace GR.BR
 
         //retourne un code erreur
         //0 pas d'erreur
+        // cette fonction semble ne pas marcher !! index out of range dans la boucle du tableau taille...
         public int getPosition(mode m, ref int position)
         {
             String commande, sPosition, sErreur;
@@ -140,11 +141,12 @@ namespace GR.BR
                     {
                     } while (reponse[taille++] != 0x00);
                     taille--;
-                    Debug.Print("taille "+taille);
                     Debug.Print("reponse[taille] " + reponse[taille]);
 
                     for (i = 3; i < taille - 2; i++)
                     {
+                        Debug.Print("j " + j);
+
                         tempo[j++] = (char)reponse[i];
                     }
                     sPosition = new string(tempo);

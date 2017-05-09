@@ -20,7 +20,6 @@ namespace GR
         public int InfrarougeAVG;
         public int InfrarougeARD;
         public int InfrarougeARG;
-        public int CapteurUltrason;
     }
 
 }

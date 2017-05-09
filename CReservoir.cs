@@ -27,9 +27,9 @@ namespace GR.Membres
         CRouletteIntelligente m_rouletteIntelligente;
         Couleur couleurEquipe;
 
-        public CReservoir(ControleurAX12 controleur, configReservoir config, Couleur couleurE)
+        public CReservoir(Couleur equipe, ControleurAX12 controleur, configReservoir config)
         {
-            couleurEquipe = couleurE;
+            couleurEquipe = equipe;
             CCapteurCouleur capteurCouleur = new CCapteurCouleur(config.idCapteurReservoir, couleurEquipe);
             CAX12 ax12Rotateur = new CAX12(config.idAx12Rotateur, controleur.m_port, controleur.m_direction);
             m_ax12Poussoir.setMode(AX12Mode.joint);

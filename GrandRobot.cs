@@ -55,45 +55,28 @@ namespace GR
         {
             Ports = ports;
             Equipe = equipe;
-            Debug.Print("grand robot ligne 59");
             Strategie = new GestionnaireStrategie();
-            Debug.Print("Gestionnaire actif");
            // Tracage = new IHMTracage();
-            Debug.Print(Ports.bras.idAx12BrasModule + "");
 
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
-            Debug.Print("Jack actif");
-            Debug.Print(Ports.Plateforme+"");
+            BaseRoulante = new CBaseRoulante(Ports.Plateforme);
+            BaseRoulante.setCouleur(equipe);
+            BaseRoulante.getPosition(ref Position);
 
             controleurAX12 = new ControleurAX12(Ports.contAX12);
             Debug.Print("Controleur actif");
             pince = new CPince(controleurAX12, Ports.pince);
            // funnyBras = new CFunnyBras(controleurAX12, Ports.funnyBras);
-            Debug.Print("Pince actif");
+           // Debug.Print("funny bras actif");
             bras = new CBras(controleurAX12, Ports.bras);
-            Debug.Print("Bras actif");
-            BaseRoulante = new CBaseRoulante(Ports.Plateforme);
-            Debug.Print("Base roulante actif");
+            //reservoir = new CReservoir(Equipe, controleurAX12, Ports.reservoir);
+
+
             cylindresRecup = 0;
 
-            //Ports.ConfigCanne.direction = m_direction;
-           // m_direction = new OutputPort((Cpu.Pin)EMX.IO46, false);  //IO26 si 11
-            /* m_RS485 = new RS485(9);
-              m_RS485.Configure(500000, GT.SocketInterfaces.SerialParity.None, GT.SocketInterfaces.SerialStopBits.One, 8, GT.SocketInterfaces.HardwareFlowControl.NotRequired);
-              m_RS485.Port.Open();*/
-
-
             IR = new GroupeInfrarouge(Ports.IO, Ports.InfrarougeAVD, Ports.InfrarougeAVG, Ports.InfrarougeARD, ports.InfrarougeARG);
-            //TelemetreLaser = new CTelemetreLaser(Ports.TelemetreLaser, 9600);
-//            CapteurUltrason = new CCapteurUltrason(Ports.CapteurUltrason);
             Debug.Print("infrarouge actif");
-
-            BaseRoulante.setCouleur(equipe);
-            BaseRoulante.getPosition(ref Position);
-
-           // Tracage.Afficher();
-            //Tracage.Ecrire("Equipe " + (equipe == Couleur.Vert ? "verte" : "violette"));
-
+            // NB : il n'y a pas de capteur ultrason sur notre grand robot
         }
 
         /// <summary>
@@ -138,7 +121,11 @@ namespace GR
             timeout = new Timer(state =>
             {
             //    Tracage.Ecrire("Fin du temps imparti.");
-                if (thStrat.IsAlive) thStrat.Abort();
+                if (thStrat.IsAlive)
+                {
+                    Debug.Print("kill main thread");
+                    thStrat.Abort();
+                }
                 BaseRoulante.stop();
                // funnyBras.lancer();
 
@@ -148,11 +135,11 @@ namespace GR
         public void EffectuerStrategie()
         {
          //   Tracage.Ecrire("Debut de l'execution de la strategie.");
-            Debug.Print("Debut de l'execution de la strategie.");
-            Debug.Print(Strategie.NombreAction+" nombre d'actions");
+          //  Debug.Print("Debut de l'execution de la strategie.");
+        //    Debug.Print(Strategie.NombreAction+" nombre d'actions");
             while (Strategie.ExecutionPossible())
             {
-                Debug.Print("execution possible");
+            //    Debug.Print("execution possible");
            //     Tracage.Ecrire("Execution de l'action suivante.");
                 Strategie.ExecuterSuivante();
             }
@@ -198,24 +185,10 @@ namespace GR
 
             if (dir == sens.avancer)
             {
-                // on teste les capteurs IR avants puis le capteur laser en appui
-                double distance = 0d;
-                bool obstacleUS = false;
-                // mesure une distance moyenne avec 5 mesures rapides
-                //Ultrason désactivé pour l'instant, ils prennent beaucoup trop de temps pour acquérir l'information.
-                /*
-                m_ultrason.getDistance(1, ref distance);
-                if (distance < 30 && distance != -1)
-                    obstacleUS = true;
-                */
-
                 if ((!IR.AVG.Read() || !IR.AVD.Read()))// infrarouge OK.. et c'est une condition et && obstacleUS
                 {
-                    //m_baseRoulante.stop();
                     obstacle = true;
-
-
-                }
+                                    }
                 else obstacle = false;
 
             }
@@ -225,11 +198,7 @@ namespace GR
                 // on teste les capteurs IR arrières
                 if (!IR.ARG.Read() || !IR.ARD.Read())
                 {
-                    //Debug.Print("Détection obstacle après");
-                    //m_baseRoulante.stop();
                     obstacle = true;
-
-
                 }
                 else obstacle = false;
 
@@ -237,34 +206,13 @@ namespace GR
 
         }
 
-        etatBR robotRotate(int alpha)
+        public etatBR robotRotate(int alpha)
         {
             etatBR retour;
             retour = BaseRoulante.tourner(alpha);
             return retour;
         }
 
-        public bool DetecterObstacle(BR.sens s, int distanceMax = 30, int nbMesuresUS = 5, int angleLaser = 60)
-        {
-            var obstacle = false;
-
-            if (s == BR.sens.avancer)
-            {
-                double distance = 0d;
-
-                obstacle = (!IR.AVG.Read() || !IR.AVD.Read()) ||
-                    (CapteurUltrason.getDistance(nbMesuresUS, ref distance) &&
-                    distance >= 0 && distance <= distanceMax);
-            }
-            else if (s == BR.sens.reculer)
-                obstacle = !IR.ARG.Read() || !IR.ARD.Read();
-
-            return obstacle;
-        }
-
-        /**
-               * il faut recoder cette méthode
-               * */
         public void Recaler(Axe axe = Axe.Null)
         {
               
