@@ -1,6 +1,8 @@
 using System;
 using Microsoft.SPOT;
 using GR.Membres;
+using System.Threading;
+
 
 namespace GR
 {
@@ -12,14 +14,12 @@ namespace GR
           public byte idAx12BrasModule;
       }
 
-      // A COMPLETER ahahaha
-
       enum positionBras
       {
-        haut = 10,
-        bas = 10,
-        ouverte = 10,
-        fermee = 10
+        haut = 200,
+        bas = 0,
+        ouverte = 200,
+        fermee = 0
       };
 
         CAX12 m_ax12BrasSupport;
@@ -41,20 +41,25 @@ namespace GR
       public void attraper(Couleur equipe)
       {
           m_ax12BrasSupport.move((int) positionBras.bas);
+          Thread.Sleep(1000);
           m_ax12BrasModule.move((int) positionBras.fermee);
+          Thread.Sleep(1000);
           m_ax12BrasSupport.move((int) positionBras.haut);
-      }
+          Thread.Sleep(1000);
+       }
 
 
       public void lacher(Couleur equipe)
       {
           m_ax12BrasModule.move((int) positionBras.ouverte);
+          Thread.Sleep(1000);
       }
 
 
       public void poserCylindre(Couleur equipe)
       {
           m_ax12BrasSupport.move((int) positionBras.bas);
+          Thread.Sleep(1000);
       }
   }
 }

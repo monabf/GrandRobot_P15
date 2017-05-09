@@ -174,8 +174,9 @@ namespace GR.BR
             //attente d'être arrive ou bloque ou stoppe
             do
             {
+                // ATTENTION LE SUIVI EN ALPHA A ETE PROVISOIREMENT SUSPENDU POUR DES TESTS. S'IL N'EST PAS REMIS, CONTACTER PE
                 // Thread.Sleep(1000);
-                erreur = getAngleTourne(ref alphaReel);
+                //erreur = getAngleTourne(ref alphaReel);
                 //dans le doute, 'Equals' est plus sûr qu'un '=='
                 if (erreur.Equals(0xE3))
                 {
@@ -193,12 +194,14 @@ namespace GR.BR
                     {
                         m_status = etatBR.arrive;
                         Thread.Sleep(500);
-                        getAngleTourne(ref alphaReel); //on donne à alphaReel la valeur d'angle tourné réellement mesuré
+                        //getAngleTourne(ref alphaReel); //on donne à alphaReel la valeur d'angle tourné réellement mesuré
                         m_kangaroo.init();
                     }
                 }
             } while (m_status != etatBR.arrive && m_status != etatBR.bloque && m_status != etatBR.stope);
-            m_posBR.alpha = m_posBR.alpha + alphaReel;
+            //m_posBR.alpha = m_posBR.alpha + alphaReel;
+            m_posBR.alpha = m_posBR.alpha + alphaConsigne;
+
             //QUOI QU'IL ARRIVE on réactualise l'angle en l'indentant de combien on vient de tourner
             return m_status;
          }

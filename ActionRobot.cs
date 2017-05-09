@@ -26,15 +26,16 @@ namespace GR
         private readonly FonctionInt CalculPriorite;
 
         /// <summary>
-        /// Si true, l'action sera supprimée de la statégie si son éxecution réussi
+        /// Si true, l'action sera supprimée de la statégie si son exécution réussi
         /// </summary>
-        public readonly bool ExecutionUnique;
+        public readonly bool ExecutionUnique = true;
 
         /// <summary>
         /// Vrai s'il n'existe pas de condition préalable à l'éxecution, sinon cette dernière
         /// </summary>
         public bool ExecutionPossible()
-        { 
+        {
+        //    Debug.Print("execution possible ?");
             return Condition == null || Condition();
         }
 

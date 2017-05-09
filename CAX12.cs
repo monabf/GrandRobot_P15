@@ -15,7 +15,7 @@ namespace GR
 {
     enum AX12Mode { joint, wheel };
 
-    enum speed { stop = 0, reverse = 1023, forward = 1500 }//2047
+    enum speed { stop = 0, reverse = 1023, forward = 2047 }//2047
 
     enum Instruction : byte
     {
@@ -201,6 +201,7 @@ namespace GR
                 byte[] buf = { 0x1E, (byte)(value), (byte)(value >> 8) };
 
                 erreur = sendCommand(m_ID, Instruction.AX_WRITE_DATA, buf);
+                //commentaire à retirer absolument !
                 getReponse(out outID, out len, out error, null);
 
             }
