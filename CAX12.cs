@@ -53,11 +53,13 @@ namespace GR
             m_serial = portserie;
             m_ID = ID;
             m_Direction = direction;
+            Debug.Print("constructeur de servos");
 
 
             Register U0FDR = new Register(0xE000C028, (8 << 4) | 1);
             // U0FDR.Write((8 << 4) | 1);//fix the fractional divider register
             Register PINSEL0 = new Register(0xE002C000);
+
 
         }
 

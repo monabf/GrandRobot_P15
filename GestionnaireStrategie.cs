@@ -1,5 +1,9 @@
 using System.Collections;
 using System.Threading;
+using System;
+using System.IO;
+using System.IO.Ports;
+using Microsoft.SPOT;
 
 namespace GR
 {
@@ -91,7 +95,7 @@ namespace GR
 
             if (resultat && optimale.ExecutionUnique)
                 Actions.Remove(optimale);
-
+            Debug.Print("executer suivante");
             return resultat;
         }
     }

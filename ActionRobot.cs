@@ -1,4 +1,7 @@
 using System;
+using System.IO;
+using System.IO.Ports;
+using Microsoft.SPOT;
 
 namespace GR
 {
@@ -46,6 +49,7 @@ namespace GR
         /// <param name="executionUnique">Si true, l'action sera supprimée de la statégie si son éxecution réussi</param>
         public ActionRobot(FonctionBool tache, FonctionBool condition = null, FonctionInt calculPriorite = null, bool executionUnique = false)
         {
+            Debug.Print("action robot créée");
             Tache = tache;
             Condition = condition;
             CalculPriorite = calculPriorite;

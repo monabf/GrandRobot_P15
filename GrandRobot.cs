@@ -58,8 +58,7 @@ namespace GR
             Debug.Print("Gestionnaire actif");
            // Tracage = new IHMTracage();
             Debug.Print(Ports.bras.idAx12BrasModule + "");
-            bras = new CBras(controleurAX12, Ports.bras);
-            Debug.Print("Bras actif");
+
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
             Debug.Print("Jack actif");
             BaseRoulante = new CBaseRoulante(Ports.Plateforme);
@@ -68,6 +67,8 @@ namespace GR
             Debug.Print("Controleur actif");
             pince = new CPince(controleurAX12, Ports.pince);
             Debug.Print("Pince actif");
+            bras = new CBras(controleurAX12, Ports.bras);
+            Debug.Print("Bras actif");
             cylindresRecup = 0;
 
             //Ports.ConfigCanne.direction = m_direction;
@@ -80,6 +81,7 @@ namespace GR
             IR = new GroupeInfrarouge(Ports.IO, Ports.InfrarougeAVD, Ports.InfrarougeAVG, Ports.InfrarougeARD, ports.InfrarougeARG);
             //TelemetreLaser = new CTelemetreLaser(Ports.TelemetreLaser, 9600);
 //            CapteurUltrason = new CCapteurUltrason(Ports.CapteurUltrason);
+            Debug.Print("infrarouge actif");
 
             BaseRoulante.setCouleur(equipe);
             BaseRoulante.getPosition(ref Position);
@@ -117,12 +119,13 @@ namespace GR
                     Thread.Sleep(10000);
                 }
             });
+            InitialiserStrategie();
+
             var thStrat = new Thread(() => EffectuerStrategie());
 
             InstantDebut = DateTime.Now;
             fin = InstantDebut.AddSeconds(tempsImparti);
 
-            InitialiserStrategie();
 
             thDecompte.Start();
             thStrat.Start();
@@ -139,7 +142,8 @@ namespace GR
         public void EffectuerStrategie()
         {
          //   Tracage.Ecrire("Debut de l'execution de la strategie.");
-
+            Debug.Print("Debut de l'execution de la strategie.");
+            Debug.Print(Strategie.ExecutionPossible + "");
             while (Strategie.ExecutionPossible)
             {
            //     Tracage.Ecrire("Execution de l'action suivante.");

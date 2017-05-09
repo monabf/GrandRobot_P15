@@ -158,6 +158,7 @@ namespace GR
 
         private void InitialiserStrategie()
         {
+            Debug.Print("stratégie active");
 
             Strategie.Ajouter(new ActionRobot(SortirZoneDepart, executionUnique: true));
             /*Permet de gérer l'enchaînement des actions : on ajoute une par une les actions qu'on veut exécuter, sous la forme
