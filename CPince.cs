@@ -4,7 +4,6 @@ using System.IO.Ports;
 using GT = Gadgeteer;
 using System.Threading;
 using Microsoft.SPOT.Hardware;
-using PR;
 
 namespace GR.Membres
 {

@@ -14,7 +14,6 @@ using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using GadgeteerApp4;
 using Grand_Robot;
-using PR;
 
 namespace GR
 {
@@ -26,7 +25,7 @@ namespace GR
         public enum Axe { Null = 0, X, Y }
 
         public  GestionnaireStrategie Strategie;
-        public  IHMTracage Tracage;
+       // public  IHMTracage Tracage;
 
         public  Couleur Equipe;
         public  ConfigurationPorts Ports;
@@ -35,9 +34,9 @@ namespace GR
         public  ControleurAX12 controleurAX12;
         public  CPince pince;
         public  CReservoir reservoir;
-        public CBras bras;
+        public  CBras bras;
         public  CCapteurCouleur CapteurCouleur;
-        public  OutputPort m_direction;
+       // public  OutputPort m_direction;
         public  GroupeInfrarouge IR;
         public  CCapteurUltrason CapteurUltrason;
        
@@ -56,18 +55,25 @@ namespace GR
         {
             Ports = ports;
             Equipe = equipe;
-
+            Debug.Print("grand robot ligne 59");
             Strategie = new GestionnaireStrategie();
-            Tracage = new IHMTracage();
+            Debug.Print("Gestionnaire actif");
+           // Tracage = new IHMTracage();
+            Debug.Print(Ports.bras.idAx12BrasModule + "");
             bras = new CBras(controleurAX12, Ports.bras);
+            Debug.Print("Bras actif");
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
+            Debug.Print("Jack actif");
             BaseRoulante = new CBaseRoulante(Ports.Plateforme);
-            controleurAX12 = new ControleurAX12(Ports.AX12);
+            Debug.Print("Base roulante actif");
+            controleurAX12 = new ControleurAX12(Ports.contAX12);
+            Debug.Print("Controleur actif");
             pince = new CPince(controleurAX12, Ports.pince);
+            Debug.Print("Pince actif");
             cylindresRecup = 0;
 
             //Ports.ConfigCanne.direction = m_direction;
-            m_direction = new OutputPort((Cpu.Pin)EMX.IO46, false);  //IO26 si 11
+           // m_direction = new OutputPort((Cpu.Pin)EMX.IO46, false);  //IO26 si 11
             /* m_RS485 = new RS485(9);
               m_RS485.Configure(500000, GT.SocketInterfaces.SerialParity.None, GT.SocketInterfaces.SerialStopBits.One, 8, GT.SocketInterfaces.HardwareFlowControl.NotRequired);
               m_RS485.Port.Open();*/
@@ -75,13 +81,13 @@ namespace GR
 
             IR = new GroupeInfrarouge(Ports.IO, Ports.InfrarougeAVD, Ports.InfrarougeAVG, Ports.InfrarougeARD, ports.InfrarougeARG);
             //TelemetreLaser = new CTelemetreLaser(Ports.TelemetreLaser, 9600);
-            CapteurUltrason = new CCapteurUltrason(Ports.CapteurUltrason);
+//            CapteurUltrason = new CCapteurUltrason(Ports.CapteurUltrason);
 
             BaseRoulante.setCouleur(equipe);
             BaseRoulante.getPosition(ref Position);
 
-            Tracage.Afficher();
-            Tracage.Ecrire("Equipe " + (equipe == Couleur.Vert ? "verte" : "violette"));
+           // Tracage.Afficher();
+            //Tracage.Ecrire("Equipe " + (equipe == Couleur.Vert ? "verte" : "violette"));
 
         }
 
@@ -90,7 +96,7 @@ namespace GR
         /// </summary>
         public void AttendreJack()
         {
-            Tracage.Ecrire("Veuillez retirer le jack pour demarrer.");
+         //   Tracage.Ecrire("Veuillez retirer le jack pour demarrer.");
 
             while (!JackDemarrage.Etat) Thread.Sleep(1);
         }
@@ -109,7 +115,7 @@ namespace GR
             {
                 while (Strategie.ExecutionPossible && DateTime.Now < fin)
                 {
-                    Tracage.Ecrire("Temps restant: " + (fin - DateTime.Now).ToString().Substring(3, 5) + ".");
+              //      Tracage.Ecrire("Temps restant: " + (fin - DateTime.Now).ToString().Substring(3, 5) + ".");
                     Thread.Sleep(10000);
                 }
             });
@@ -125,7 +131,7 @@ namespace GR
 
             timeout = new Timer(state =>
             {
-                Tracage.Ecrire("Fin du temps imparti.");
+            //    Tracage.Ecrire("Fin du temps imparti.");
                 if (thStrat.IsAlive) thStrat.Abort();
                 BaseRoulante.stop();
 
@@ -134,16 +140,16 @@ namespace GR
 
         public void EffectuerStrategie()
         {
-            Tracage.Ecrire("Debut de l'execution de la strategie.");
+         //   Tracage.Ecrire("Debut de l'execution de la strategie.");
 
             while (Strategie.ExecutionPossible)
             {
-                Tracage.Ecrire("Execution de l'action suivante.");
+           //     Tracage.Ecrire("Execution de l'action suivante.");
                 Strategie.ExecuterSuivante();
             }
 
-            Tracage.Ecrire("Fin de l'execution de la strategie.");
-            Tracage.Ecrire("Nombre de cylindres " + cylindresRecup);
+          //  Tracage.Ecrire("Fin de l'execution de la strategie.");
+          //  Tracage.Ecrire("Nombre de cylindres " + cylindresRecup);
         }
 
         public etatBR AllerEn(double x, double y, BR.sens s, vitesse speedDistance = vitesse.premiere, bool reculSiBlocage = true,
@@ -158,7 +164,7 @@ namespace GR
 
                     if (obstacle = DetecterObstacle(s))
                     {
-                        if (obstacle != diff) Tracage.Ecrire("Obstacle detecte");
+                  //      if (obstacle != diff) Tracage.Ecrire("Obstacle detecte");
                         BaseRoulante.stop();
                     }
 

@@ -11,7 +11,7 @@ namespace GR
         public int IO;
         public int Jack;
         public int Plateforme;
-        public int AX12;
+        public int contAX12;
         public CPince.configPince pince;
         public CBras.configBras bras;
         public CReservoir.configReservoir reservoir;

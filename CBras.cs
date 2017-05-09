@@ -1,7 +1,6 @@
 using System;
 using Microsoft.SPOT;
 using GR.Membres;
-using PR;
 
 namespace GR
 {
@@ -28,8 +27,11 @@ namespace GR
 
       public CBras(ControleurAX12 controleur, configBras config)
       {
+          Debug.Print(""+controleur.m_port);
           m_ax12BrasSupport = new CAX12(config.idAx12BrasSupport, controleur.m_port, controleur.m_direction);
+          Debug.Print("bras support actif");
           m_ax12BrasModule = new CAX12(config.idAx12BrasModule, controleur.m_port, controleur.m_direction);
+          Debug.Print("bras module actif");
          // m_ax12Pince.setMode(CAX_12.AX12Mode.joint);
           //position initiale
           // m_ax12Pince.setMode(CAX_12.AX12Mode.joint);

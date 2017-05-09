@@ -2,7 +2,6 @@ using System;
 using Microsoft.SPOT;
 using GadgeteerApp4;
 using Grand_Robot;
-using PR;
 using System.Threading;
 
 namespace GR.Membres

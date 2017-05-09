@@ -3,7 +3,6 @@ using Microsoft.SPOT;
 using System.Threading;
 using System.Collections;
 using GR.Membres;
-using PR;
 using GR.BR;
 
 namespace GR
@@ -32,14 +31,14 @@ namespace GR
 //entre les deux (le bras le garde simplement), s'arrêter si le capteur ultrasons réagit (l'arrêt est codé dans la classe capteur ultrasons)
 
 #else
-            Tracage.Ecrire("Sortie de la zone de depart");
+     //       Tracage.Ecrire("Sortie de la zone de depart");
 
             Tourner(12);
             bool SortieOK = AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, sens.avancer) == etatBR.arrive;
             //on prend la convention Couleur.Bleu == zone de départ bleue, sinon zone de départ jaune ; en cm pour l'instant, à voir ! Attention aussi aux conventions de repère, ici on a pris y vers le bas et angle positif en sens horaire mais pas forcément vrai
             //rappeler à PED de coder etat car permet savoir si arrive/perdu... et adapter le nom en fonction de ce qu'il choisit
 
-            Tracage.Ecrire(SortieOK ? "Sortie reussie" : "Sortie echouee");
+//            Tracage.Ecrire(SortieOK ? "Sortie reussie" : "Sortie echouee");
             //si SortieOk == etat.arrive alors on écrit Sortie reussie, sinon on écrit Sortie echouee
 
 #endif
@@ -53,7 +52,7 @@ namespace GR
         {
           cylindresRecup++;
 
-          Tracage.Ecrire("Recuperation du 1er cylindre");
+   //       Tracage.Ecrire("Recuperation du 1er cylindre");
           pince.ouvrir(Equipe);
           Tourner(Equipe==Couleur.Bleu ? 78 : -78);
           pince.fermer(Equipe);
@@ -68,7 +67,7 @@ namespace GR
         {
           cylindresRecup+=4; //int défini dans GrandRobot.cs
 
-          Tracage.Ecrire("Positionnement devant la fusee et recuperation des 4 cylindres");
+   //       Tracage.Ecrire("Positionnement devant la fusee et recuperation des 4 cylindres");
 
           AllerEn(341,Equipe==Couleur.Bleu ? 1150 : 1850, sens.avancer);
           Tourner(Equipe==Couleur.Bleu ? 90 : -90);
@@ -103,7 +102,7 @@ namespace GR
         {
           cylindresRecup++; //int défini dans GrandRobot.cs
 
-          Tracage.Ecrire("Recuperation du 2eme cylindre");
+   //       Tracage.Ecrire("Recuperation du 2eme cylindre");
 
           AllerEn(850,1150, Equipe==Couleur.Bleu ? sens.avancer : sens.reculer);
           Tourner(180);
@@ -121,7 +120,7 @@ namespace GR
         private bool DeposerCylindres()
         {
 
-          Tracage.Ecrire("Depot des cylindres");
+   //       Tracage.Ecrire("Depot des cylindres");
 
           AllerEn(1125, Equipe==Couleur.Bleu ? 900 : 2100, sens.reculer);
           Tourner(Equipe==Couleur.Bleu ? -45 : 45);

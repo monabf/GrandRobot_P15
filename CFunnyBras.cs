@@ -1,7 +1,6 @@
 using System;
 using Microsoft.SPOT;
 using GR;
-using PR;
 
 namespace GR.Membres
 {
