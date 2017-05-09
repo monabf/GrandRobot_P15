@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 
 namespace GR
 {
@@ -63,6 +64,10 @@ namespace GR
         public void Supprimer(ActionRobot action)
         {
             Actions.Remove(action);
+            while (Actions.Count == 0)
+            {
+                Thread.Sleep(20);
+            }
         }
         
         /// <summary>
