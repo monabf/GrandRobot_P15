@@ -14,29 +14,30 @@ namespace GR
     {
         private ArrayList Actions;
 
-        private ActionRobot ActionOptimale
+        private ActionRobot ActionOptimale()
         {
-            get
-            {
-                ActionRobot optimale = null;
 
-                foreach (ActionRobot action in Actions)
-                    if (action.ExecutionPossible && action > optimale)
-                        optimale = action;
-
-                return optimale;
+            ActionRobot optimale = null;
+            Debug.Print("action optimale appelée");
+            Debug.Print(Actions.Count+"");
+            foreach (ActionRobot action in Actions) { 
+                if (action.ExecutionPossible() && action > optimale)
+                    Debug.Print("if passée pour une certaine action");
+                    optimale = action;
             }
+            Debug.Print("action optimale boucle for ok");
+
+            return optimale;
+
         }
 
         /// <summary>
         /// Possibilité de continuer l'éxecution
         /// </summary>
-        public bool ExecutionPossible
+        public bool ExecutionPossible()
         {
-            get
-            {
-                return ActionOptimale != null;
-            }
+            Debug.Print("action optimale");
+            return ActionOptimale() != null;
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace GR
         /// <returns>Résultat de l'éxecution de l'action</returns>
         public bool ExecuterSuivante()
         {
-            var optimale = ActionOptimale;
+            var optimale = ActionOptimale();
             var resultat = optimale != null ? optimale.Executer() : false;
 
             if (resultat && optimale.ExecutionUnique)

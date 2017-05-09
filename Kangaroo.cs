@@ -14,23 +14,19 @@ namespace GR.BR
 
     enum unite
     {
-        mm = 5, cm = 56, m = 562, degre = 79, kmh = 10000//20000
+        mm = 6, cm = 65, m = 650, degre = 9, kmh = (int)(15000 / 120)//20000
     };
-
-    enum vitesse
-    {
-        ralenti = 500, premiere = 1500, deuxieme = 3000, troisieme = 4000, vitesseRotationMax = 750, vitesseRotationMin = 500
-    };
-
     class CKangaroo
     {
         SerialPort m_port;
 
         public CKangaroo(int numPort)
         {
+            Debug.Print("test kangaroo");
 
             string COMPort = GT.Socket.GetSocket(numPort, true, null, null).SerialPortName;
             m_port = new SerialPort(COMPort, 9600, Parity.None, 8, StopBits.One);
+            Debug.Print("serial port ok");
             m_port.ReadTimeout = 500;
             m_port.WriteTimeout = 500;
             m_port.Open();
@@ -62,7 +58,7 @@ namespace GR.BR
             if (m_port.IsOpen)
             {
                 start(mode.drive);
-                commande = "D, UNITS 17907 mm = 1067 lines";
+                commande = "D, UNITS 1696 mm = 128 lines";
                 buffer = System.Text.Encoding.UTF8.GetBytes(commande);
                 m_port.Write(buffer, 0, commande.Length);
                 start(mode.drive);
@@ -71,7 +67,7 @@ namespace GR.BR
                 m_port.Write(buffer, 0, commande.Length);
 
                 start(mode.turn);
-                commande = "T, UNITS 3600 degrees = 539 lines";
+                commande = "T, UNITS 360 degrees = 37 lines";
                 buffer = System.Text.Encoding.UTF8.GetBytes(commande);
                 m_port.Write(buffer, 0, commande.Length);
                 start(mode.turn);
@@ -91,7 +87,7 @@ namespace GR.BR
             if (m_port.IsOpen)
             {
                 start(mode.drive);
-                commande = "D, UNITS 1696 mm = 128 lines";
+                commande = "D, UNITS 1696 mm = 256 lines";// = "D, UNITS 1696 mm = 128 lines";
                 buffer = System.Text.Encoding.UTF8.GetBytes(commande);
                 m_port.Write(buffer, 0, commande.Length);
                 start(mode.drive);
@@ -100,7 +96,7 @@ namespace GR.BR
                 m_port.Write(buffer, 0, commande.Length);
 
                 start(mode.turn);
-                commande = "T, UNITS 360 degrees = 37 lines";
+                commande = "T, UNITS 360 degrees = 74 lines";//"T, UNITS 360 degrees = 37 lines";
                 buffer = System.Text.Encoding.UTF8.GetBytes(commande);
                 m_port.Write(buffer, 0, commande.Length);
                 start(mode.turn);
@@ -128,7 +124,6 @@ namespace GR.BR
                 buffer = System.Text.Encoding.UTF8.GetBytes(commande);
                 int t = commande.Length;
                 m_port.Write(buffer, 0, commande.Length);
-//m_port = écriture en caractères du paramètre mode (converti en bytes auparavant)
 
                 int i = 0;
                 do
@@ -136,8 +131,6 @@ namespace GR.BR
                     reponse[i++] = (byte)m_port.ReadByte();
                 } while (reponse[i - 1] != '\n' && i < 99);
                 reponse[i] = (byte)'\0';
-//reponse = lecture en bytes de m_port puis
-
                 if (reponse[2] != 'E')
                 {
                     int j = 0;
@@ -147,11 +140,15 @@ namespace GR.BR
                     {
                     } while (reponse[taille++] != 0x00);
                     taille--;
+                    Debug.Print("taille "+taille);
+                    Debug.Print("reponse[taille] " + reponse[taille]);
+
                     for (i = 3; i < taille - 2; i++)
                     {
                         tempo[j++] = (char)reponse[i];
                     }
                     sPosition = new string(tempo);
+                    Debug.Print("reponse[2] != 'E'" + sPosition);
                     position = Convert.ToInt32(sPosition);
                 }
                 else
@@ -159,6 +156,7 @@ namespace GR.BR
                     tempo[0] = (char)reponse[2];
                     tempo[1] = (char)reponse[3];
                     sErreur = new string(tempo);
+                    Debug.Print("else" + sErreur);
                     codeErreur = Convert.ToInt32(sErreur, 16);
 
                 }
@@ -166,19 +164,19 @@ namespace GR.BR
             return codeErreur;
         }
 
-        public bool allerEn(double distance, vitesse speed, unite u)
+        public bool allerEn(int distance, int speed, unite u)
         {
             String commande;
             bool retour = false;
             byte[] buffer = new byte[100];
 
-            distance = 5.68d * distance;
+            distance = (int)(6.5 / 1.01 * distance);// 6.5 * 
             init();
             start(mode.drive);
-
+            speed = speed * (int)unite.kmh;//* (int)unite.kmh;
             if (m_port.IsOpen)
             {
-                commande = "D,p" + ((int)distance).ToString() + "s" + speed.ToString() + "\r\n";
+                commande = "D,p" + distance.ToString() + "s" + speed.ToString() + "\r\n";
                 buffer = System.Text.Encoding.UTF8.GetBytes(commande);
                 m_port.Write(buffer, 0, commande.Length);
             }
@@ -188,19 +186,21 @@ namespace GR.BR
 
 
 
-        public bool tourner(double angle, vitesse speed)
+        public bool tourner(int angle)
         {
             String commande;
             bool retour = false;
             byte[] buffer = new byte[100];
 
-            angle = angle * 14.25d;
-
+            angle = (int)(angle * 8.7);//  CONSTANTE A MODIFIER !!!!
+            //angle = angle * (int)unite.degre;
+            //speed = speed * (int)unite.kmh;
             init();
             start(mode.turn);
             if (m_port.IsOpen)
             {
-                commande = "T,p" + ((int)angle).ToString() + "s" + speed.ToString() + "\r\n";
+                // commande = "T,p" + angle.ToString() + "s" + speed.ToString() + "\r\n";
+                commande = "T,p" + angle.ToString() + "s500\r\n";//15000
                 buffer = System.Text.Encoding.UTF8.GetBytes(commande);
                 m_port.Write(buffer, 0, commande.Length);
                 retour = true;

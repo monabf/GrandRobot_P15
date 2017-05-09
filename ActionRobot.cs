@@ -33,7 +33,10 @@ namespace GR
         /// <summary>
         /// Vrai s'il n'existe pas de condition préalable à l'éxecution, sinon cette dernière
         /// </summary>
-        public bool ExecutionPossible { get { return Condition == null || Condition(); } }
+        public bool ExecutionPossible()
+        { 
+            return Condition == null || Condition();
+        }
 
         /// <summary>
         /// Priorité de l'action si elle a été définie, sinon zéro
@@ -88,8 +91,8 @@ namespace GR
             priorite = Priorite;
             autrePriorite = autre.Priorite;
 
-            possible = ExecutionPossible;
-            autrePossible = autre.ExecutionPossible;
+            possible = ExecutionPossible();
+            autrePossible = autre.ExecutionPossible();
 
             return !possible && !autrePossible ? 0 :
                 possible && !autrePossible ? 1 :
