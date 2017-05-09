@@ -12,11 +12,13 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
+using GadgeteerApp4;
+using Grand_Robot;
 
 namespace GR
 {
     /// <summary>
-    /// Classe représentant le grand robot
+    /// Classe reprï¿½sentant le grand robot
     /// </summary>
     partial class GrandRobot
     {
@@ -33,11 +35,12 @@ namespace GR
         public  CPince pince;
         public  CReservoir reservoir;
         public  CBras bras;
+        public  CFunnyBras funnybras;
         public  CCapteurCouleur CapteurCouleur;
        // public  OutputPort m_direction;
         public  GroupeInfrarouge IR;
         public  CCapteurUltrason CapteurUltrason;
-       
+
         public positionBaseRoulante Position = new positionBaseRoulante();
         public bool SortieOK = false;
 
@@ -47,7 +50,7 @@ namespace GR
         /// Initialise le robot
         /// </summary>
         /// <param name="ports">Configuration des ports</param>
-        /// <param name="equipe">Couleur de l'équipe</param>
+        /// <param name="equipe">Couleur de l'ï¿½quipe</param>
         /// <param name="table">Configuration de la table</param>
         public GrandRobot(ConfigurationPorts ports, Couleur equipe)
         {
@@ -58,7 +61,8 @@ namespace GR
             Debug.Print("Gestionnaire actif");
            // Tracage = new IHMTracage();
             Debug.Print(Ports.bras.idAx12BrasModule + "");
-
+            bras = new CBras(controleurAX12, Ports.bras);
+            Debug.Print("Bras actif");
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
             Debug.Print("Jack actif");
             BaseRoulante = new CBaseRoulante(Ports.Plateforme);
@@ -67,8 +71,6 @@ namespace GR
             Debug.Print("Controleur actif");
             pince = new CPince(controleurAX12, Ports.pince);
             Debug.Print("Pince actif");
-            bras = new CBras(controleurAX12, Ports.bras);
-            Debug.Print("Bras actif");
             cylindresRecup = 0;
 
             //Ports.ConfigCanne.direction = m_direction;
@@ -81,7 +83,6 @@ namespace GR
             IR = new GroupeInfrarouge(Ports.IO, Ports.InfrarougeAVD, Ports.InfrarougeAVG, Ports.InfrarougeARD, ports.InfrarougeARG);
             //TelemetreLaser = new CTelemetreLaser(Ports.TelemetreLaser, 9600);
 //            CapteurUltrason = new CCapteurUltrason(Ports.CapteurUltrason);
-            Debug.Print("infrarouge actif");
 
             BaseRoulante.setCouleur(equipe);
             BaseRoulante.getPosition(ref Position);
@@ -102,9 +103,9 @@ namespace GR
         }
 
         /// <summary>
-        /// Démarre asynchronement le robot
+        /// Dï¿½marre asynchronement le robot
         /// </summary>
-        /// <param name="tempsImparti">Temps en secondes au bout du quel l'arrêt du robot est forcé</param>
+        /// <param name="tempsImparti">Temps en secondes au bout du quel l'arrï¿½t du robot est forcï¿½</param>
         public void Demarrer(double tempsImparti)
         {
 
@@ -119,13 +120,12 @@ namespace GR
                     Thread.Sleep(10000);
                 }
             });
-            InitialiserStrategie();
-
             var thStrat = new Thread(() => EffectuerStrategie());
 
             InstantDebut = DateTime.Now;
             fin = InstantDebut.AddSeconds(tempsImparti);
 
+            InitialiserStrategie();
 
             thDecompte.Start();
             thStrat.Start();
@@ -135,6 +135,7 @@ namespace GR
             //    Tracage.Ecrire("Fin du temps imparti.");
                 if (thStrat.IsAlive) thStrat.Abort();
                 BaseRoulante.stop();
+                funnybras.lancer();
 
             }, null, (int)(tempsImparti * 1000), -1);
         }
@@ -142,8 +143,7 @@ namespace GR
         public void EffectuerStrategie()
         {
          //   Tracage.Ecrire("Debut de l'execution de la strategie.");
-            Debug.Print("Debut de l'execution de la strategie.");
-            Debug.Print(Strategie.ExecutionPossible + "");
+
             while (Strategie.ExecutionPossible)
             {
            //     Tracage.Ecrire("Execution de l'action suivante.");
@@ -222,11 +222,11 @@ namespace GR
         }
 
         /**
-               * il faut recoder cette méthode
+               * il faut recoder cette mï¿½thode
                * */
         public void Recaler(Axe axe = Axe.Null)
         {
-              
+
             /*
             var posBR = new positionBaseRoulante();
             etatBR retour;
