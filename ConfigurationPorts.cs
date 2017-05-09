@@ -15,7 +15,7 @@ namespace GR
         public CPince.configPince pince;
         public CBras.configBras bras;
         public CReservoir.configReservoir reservoir;
-        public byte IdFunnyBras;
+        public int idFunnyBras;
         public int InfrarougeAVD;
         public int InfrarougeAVG;
         public int InfrarougeARD;

@@ -31,6 +31,7 @@ namespace GR
         public  CBaseRoulante BaseRoulante;
         public  ControleurAX12 controleurAX12;
         public  CPince pince;
+        public  CFunnyBras funnyBras;
         public  CReservoir reservoir;
         public  CBras bras;
         public  CCapteurCouleur CapteurCouleur;
@@ -67,7 +68,7 @@ namespace GR
             controleurAX12 = new ControleurAX12(Ports.contAX12);
             Debug.Print("Controleur actif");
             pince = new CPince(controleurAX12, Ports.pince);
-            funnyBras = new FunnyBras(controleurAX12, Ports.funnyBras);
+           // funnyBras = new CFunnyBras(controleurAX12, Ports.funnyBras);
             Debug.Print("Pince actif");
             bras = new CBras(controleurAX12, Ports.bras);
             Debug.Print("Bras actif");
@@ -139,7 +140,7 @@ namespace GR
             //    Tracage.Ecrire("Fin du temps imparti.");
                 if (thStrat.IsAlive) thStrat.Abort();
                 BaseRoulante.stop();
-                funnyBras.lancer();
+               // funnyBras.lancer();
 
             }, null, (int)(tempsImparti * 1000), -1);
         }

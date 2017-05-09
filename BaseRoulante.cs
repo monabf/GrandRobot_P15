@@ -130,7 +130,9 @@ namespace GR.BR
             int erreur = 0;
             int posCodeur = 0;
             erreur = m_kangaroo.getPosition(mode.drive, ref posCodeur);
-            distance = (int)(posCodeur * 1.01 / 6.5);///(int)unite.mm / 6.5
+            if (!erreur.Equals(0xE3)) { 
+                distance = (int)(posCodeur * 1.01 / 6.5);///(int)unite.mm / 6.5
+            }
             return erreur;
         }
 
@@ -165,40 +167,41 @@ namespace GR.BR
         {
 
             int erreur = 0;
-            int alphaReel = 0, alphaReel_tm1 = 0;
-            int delta = 0;
+            int alphaReel = 0;
+            double delta = 0;
             m_status = 0;
             m_kangaroo.tourner(alphaConsigne);
             //attente d'être arrive ou bloque ou stoppe
             do
             {
-                alphaReel_tm1 = alphaReel;
-                //  Thread.Sleep(1000);
+                // Thread.Sleep(1000);
                 erreur = getAngleTourne(ref alphaReel);
-                if (erreur == 0xE3)
+                //dans le doute, 'Equals' est plus sûr qu'un '=='
+                if (erreur.Equals(0xE3))
                 {
-                    alphaReel = alphaReel_tm1;
                     m_status = etatBR.bloque;
-                    m_kangaroo.powerdown(mode.drive);
-                    m_kangaroo.powerdown(mode.turn);
+                    relai.TurnOn();
+                    Thread.Sleep(1000);
+                    relai.TurnOff();
+                    Thread.Sleep(1000);
                     m_kangaroo.init();
-
                 }
                 else
                 {
-
                     delta = System.Math.Abs(alphaConsigne - alphaReel);
-                    if (delta < 1)
+                    if (delta <= 3)
                     {
                         m_status = etatBR.arrive;
-                        Thread.Sleep(1000);
-                        getAngleTourne(ref alphaReel);
+                        Thread.Sleep(500);
+                        getAngleTourne(ref alphaReel); //on donne à alphaReel la valeur d'angle tourné réellement mesuré
+                        m_kangaroo.init();
                     }
                 }
             } while (m_status != etatBR.arrive && m_status != etatBR.bloque && m_status != etatBR.stope);
-
+            m_posBR.alpha = m_posBR.alpha + alphaReel;
+            //QUOI QU'IL ARRIVE on réactualise l'angle en l'indentant de combien on vient de tourner
             return m_status;
-        }
+         }
 
         public etatBR allerEn(double x, double y, sens s, int speed = 10)
         {
