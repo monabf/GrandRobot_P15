@@ -33,18 +33,18 @@ namespace GR
 #else
      //       Tracage.Ecrire("Sortie de la zone de depart");
 
-          //  robotRotate(12);
-          //  bool SortieOK = robotGoToXY((ushort) 341, (ushort) (Equipe == Couleur.Bleu ? 946 : 2054), sens.avancer) == etatBR.arrive;
+            robotRotate(12);
+            bool SortieOK = robotGoToXY((ushort) 341, (ushort) (Equipe == Couleur.Bleu ? 946 : 2054), sens.avancer) == etatBR.arrive;
             //on prend la convention Couleur.Bleu == zone de départ bleue, sinon zone de départ jaune ; en cm pour l'instant, à voir ! Attention aussi aux conventions de repère, ici on a pris y vers le bas et angle positif en sens horaire mais pas forcément vrai
             //rappeler à PED de coder etat car permet savoir si arrive/perdu... et adapter le nom en fonction de ce qu'il choisit
 
-//            Tracage.Ecrire(SortieOK ? "Sortie reussie" : "Sortie echouee");
+            Debug.Print("Sortie");
             //si SortieOk == etat.arrive alors on écrit Sortie reussie, sinon on écrit Sortie echouee
 
 #endif
 
-            //return SortieOK;
-            return true;
+            return SortieOK;
+            //return true;
         }
 
 
@@ -52,14 +52,14 @@ namespace GR
         private bool RecupererCylindre1()
         {
           cylindresRecup++;
+          Debug.Print("RecupererCylindre1");
 
    //       Tracage.Ecrire("Recuperation du 1er cylindre");
-          pince.ouvrir(Equipe);
-          //robotRotate(Equipe==Couleur.Bleu ? 78 : -78);
+    //      pince.ouvrir(Equipe);
+          robotRotate(Equipe==Couleur.Bleu ? 78 : -78);
           pince.fermer(Equipe);
           bras.attraper(Equipe);
           bras.lacher(Equipe);
-          Debug.Print("RecupererCylindre1");
           //reservoir.tourner(Equipe);
 
           return true;
@@ -74,7 +74,8 @@ namespace GR
          // robotGoToXY((ushort) 341, (ushort) (Equipe==Couleur.Bleu ? 1150 : 1850), sens.avancer);
          // robotRotate(Equipe==Couleur.Bleu ? 90 : -90);
          // robotGoToXY((ushort)310, (ushort) (Equipe == Couleur.Bleu ? 1150 : 1850), sens.avancer);
-          pince.ouvrir(Equipe);
+          /*
+            pince.ouvrir(Equipe);
           pince.fermer(Equipe);
           pince.ouvrir(Equipe);
           bras.attraper(Equipe);
@@ -96,7 +97,8 @@ namespace GR
           pince.fermer(Equipe);
           pince.ouvrir(Equipe);
           bras.attraper(Equipe); //On garde le 5eme cylindre dans le grand bras jusqu'à avoir fait de la place dans le réservoir !
-          Debug.Print("RecupererCylindreFusee");
+        */
+           Debug.Print("RecupererCylindreFusee");
 
           return true;
         }
@@ -107,7 +109,7 @@ namespace GR
 
    //       Tracage.Ecrire("Recuperation du 2eme cylindre");
 
-      //    robotGoToXY(850,1150, Equipe==Couleur.Bleu ? sens.avancer : sens.reculer);
+        //  robotGoToXY(850,1150, Equipe==Couleur.Bleu ? sens.avancer : sens.reculer);
        //   robotRotate(180);
         //  robotRotate(Equipe == Couleur.Bleu ? -45 : 45);
          // robotGoToXY((ushort) 1100, (ushort) (Equipe == Couleur.Bleu ? 900 : 2100), sens.avancer);
@@ -174,10 +176,10 @@ namespace GR
         #if HOMOLOGATION
               return;
         #endif
-          //  Strategie.Ajouter(new ActionRobot(RecupererCylindre1, ()=>true, () => 100 - cylindresRecup, true));
-          //  Strategie.Ajouter(new ActionRobot(RecupererCylindresFusee, () => true, () => 100 - cylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindre1, ()=>true, () => 100 - cylindresRecup, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindresFusee, () => true, () => 100 - cylindresRecup, true));
             Strategie.Ajouter(new ActionRobot(RecupererCylindre2, () => true, () => 100 - cylindresRecup, true));
-          //  Strategie.Ajouter(new ActionRobot(DeposerCylindres, () => true, () => 100 - cylindresRecup - 1, true));
+            Strategie.Ajouter(new ActionRobot(DeposerCylindres, () => true, () => 100 - cylindresRecup - 1, true));
 
 
         }

@@ -15,7 +15,7 @@ namespace GR.BR
     // ATTENTION: seulement pour les tests. Valeurs à corriger impérativement !
     enum sens
     {
-        avancer = -1, reculer = 1
+        avancer = 1, reculer = - 1
     };
 
     struct positionBaseRoulante
@@ -31,7 +31,7 @@ namespace GR.BR
         CKangaroo m_kangaroo;
         public positionBaseRoulante m_posBR;
         public etatBR m_status = 0;
-        RelayX1 relai = new RelayX1(8);//A changer
+        RelayX1 relai = new RelayX1(8);//@P16 : valeur à changer
 
         public CBaseRoulante(int numPort)
         {
@@ -140,7 +140,10 @@ namespace GR.BR
         {
             int erreur = 0;
             int posCodeur = 0;
+            Debug.Print("getAngleTourne l 143");
             erreur = m_kangaroo.getPosition(mode.turn, ref posCodeur);
+            Debug.Print("getAngleTourne l 145");
+
             angle = (int)(posCodeur / (8.7));// CONSTANTE A MODIFIER !!!
             return erreur;
         }
@@ -170,13 +173,21 @@ namespace GR.BR
             int alphaReel = 0;
             double delta = 0;
             m_status = 0;
+            Debug.Print("BR 174 Avant Kangaroo");
             m_kangaroo.tourner(alphaConsigne);
+            Debug.Print("BR 176 Après Kangaroo");
+            Debug.Print("status " + (m_status != etatBR.arrive && m_status != etatBR.bloque && m_status != etatBR.stope));
+
             //attente d'être arrive ou bloque ou stoppe
             do
             {
                 // ATTENTION LE SUIVI EN ALPHA A ETE PROVISOIREMENT SUSPENDU POUR DES TESTS. S'IL N'EST PAS REMIS, CONTACTER PE
                 // Thread.Sleep(1000);
-                //erreur = getAngleTourne(ref alphaReel);
+                erreur = getAngleTourne(ref alphaReel);
+                // retirer la ligne ci-dessous erreur = 1
+                erreur = 1;
+                Debug.Print("delta " + delta);
+                Debug.Print("status " + (m_status != etatBR.arrive && m_status != etatBR.bloque && m_status != etatBR.stope));
                 //dans le doute, 'Equals' est plus sûr qu'un '=='
                 if (erreur.Equals(0xE3))
                 {

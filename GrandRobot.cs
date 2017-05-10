@@ -165,6 +165,7 @@ namespace GR
                     }
                 });
                 thDetection.Start();
+
                 retour = BaseRoulante.allerDect(y, x, s, speed);// x,y,s
                 thDetection.Suspend();
                 obstacle = false;
@@ -174,6 +175,8 @@ namespace GR
             {
                 retour = BaseRoulante.allerEn(y, x, s, speed);
             }
+            Debug.Print("pos_visee " + x + " " + y);
+
             return retour;
         }
 
@@ -209,7 +212,10 @@ namespace GR
         public etatBR robotRotate(int alpha)
         {
             etatBR retour;
+            Debug.Print("avant rotate " + alpha);
             retour = BaseRoulante.tourner(alpha);
+            Debug.Print("après rotate " + alpha);
+
             return retour;
         }
 

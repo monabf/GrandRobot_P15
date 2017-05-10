@@ -18,8 +18,6 @@ namespace GR
         {
 
             ActionRobot optimale = null;
-        //    Debug.Print("action optimale appelée");
-        //    Debug.Print(Actions.Count+"");
             // attention le coup de l'indice c'est assez moche
             // mais apparemment le foreach bugue en parcourant Actions, et renvoie null pour chaque action removed
             int j = 0;
@@ -27,7 +25,6 @@ namespace GR
                 if (j < Actions.Count)
                 {
                     j++;
-                    Debug.Print(Actions + " " + j);
                     if (action.ExecutionPossible() && action > optimale)
           //              Debug.Print("if passée pour une certaine action");
                     optimale = action;
@@ -45,8 +42,7 @@ namespace GR
         /// </summary>
         public bool ExecutionPossible()
         {
-            Debug.Print("action optimale");
-            return ActionOptimale() != null;
+            return (ActionOptimale() != null);
         }
 
         /// <summary>
@@ -101,11 +97,20 @@ namespace GR
         public bool ExecuterSuivante()
         {
             var optimale = ActionOptimale();
-            var resultat = optimale != null ? optimale.Executer() : false;
-          //  Debug.Print("résultat "+resultat);
+            var resultat = false;
+            if (optimale != null)
+            {
+                Debug.Print("opt " + (optimale != null));
+                optimale.Executer();
+                if (optimale.ExecutionUnique)
+                {
+                    Supprimer(optimale);
+                    resultat = true;
+                }
+            }
+
           //  if (resultat && optimale.ExecutionUnique)
-                if (resultat)
-                Actions.Remove(optimale);
+
           //  Debug.Print(Actions+"");
          //   Debug.Print("executer suivante");
             return resultat;

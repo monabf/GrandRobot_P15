@@ -14,7 +14,12 @@ namespace GR.BR
 
     enum unite
     {
-        mm = 6, cm = 65, m = 650, degre = 9, kmh = (int)(15000 / 120)//20000
+        mm = 5, cm = 56, m = 562, degre = 79, kmh = 10000//20000
+    };
+
+    enum vitesse
+    {
+        ralenti = 500, premiere = 1500, deuxieme = 3000, troisieme = 4000, vitesseRotationMax = 750, vitesseRotationMin = 500
     };
     class CKangaroo
     {
@@ -188,21 +193,19 @@ namespace GR.BR
 
 
 
-        public bool tourner(int angle)
+        public bool tourner(double angle)
         {
             String commande;
             bool retour = false;
             byte[] buffer = new byte[100];
 
-            angle = (int)(angle * 8.7);//  CONSTANTE A MODIFIER !!!!
-            //angle = angle * (int)unite.degre;
-            //speed = speed * (int)unite.kmh;
+            angle = angle * 14.25d;
+
             init();
             start(mode.turn);
             if (m_port.IsOpen)
             {
-                // commande = "T,p" + angle.ToString() + "s" + speed.ToString() + "\r\n";
-                commande = "T,p" + angle.ToString() + "s500\r\n";//15000
+                commande = "T,p" + ((int)angle).ToString() + "s" + 500 + "\r\n";
                 buffer = System.Text.Encoding.UTF8.GetBytes(commande);
                 m_port.Write(buffer, 0, commande.Length);
                 retour = true;
