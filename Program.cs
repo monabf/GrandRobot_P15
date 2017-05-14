@@ -36,20 +36,20 @@ namespace GR
 
             var ports = new ConfigurationPorts
             {
-                Plateforme = 11,
+                Plateforme = 8,
                 IO = 5,
                 Jack = 3, // pin 1 de l'extendeur
                 InfrarougeAVG = 7,
                 InfrarougeAVD = 6,
                 InfrarougeARG = 5,
                 InfrarougeARD = 4,
-                contAX12 = 9,
+                contAX12 = 11,
             };
 
-            ports.bras.idAx12BrasSupport = 1; // num servo
-            ports.bras.idAx12BrasModule = 2; // idem
-            ports.pince.idAx12PinceSupport = 3;
-            ports.pince.idAx12PinceModule = 4;
+            ports.bras.idAx12BrasSupport = 3; // num servo
+            ports.bras.idAx12BrasModule = 4; // idem
+            ports.pince.idAx12PinceSupport = 1;
+            ports.pince.idAx12PinceModule = 2;
             ports.reservoir.idAx12Rotateur = 5;
             ports.reservoir.idAx12Poussoir = 6;
             ports.idFunnyBras = 7; // idem
@@ -60,8 +60,8 @@ namespace GR
 
             
             // initialisation de GHI Glide pour les IHMs
-            GlideTouch.Initialize();
-            Glide.FitToScreen = true;
+           // GlideTouch.Initialize();
+           // Glide.FitToScreen = true;
 
 
             // initialisation de l'IHM de sélection

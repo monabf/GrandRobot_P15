@@ -59,7 +59,9 @@ namespace GR
            // Tracage = new IHMTracage();
 
             JackDemarrage = new Jack(Ports.IO, Ports.Jack);
+            Debug.Print("Ceration de la plateforme "+Ports.Plateforme);
             BaseRoulante = new CBaseRoulante(Ports.Plateforme);
+            Debug.Print("plateforme créée");
             BaseRoulante.setCouleur(equipe);
             BaseRoulante.getPosition(ref Position);
 
@@ -147,7 +149,7 @@ namespace GR
           //  Tracage.Ecrire("Fin de l'execution de la strategie.");
           //  Tracage.Ecrire("Nombre de cylindres " + cylindresRecup);
         }
-        etatBR robotGoToXY(ushort x, ushort y, sens s, bool boolDetection = false, int speed = 10)
+        etatBR robotGoToXY(ushort x, ushort y, sens s, bool boolDetection = false, int speed = 1)
         {
             etatBR retour;
             if (boolDetection)
@@ -166,14 +168,14 @@ namespace GR
                 });
                 thDetection.Start();
 
-                retour = BaseRoulante.allerDect(y, x, s, speed);// x,y,s
+                retour = BaseRoulante.allerDect(x, y, s, speed);// x,y,s
                 thDetection.Suspend();
                 obstacle = false;
                 //t.Dispose();
             }
             else
             {
-                retour = BaseRoulante.allerEn(y, x, s, speed);
+                retour = BaseRoulante.allerEn(x, y, s, speed);
             }
             Debug.Print("pos_visee " + x + " " + y);
 

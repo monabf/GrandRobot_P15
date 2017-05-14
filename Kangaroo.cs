@@ -14,7 +14,7 @@ namespace GR.BR
 
     enum unite
     {
-        mm = 5, cm = 56, m = 562, degre = 79, kmh = 10000//20000
+        mm = 5, cm = 56, m = 562, degre = 79, kmh = 1000//20000
     };
 
     enum vitesse
@@ -146,16 +146,16 @@ namespace GR.BR
                     {
                     } while (reponse[taille++] != 0x00);
                     taille--;
-                    Debug.Print("reponse[taille] " + reponse[taille]);
+                //    Debug.Print("reponse[taille] " + reponse[taille]);
 
                     for (i = 3; i < taille - 2; i++)
                     {
-                        Debug.Print("j " + j);
+              //          Debug.Print("j " + j);
 
                         tempo[j++] = (char)reponse[i];
                     }
                     sPosition = new string(tempo);
-                    Debug.Print("reponse[2] != 'E'" + sPosition);
+          //          Debug.Print("reponse[2] != 'E'" + sPosition);
                     position = Convert.ToInt32(sPosition);
                 }
                 else
@@ -177,7 +177,7 @@ namespace GR.BR
             bool retour = false;
             byte[] buffer = new byte[100];
 
-            distance = (int)(6.5 / 1.01 * distance);// 6.5 * 
+            distance = (int)(5.695 * distance);// 6.5 * 
             init();
             start(mode.drive);
             speed = speed * (int)unite.kmh;//* (int)unite.kmh;
@@ -199,7 +199,7 @@ namespace GR.BR
             bool retour = false;
             byte[] buffer = new byte[100];
 
-            angle = angle * 14.25d;
+            angle =(int) (angle * 14.05);
 
             init();
             start(mode.turn);

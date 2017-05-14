@@ -28,14 +28,16 @@ namespace GR.BR
 
     class CBaseRoulante
     {
-        CKangaroo m_kangaroo;
+        public CKangaroo m_kangaroo;
         public positionBaseRoulante m_posBR;
         public etatBR m_status = 0;
-        RelayX1 relai = new RelayX1(8);//@P16 : valeur à changer
+        RelayX1 relai = new RelayX1(10);//@P16 : valeur à changer
 
         public CBaseRoulante(int numPort)
         {
+            Debug.Print("Ceration de la Kangaroo");
             m_kangaroo = new CKangaroo(numPort);
+            Debug.Print("fait");
             m_posBR = new positionBaseRoulante();
             Debug.Print("kangaroo ok");
             m_kangaroo.init();
@@ -47,9 +49,9 @@ namespace GR.BR
             if (c == Couleur.Bleu)
             {
                 //NB: constantes à modifier
-                m_posBR.x = 205;//30 //85
-                m_posBR.y = 1405;//157 //157
-                m_posBR.alpha = -90;//0 //0
+                m_posBR.x = 200;//30 //85
+                m_posBR.y = 920;//157 //157
+                m_posBR.alpha = 0;//0 //0
             }
             else
             {
@@ -144,7 +146,7 @@ namespace GR.BR
             erreur = m_kangaroo.getPosition(mode.turn, ref posCodeur);
             Debug.Print("getAngleTourne l 145");
 
-            angle = (int)(posCodeur / (8.7));// CONSTANTE A MODIFIER !!!
+            angle = (int)(posCodeur / (14.05));// CONSTANTE A MODIFIER !!!
             return erreur;
         }
 
@@ -217,7 +219,7 @@ namespace GR.BR
             return m_status;
          }
 
-        public etatBR allerEn(double x, double y, sens s, int speed = 10)
+        public etatBR allerEn(double x, double y, sens s, int speed = 6)
         {
 
             int erreur = 0;
@@ -243,6 +245,7 @@ namespace GR.BR
                 alphaReel_tm1 = alphaReel;
                 //  Thread.Sleep(1000);
                 erreur = getAngleTourne(ref alphaReel);
+                Debug.Print("" + erreur);
                 if (erreur == 0xE3)
                 {
                     alphaReel = alphaReel_tm1;
@@ -257,7 +260,8 @@ namespace GR.BR
                 {
 
                     delta = System.Math.Abs(alphaConsigne - alphaReel);
-                    if (delta < 2)
+                    Debug.Print("delta " + delta);
+                    if (delta < 5)
                     {
                         m_status = etatBR.arrive;
                         Thread.Sleep(500);
@@ -315,8 +319,8 @@ namespace GR.BR
             } while (m_status != etatBR.arrive && m_status != etatBR.bloque && m_status != etatBR.stope);
 
             m_posBR.alpha = m_posBR.alpha + alphaReel;
-            m_posBR.x = m_posBR.x + (int)(-distanceReelle * System.Math.Cos(m_posBR.alpha * System.Math.PI / 180));
-            m_posBR.y = m_posBR.y + (int)(-distanceReelle * System.Math.Sin(m_posBR.alpha * System.Math.PI / 180));
+            m_posBR.x = m_posBR.x + (int)(distanceReelle * System.Math.Cos(m_posBR.alpha * System.Math.PI / 180));
+            m_posBR.y = m_posBR.y + (int)(distanceReelle * System.Math.Sin(m_posBR.alpha * System.Math.PI / 180));
             Debug.Print("position_x " + m_posBR.x + " position_y" + m_posBR.y);
             /*  m_kangaroo.powerdown(mode.drive);
               m_kangaroo.powerdown(mode.turn);
@@ -324,7 +328,7 @@ namespace GR.BR
             return m_status;
         }
 
-        public etatBR allerDect(double x, double y, sens s, int speed = 10)
+        public etatBR allerDect(double x, double y, sens s, int speed = 1)
         {
 
             int posCodeur = 0;
@@ -367,7 +371,7 @@ namespace GR.BR
                 {
 
                     delta = System.Math.Abs(alphaConsigne - alphaReel);
-                    if (delta < 2)
+                    if (delta < 5)
                     {
                         m_status = etatBR.arrive;
                         Thread.Sleep(500);
@@ -413,6 +417,7 @@ namespace GR.BR
                     dureeBlocage = 0;
 
                 delta = System.Math.Abs(distanceConsigne - distanceReelle - (int)distanceSF);//(int) s*distanceSF
+                Debug.Print("delta " + delta);
                 if (delta < 5)
                 {
                     m_status = etatBR.arrive;

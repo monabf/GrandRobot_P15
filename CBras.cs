@@ -16,10 +16,11 @@ namespace GR
 
       enum positionBras
       {
-        haut = 200,
-        bas = 0,
-        ouverte = 200,
-        fermee = 0
+        haut = 500,
+        bas = 833,
+        intrmediaire = 766,
+        ouverte = 540,
+        fermee = 455
       };
 
         CAX12 m_ax12BrasSupport;
@@ -38,15 +39,21 @@ namespace GR
 
       }
 
-      public void attraper(Couleur equipe)
+      public void descendre(Couleur equipe)
       {
+     
           m_ax12BrasSupport.move((int) positionBras.bas);
           Thread.Sleep(1000);
-          m_ax12BrasModule.move((int) positionBras.fermee);
-          Thread.Sleep(1000);
-          m_ax12BrasSupport.move((int) positionBras.haut);
-          Thread.Sleep(1000);
        }
+      public void semidescendre(Couleur equipe)
+      {
+          m_ax12BrasModule.move((int)positionBras.fermee);
+          Thread.Sleep(1000);
+          m_ax12BrasSupport.move((int)positionBras.intrmediaire);
+          Thread.Sleep(1000);
+          m_ax12BrasModule.move((int)positionBras.ouverte);
+          Thread.Sleep(1000);
+      }
 
 
       public void lacher(Couleur equipe)
@@ -56,9 +63,11 @@ namespace GR
       }
 
 
-      public void poserCylindre(Couleur equipe)
+      public void Monter(Couleur equipe)
       {
-          m_ax12BrasSupport.move((int) positionBras.bas);
+          m_ax12BrasModule.move((int)positionBras.fermee);
+          Thread.Sleep(1000);
+          m_ax12BrasSupport.move((int)positionBras.haut);
           Thread.Sleep(1000);
       }
   }
