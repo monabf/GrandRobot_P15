@@ -19,8 +19,8 @@ namespace GR.Membres
 
         enum positionReservoir
         {
-          rentre = 10,
-          deploye = 10
+          rentre = 345,
+          deploye = 830
         };
 
         CAX12 m_ax12Poussoir;
@@ -32,25 +32,30 @@ namespace GR.Membres
             couleurEquipe = equipe;
             CCapteurCouleur capteurCouleur = new CCapteurCouleur(config.idCapteurReservoir, couleurEquipe);
             CAX12 ax12Rotateur = new CAX12(config.idAx12Rotateur, controleur.m_port, controleur.m_direction);
-            m_ax12Poussoir.setMode(AX12Mode.joint);
+            
             m_rouletteIntelligente = new CRouletteIntelligente(capteurCouleur, ax12Rotateur);
             m_ax12Poussoir = new CAX12(config.idAx12Poussoir, controleur.m_port, controleur.m_direction);
+            m_ax12Poussoir.setMode(AX12Mode.joint);
         }
 
         public void rentrer(Couleur equipe)
         {
             m_ax12Poussoir.move((int)positionReservoir.rentre);
+            Thread.Sleep(500);
         }
 
         public void deployer(Couleur equipe)
         {
             m_ax12Poussoir.move((int)positionReservoir.deploye);
+            Thread.Sleep(500);
         }
 
         public void sortir(Couleur equipe) 
         {
             deployer(equipe);
+            Thread.Sleep(500);
             rentrer(equipe);
+            Thread.Sleep(500);
         }
 
         public void tourner(Couleur equipe)

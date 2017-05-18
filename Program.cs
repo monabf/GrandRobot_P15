@@ -54,7 +54,7 @@ namespace GR
             ports.reservoir.idAx12Poussoir = 6;
             ports.idFunnyBras = 7; // idem
 
-        //    ports.reservoir.idCapteurCouleur = ; // pin de la spider
+            ports.reservoir.idCapteurReservoir = 4; // pin de la spider
 
 
 

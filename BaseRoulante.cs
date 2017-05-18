@@ -62,58 +62,31 @@ namespace GR.BR
             }
         }
 
-        public void recalagePosX(int angle, int x, int speed, sens s)
+        public void recalagePosX(int angle, int x, int speed, sens s, int temps)
         {
-            bool reponse = true;
+
             m_posBR.alpha = angle;
-            m_posBR.y = x;
-            int r = 0;
-            int distanceReelle = 0;
-            int AdistanceReelle = 0;
+            m_posBR.x = x;
+
             m_kangaroo.allerEn((int)(s) * 100, speed, unite.mm);
-            while (reponse)
-            {
-                getDistanceParcourue(ref distanceReelle);
-                if (distanceReelle != AdistanceReelle) r = 0;
-                if (distanceReelle == AdistanceReelle) r++;
-                if (r == 4)
-                {
-                    m_kangaroo.start(mode.drive);
-                    //m_kangaroo.allerEn(0, speed, unite.mm);
-                    reponse = false;
+            Thread.Sleep(temps);
+            m_kangaroo.start(mode.drive);
 
-                }
-            }
-            Thread.Sleep(1000);
+
         }
-
-
-        public void recalagePosY(int angle, int y, int speed, sens s)
+        public void recalagePosY(int angle, int y, int speed, sens s, int temps)
         {
-            bool reponse = true;
+
             m_posBR.alpha = angle;
-            m_posBR.x = y;
-            int r = 0;
-            int distanceReelle = 0;
-            int AdistanceReelle = 0;
+            m_posBR.y = y;
+
             m_kangaroo.allerEn((int)(s) * 100, speed, unite.mm);
-            while (reponse)
-            {
-                getDistanceParcourue(ref distanceReelle);
+            Thread.Sleep(temps);
+            m_kangaroo.start(mode.drive);
 
-                if (distanceReelle == AdistanceReelle) r++;// position du robot ne bougeant plus
-                if (r == 4)
-                {
-                    //m_kangaroo.allerEn(0, speed, unite.mm);
-                    m_kangaroo.start(mode.drive);
-                    reponse = false;
 
-                }
-                if (distanceReelle != AdistanceReelle) r = 0;
-            }
-            Thread.Sleep(1000);
         }
-
+      
         public void changerXYA(int angle, int x, int y)
         {
             m_posBR.alpha = angle;
@@ -133,7 +106,7 @@ namespace GR.BR
             int posCodeur = 0;
             erreur = m_kangaroo.getPosition(mode.drive, ref posCodeur);
             if (!erreur.Equals(0xE3)) { 
-                distance = (int)(posCodeur * 1.01 / 6.5);///(int)unite.mm / 6.5
+                distance = (int)(posCodeur /5.695);///(int)unite.mm / 6.5
             }
             return erreur;
         }
@@ -296,6 +269,7 @@ namespace GR.BR
                     dureeBlocage = 0;
 
                 delta = System.Math.Abs(distanceConsigne - distanceReelle);
+                Debug.Print("+delta"+delta);
                 if (delta < 5)//5
                 {
                     m_status = etatBR.arrive;
@@ -325,6 +299,8 @@ namespace GR.BR
             /*  m_kangaroo.powerdown(mode.drive);
               m_kangaroo.powerdown(mode.turn);
               m_kangaroo.init();*/
+            m_kangaroo.start(mode.drive);
+
             return m_status;
         }
 

@@ -71,7 +71,7 @@ namespace GR
            // funnyBras = new CFunnyBras(controleurAX12, Ports.funnyBras);
            // Debug.Print("funny bras actif");
             bras = new CBras(controleurAX12, Ports.bras);
-            //reservoir = new CReservoir(Equipe, controleurAX12, Ports.reservoir);
+            reservoir = new CReservoir(equipe, controleurAX12, Ports.reservoir);
 
 
             cylindresRecup = 0;
@@ -79,6 +79,15 @@ namespace GR
             IR = new GroupeInfrarouge(Ports.IO, Ports.InfrarougeAVD, Ports.InfrarougeAVG, Ports.InfrarougeARD, ports.InfrarougeARG);
             Debug.Print("infrarouge actif");
             // NB : il n'y a pas de capteur ultrason sur notre grand robot
+        }
+        void recalageX(int angle, int x, sens s, int speed, int temps)
+        {
+            BaseRoulante.recalagePosX(angle, x, speed, s, temps);
+        }
+
+        void recalageY(int angle, int y, sens s, int speed, int temps)
+        {
+            BaseRoulante.recalagePosY(angle, y, speed, s, temps);
         }
 
         /// <summary>
@@ -149,7 +158,7 @@ namespace GR
           //  Tracage.Ecrire("Fin de l'execution de la strategie.");
           //  Tracage.Ecrire("Nombre de cylindres " + cylindresRecup);
         }
-        etatBR robotGoToXY(ushort x, ushort y, sens s, bool boolDetection = false, int speed = 1)
+        etatBR robotGoToXY(ushort x, ushort y, sens s, bool boolDetection = false, int speed = 3)
         {
             etatBR retour;
             if (boolDetection)

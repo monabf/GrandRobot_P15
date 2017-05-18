@@ -18,8 +18,8 @@ namespace GR
       {
         haut = 500,
         bas = 833,
-        intrmediaire = 766,
-        ouverte = 540,
+        intrmediaire = 760,
+        ouverte = 550,
         fermee = 455
       };
 
@@ -43,30 +43,30 @@ namespace GR
       {
      
           m_ax12BrasSupport.move((int) positionBras.bas);
-          Thread.Sleep(1000);
+          Thread.Sleep(100);
        }
       public void semidescendre(Couleur equipe)
       {
           m_ax12BrasModule.move((int)positionBras.fermee);
-          Thread.Sleep(1000);
+          Thread.Sleep(50);
           m_ax12BrasSupport.move((int)positionBras.intrmediaire);
-          Thread.Sleep(1000);
+          Thread.Sleep(200);
           m_ax12BrasModule.move((int)positionBras.ouverte);
-          Thread.Sleep(1000);
+          Thread.Sleep(50);
       }
 
 
       public void lacher(Couleur equipe)
       {
           m_ax12BrasModule.move((int) positionBras.ouverte);
-          Thread.Sleep(1000);
+          Thread.Sleep(50);
       }
 
 
       public void Monter(Couleur equipe)
       {
           m_ax12BrasModule.move((int)positionBras.fermee);
-          Thread.Sleep(1000);
+          Thread.Sleep(50);
           m_ax12BrasSupport.move((int)positionBras.haut);
           Thread.Sleep(1000);
       }

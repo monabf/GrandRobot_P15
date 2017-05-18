@@ -33,21 +33,57 @@ namespace GR
 #else
      //       Tracage.Ecrire("Sortie de la zone de depart");
         //    robotGoToXY((ushort)1200, (ushort)920, sens.avancer);
+            
+           //Début stratégie Mohamed
+            reservoir.rentrer(Equipe);
+            pince.sortir(Equipe);
+            robotGoToXY(400, 974, sens.avancer);
+            pince.entrer(Equipe);
+            robotGoToXY(400, 1130, sens.avancer);
+          
+            //reservoir.sortir(Equipe);
+           // reservoir.rentrer(Equipe);
+
+          /*  robotGoToXY(240, 1130, sens.avancer);
+            BaseRoulante.getPosition(ref pos);
+            recalageX(180, 220, sens.avancer, 1, 800);
+            robotGoToXY(240, (ushort)pos.y, sens.reculer);
+            
             for (int i = 0; i < 4; i++)
             {
                 pince.sortir(Equipe);
                 pince.entrer(Equipe);
                 bras.semidescendre(Equipe);
+                if (i < 3)
+                {
+                    pince.semisortir(Equipe);
+                    pince.entrer(Equipe);
+                }
+                if (i == 2)
+                {
+                    pince.petiteavancee(Equipe);
+                    pince.entrer(Equipe);
+
+                }
                 pince.deserrer(Equipe);
                 bras.descendre(Equipe);
                 bras.Monter(Equipe);
+                if(i<3)
                 bras.lacher(Equipe);
             }
-            //robotGoToXY(400, 974, sens.avancer);
+            robotGoToXY(340, (ushort)pos.y, sens.reculer);
+            robotGoToXY(1120, 600, sens.avancer);
+            robotGoToXY(1280, 780, sens.avancer);
+            pince.sortir(Equipe);
+            pince.entrer(Equipe);
+            robotGoToXY(1240, 740, sens.avancer);
+            robotGoToXY(1320, 800, sens.reculer);
+            Thread.Sleep(5000);
+            */
+            //
            // bool SortieOK = robotGoToXY((ushort) 341, (ushort) (Equipe == Couleur.Bleu ? 946 : 2054), sens.avancer) == etatBR.arrive;
             //on prend la convention Couleur.Bleu == zone de départ bleue, sinon zone de départ jaune ; en cm pour l'instant, à voir ! Attention aussi aux conventions de repère, ici on a pris y vers le bas et angle positif en sens horaire mais pas forcément vrai
             //rappeler à PED de coder etat car permet savoir si arrive/perdu... et adapter le nom en fonction de ce qu'il choisit
-            pince.entrer(Equipe);
             Debug.Print("Sortie");
             //si SortieOk == etat.arrive alors on écrit Sortie reussie, sinon on écrit Sortie echouee
 
@@ -61,8 +97,61 @@ namespace GR
 
         private bool RecupererCylindre1()
         {
-          cylindresRecup++;
-          Debug.Print("RecupererCylindre1");
+            cylindresRecup++;
+            Debug.Print("RecupererCylindre1");
+
+            bras.semidescendre(Equipe);
+            pince.deserrer(Equipe);
+            bras.descendre(Equipe);
+            bras.Monter(Equipe);
+            bras.lacher(Equipe);
+            Thread.Sleep(200); //ne pas raccourcir
+            reservoir.tourner(Equipe);
+            robotGoToXY(240, 1130, sens.avancer);
+
+            for (int i = 0; i < 4; i++) //Une solution pour raccourcir la stratégie si on arrive pas en 90s : ignorer le dernier cylindre 
+            //for (int i = 0; i < 3; i++)
+            {
+                pince.sortir(Equipe);
+                pince.entrer(Equipe);
+
+                if (i < 3)
+                    robotGoToXY(300, 1130, sens.reculer);
+
+                bras.semidescendre(Equipe);
+                pince.deserrer(Equipe);
+                bras.descendre(Equipe);
+                bras.Monter(Equipe);
+                if (i < 3)
+                {
+                    bras.lacher(Equipe);
+                    robotGoToXY(240, 1130, sens.avancer);
+                }
+            }
+            robotGoToXY(350, 1130, sens.reculer);
+          robotGoToXY(1200, 720, sens.avancer);
+          robotGoToXY(1240, 755, sens.avancer);
+          pince.sortir(Equipe);
+          pince.entrer(Equipe);
+          robotGoToXY(1200, 725, sens.reculer);
+          robotGoToXY(1355, 878, sens.reculer);
+          for (int i = 1; i < 5; i++)
+          {
+              reservoir.sortir(Equipe);
+              Thread.Sleep(500);
+
+          }
+          bras.lacher(Equipe);
+          Thread.Sleep(500);
+          reservoir.sortir(Equipe);
+          bras.semidescendre(Equipe);
+          pince.deserrer(Equipe);
+          bras.descendre(Equipe);
+          bras.Monter(Equipe);
+          bras.lacher(Equipe);
+          Thread.Sleep(200);
+          reservoir.tourner(Equipe);
+          reservoir.sortir(Equipe);
 
    //       Tracage.Ecrire("Recuperation du 1er cylindre");
         //  pince.ouvrir(Equipe);
@@ -70,7 +159,7 @@ namespace GR
 
           //BaseRoulante.m_kangaroo.allerEn(1000,1,unite.mm);
          // Thread.Sleep(100000);
-          robotRotate(Equipe==Couleur.Bleu ? 78 : -78);
+         // robotRotate(Equipe==Couleur.Bleu ? 78 : -78);
          // pince.fermer(Equipe);
          // bras.attraper(Equipe);
          // bras.lacher(Equipe);
@@ -85,12 +174,12 @@ namespace GR
 
    //       Tracage.Ecrire("Positionnement devant la fusee et recuperation des 4 cylindres");
 
-          robotGoToXY((ushort) 341, (ushort) (Equipe==Couleur.Bleu ? 1150 : 1850), sens.avancer);
-          Thread.Sleep(50);
-          robotRotate(Equipe == Couleur.Bleu ? 90 : -90);
-          Thread.Sleep(50);
-          robotGoToXY((ushort)310, (ushort)(Equipe == Couleur.Bleu ? 1150 : 1850), sens.avancer);
-         
+       //   robotGoToXY((ushort) 341, (ushort) (Equipe==Couleur.Bleu ? 1150 : 1850), sens.avancer);
+       //   Thread.Sleep(50);
+       //   robotRotate(Equipe == Couleur.Bleu ? 90 : -90);
+       //   Thread.Sleep(50);
+       //   robotGoToXY((ushort)310, (ushort)(Equipe == Couleur.Bleu ? 1150 : 1850), sens.avancer);
+          
         
            Debug.Print("RecupererCylindreFusee");
 
@@ -102,17 +191,17 @@ namespace GR
           cylindresRecup++; //int défini dans GrandRobot.cs
 
    //       Tracage.Ecrire("Recuperation du 2eme cylindre");
-
-          robotGoToXY(850,1150, Equipe==Couleur.Bleu ? sens.avancer : sens.reculer);
-          Thread.Sleep(50);
-          robotRotate(180);
-          Thread.Sleep(50);
-          robotRotate(Equipe == Couleur.Bleu ? -45 : 45);
-          robotGoToXY((ushort) 1100, (ushort) (Equipe == Couleur.Bleu ? 900 : 2100), sens.avancer);
-          Thread.Sleep(50);
-          robotRotate(Equipe==Couleur.Bleu ? 45 : -45);
-          Thread.Sleep(50);
-          robotGoToXY((ushort) 1136, (ushort)(Equipe == Couleur.Bleu ? 900 : 2100), sens.avancer);
+         
+   //       robotGoToXY(850,1150, Equipe==Couleur.Bleu ? sens.avancer : sens.reculer);
+   //       Thread.Sleep(50);
+    //      robotRotate(180);
+   //       Thread.Sleep(50);
+   //       robotRotate(Equipe == Couleur.Bleu ? -45 : 45);
+   //       robotGoToXY((ushort) 1100, (ushort) (Equipe == Couleur.Bleu ? 900 : 2100), sens.avancer);
+   //       Thread.Sleep(50);
+   //       robotRotate(Equipe==Couleur.Bleu ? 45 : -45);
+   //       Thread.Sleep(50);
+   //       robotGoToXY((ushort) 1136, (ushort)(Equipe == Couleur.Bleu ? 900 : 2100), sens.avancer);
 
           Debug.Print("RecupererCylindre2");
 
@@ -124,23 +213,24 @@ namespace GR
 
    //       Tracage.Ecrire("Depot des cylindres");
 
-          robotGoToXY((ushort)1125, (ushort) (Equipe == Couleur.Bleu ? 900 : 2100), sens.reculer);
-          Thread.Sleep(50);
-          robotRotate(Equipe==Couleur.Bleu ? -45 : 45);
-          robotGoToXY((ushort)1275, (ushort) (Equipe == Couleur.Bleu ? 750 : 2250), sens.avancer);
-          Thread.Sleep(50);
-          robotRotate(Equipe==Couleur.Bleu ? -90 : 90);
-          robotGoToXY((ushort)1427, (ushort) (Equipe == Couleur.Bleu ? 927 : 2073), sens.reculer);
-          Thread.Sleep(50);
+          
+   //       robotGoToXY((ushort)1125, (ushort) (Equipe == Couleur.Bleu ? 900 : 2100), sens.reculer);
+   //       Thread.Sleep(50);
+    //      robotRotate(Equipe==Couleur.Bleu ? -45 : 45);
+   //       robotGoToXY((ushort)1275, (ushort) (Equipe == Couleur.Bleu ? 750 : 2250), sens.avancer);
+   //       Thread.Sleep(50);
+   //       robotRotate(Equipe==Couleur.Bleu ? -90 : 90);
+    //      robotGoToXY((ushort)1427, (ushort) (Equipe == Couleur.Bleu ? 927 : 2073), sens.reculer);
+          Thread.Sleep(5000);
       //    reservoir.sortir(Equipe); //À CODER : doit utiliser le petit poussoir pour faire sortir les cylindres du réservoir
       //    reservoir.sortir(Equipe);
       //    reservoir.sortir(Equipe);
       //    reservoir.sortir(Equipe);
 
-          bras.lacher(Equipe); //on laisse tomber l'avant-dernier cylindre dans le réservoir et on le sort
+     //     bras.lacher(Equipe); //on laisse tomber l'avant-dernier cylindre dans le réservoir et on le sort
         //  reservoir.sortir(Equipe);
 
-          bras.lacher(Equipe);
+   //       bras.lacher(Equipe);
         //  reservoir.tourner(Equipe);
        //   reservoir.sortir(Equipe);
           Debug.Print("DeposerCylindre");
