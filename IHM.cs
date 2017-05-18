@@ -7,10 +7,9 @@ using GHI.Glide;
 using GHI.Glide.Display;
 using GHI.Glide.UI;
 using System.Threading;
-using PetitRobotP15;
 
 enum Couleurs { rouge, orange, jaune, vert, bleu, indigo, violet };
-namespace PR
+namespace GR
 {
     class IHM
     {

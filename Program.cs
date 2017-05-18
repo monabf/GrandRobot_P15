@@ -52,7 +52,7 @@ namespace GR
             ports.pince.idAx12PinceModule = 2;
             ports.reservoir.idAx12Rotateur = 5;
             ports.reservoir.idAx12Poussoir = 6;
-            ports.idFunnyBras = 7; // idem
+            ports.funnyBras = 7; // idem
 
             ports.reservoir.idCapteurReservoir = 4; // pin de la spider
 
@@ -88,12 +88,12 @@ namespace GR
             robot.Demarrer(90d);
             Debug.Print("demarrage ok");
         }
+        /*
 
         private void SelectionEffectuee(object sender, EventArgs e)
         {
-            var selection = sender as IHMSelection;
-
             SelectionValidee = selection.Equipe != Couleur.Null && selection.Disposition > 0;
         }
+         * */
     }
 }

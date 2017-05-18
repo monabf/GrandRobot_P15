@@ -15,17 +15,30 @@ using GTM = Gadgeteer.Modules;
 
 namespace GR
 {
-    /// <summary>
-    /// Classe représentant le grand robot
-    /// </summary>
+    #region structures
+
+    struct EtatRobot
+    {
+        public Couleur couleurEquipe;
+        public int disposition;
+        public int coefPos;
+        public int coefAngle;
+        public bool stop;
+        public sens s;
+    }
+
+    #endregion
+    
+
     partial class GrandRobot
     {
         public enum Axe { Null = 0, X, Y }
 
         public  GestionnaireStrategie Strategie;
-       // public  IHMTracage Tracage;
 
         public  Couleur Equipe;
+        EtatRobot m_etatRobot;
+
         public  ConfigurationPorts Ports;
         public  Jack JackDemarrage;
         public  CBaseRoulante BaseRoulante;
@@ -35,7 +48,6 @@ namespace GR
         public  CReservoir reservoir;
         public  CBras bras;
         public  CCapteurCouleur CapteurCouleur;
-       // public  OutputPort m_direction;
         public  GroupeInfrarouge IR;
         public  CCapteurUltrason CapteurUltrason;
        
@@ -45,12 +57,7 @@ namespace GR
 
         public DateTime InstantDebut;
         public int cylindresRecup;
-        /// <summary>
-        /// Initialise le robot
-        /// </summary>
-        /// <param name="ports">Configuration des ports</param>
-        /// <param name="equipe">Couleur de l'équipe</param>
-        /// <param name="table">Configuration de la table</param>
+
         public GrandRobot(ConfigurationPorts ports, Couleur equipe)
         {
             Ports = ports;
@@ -68,8 +75,8 @@ namespace GR
             controleurAX12 = new ControleurAX12(Ports.contAX12);
             Debug.Print("Controleur actif");
             pince = new CPince(controleurAX12, Ports.pince);
-           // funnyBras = new CFunnyBras(controleurAX12, Ports.funnyBras);
-           // Debug.Print("funny bras actif");
+            funnyBras = new CFunnyBras(controleurAX12, Ports.funnyBras);
+            Debug.Print("funny bras actif");
             bras = new CBras(controleurAX12, Ports.bras);
             reservoir = new CReservoir(equipe, controleurAX12, Ports.reservoir);
 
@@ -138,7 +145,7 @@ namespace GR
                     thStrat.Abort();
                 }
                 BaseRoulante.stop();
-               // funnyBras.lancer();
+               funnyBras.lancer();
 
             }, null, (int)(tempsImparti * 1000), -1);
         }
@@ -155,9 +162,18 @@ namespace GR
                 Strategie.ExecuterSuivante();
             }
 
-          //  Tracage.Ecrire("Fin de l'execution de la strategie.");
-          //  Tracage.Ecrire("Nombre de cylindres " + cylindresRecup);
         }
+
+        public Couleur robotGetCouleur()
+        {
+            return m_etatRobot.couleurEquipe;
+        }
+
+        public int robotGetDisposition()
+        {
+            return m_etatRobot.disposition;
+        }  
+
         etatBR robotGoToXY(ushort x, ushort y, sens s, bool boolDetection = false, int speed = 3)
         {
             etatBR retour;

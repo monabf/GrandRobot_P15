@@ -117,14 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FenetreSelection" xml:space="preserve">
+  <data name="fenetreAffichage" xml:space="preserve">
     <value>&lt;Glide Version="1.0.7"&gt;
-  &lt;Window Name="FenetreSelection" Width="320" Height="240" BackColor="FFFFFF"&gt;
-    &lt;Button Name="BoutonVert" X="0" Y="0" Width="160" Height="32" Alpha="255" Text="Vert" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonViolet" X="160" Y="0" Width="160" Height="32" Alpha="255" Text="Violet" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
+  &lt;Window Name="fenetreAffichage" Width="320" Height="240" BackColor="FFFFFF"&gt;
+    &lt;TextBlock Name="TexteAffichage" X="13" Y="17" Width="288" Height="208" Alpha="255" Text="" TextAlign="Left" TextVerticalAlign="Top" Font="2" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+  &lt;/Window&gt;
+&lt;/Glide&gt;</value>
+  </data>
+  <data name="fenetreSelection" xml:space="preserve">
+    <value>&lt;Glide Version="1.0.7"&gt;
+  &lt;Window Name="fenetreSelection" Width="320" Height="240" BackColor="FFFFFF"&gt;
+    &lt;Button Name="BoutonJaune" X="0" Y="0" Width="160" Height="32" Alpha="255" Text="Jaune" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
+    &lt;Button Name="BoutonBleu" X="160" Y="0" Width="160" Height="32" Alpha="255" Text="Bleu" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
     &lt;Button Name="BoutonValider" X="0" Y="208" Width="320" Height="32" Alpha="255" Text="Valider" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonDispo1" X="0" Y="32" Width="160" Height="32" Alpha="255" Text="Dispo no. 1" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonDispo2" X="160" Y="32" Width="160" Height="32" Alpha="255" Text="Dispo no. 2" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
+    &lt;Button Name="BoutonHomologation" X="0" Y="32" Width="160" Height="32" Alpha="255" Text="Homologation" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
+    &lt;Button Name="BoutonDispo2" X="160" Y="32" Width="160" Height="32" Alpha="255" Text="Match" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
     &lt;Button Name="BoutonDispo3" X="0" Y="64" Width="160" Height="32" Alpha="255" Text="Dispo no. 3" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
     &lt;Button Name="BoutonDispo4" X="160" Y="64" Width="160" Height="32" Alpha="255" Text="Dispo no. 4" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
     &lt;Button Name="BoutonDispo5" X="0" Y="96" Width="320" Height="32" Alpha="255" Text="Dispo no. 5" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
@@ -132,51 +139,6 @@
     &lt;TextBlock Name="TexteDispo" X="0" Y="160" Width="320" Height="32" Alpha="255" Text="Veuillez selectionner une disposition." TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
   &lt;/Window&gt;
 &lt;/Glide&gt;</value>
-    <comment>Code de la fenêtre de sélection de couleur et disposition.</comment>
-  </data>
-  <data name="FenetreTestBR" xml:space="preserve">
-    <value>&lt;Glide Version="1.0.7"&gt;
-  &lt;Window Name="FenetreTestBR" Width="320" Height="240" BackColor="FFFFFF"&gt;
-    &lt;TextBlock Name="EtiqVitesse" X="32" Y="0" Width="64" Height="32" Alpha="255" Text="Vitesse" TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
-    &lt;Button Name="BoutonVitesseMoins" X="96" Y="0" Width="32" Height="32" Alpha="255" Text="-" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;TextBlock Name="TexteValVitesse" X="128" Y="0" Width="32" Height="32" Alpha="255" Text="0000" TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="DDDDDD" ShowBackColor="True"/&gt;
-    &lt;Button Name="BoutonVitessePlus" X="160" Y="0" Width="32" Height="32" Alpha="255" Text="+" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonVitesseOk" X="192" Y="0" Width="64" Height="32" Alpha="255" Text="OK" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;TextBlock Name="TexteDistParcourue" X="0" Y="216" Width="320" Height="24" Alpha="255" Text="Distance parcourue: 00000" TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="EEEEEE" ShowBackColor="True"/&gt;
-    &lt;TextBlock Name="TextePosX" X="0" Y="192" Width="106" Height="24" Alpha="255" Text="X: 0000" TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="EEEEEE" ShowBackColor="True"/&gt;
-    &lt;TextBlock Name="TextePosY" X="106" Y="192" Width="107" Height="24" Alpha="255" Text="Y: 0000" TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="EEEEEE" ShowBackColor="True"/&gt;
-    &lt;TextBlock Name="TextePosAlpha" X="213" Y="192" Width="106" Height="24" Alpha="255" Text="Alpha: 0000" TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="EEEEEE" ShowBackColor="True"/&gt;
-    &lt;Button Name="BoutonAller" X="0" Y="144" Width="320" Height="32" Alpha="255" Text="Aller" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonSensDepl" X="160" Y="64" Width="160" Height="32" Alpha="255" Text="Avancer" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonSigneAngle" X="160" Y="112" Width="160" Height="32" Alpha="255" Text="Positif" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;TextBlock Name="EtiqAlpha" X="0" Y="112" Width="64" Height="32" Alpha="255" Text="Alpha" TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
-    &lt;TextBlock Name="EtiqDestX" X="0" Y="48" Width="64" Height="32" Alpha="255" Text="Dest. X" TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
-    &lt;TextBlock Name="EtiqDestY" X="0" Y="80" Width="64" Height="32" Alpha="255" Text="Dest. Y" TextAlign="Center" TextVerticalAlign="Middle" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
-    &lt;Button Name="BoutonXMoins" X="64" Y="48" Width="32" Height="32" Alpha="255" Text="-" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonYMoins" X="64" Y="80" Width="32" Height="32" Alpha="255" Text="-" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonAlphaMoins" X="64" Y="112" Width="32" Height="32" Alpha="255" Text="-" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonXPlus" X="128" Y="48" Width="32" Height="32" Alpha="255" Text="+" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonYPlus" X="128" Y="80" Width="32" Height="32" Alpha="255" Text="+" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonAlphaPlus" X="128" Y="112" Width="32" Height="32" Alpha="255" Text="+" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;TextBlock Name="TexteDestX" X="96" Y="48" Width="32" Height="32" Alpha="255" Text="0000" TextAlign="Center" TextVerticalAlign="Middle" Font="2" FontColor="0" BackColor="DDDDDD" ShowBackColor="True"/&gt;
-    &lt;TextBlock Name="TexteDestY" X="96" Y="80" Width="32" Height="32" Alpha="255" Text="0000" TextAlign="Center" TextVerticalAlign="Middle" Font="2" FontColor="0" BackColor="DDDDDD" ShowBackColor="True"/&gt;
-    &lt;TextBlock Name="TexteDestAlpha" X="96" Y="112" Width="32" Height="32" Alpha="255" Text="0000" TextAlign="Center" TextVerticalAlign="Middle" Font="2" FontColor="0" BackColor="DDDDDD" ShowBackColor="True"/&gt;
-  &lt;/Window&gt;
-&lt;/Glide&gt;</value>
-    <comment>Code de la fenêtre de test de la base roulante.</comment>
-  </data>
-  <data name="FenetreTracage" xml:space="preserve">
-    <value>&lt;Glide Version="1.0.7"&gt;
-  &lt;Window Name="FenetreTracage" Width="320" Height="240" BackColor="FFFFFF"&gt;
-    &lt;Button Name="BoutonEffacer" X="0" Y="208" Width="320" Height="32" Alpha="255" Text="Effacer" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonDebut" X="288" Y="0" Width="32" Height="32" Alpha="255" Text="^^" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonHaut" X="288" Y="32" Width="32" Height="32" Alpha="255" Text="^" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonBas" X="288" Y="144" Width="32" Height="32" Alpha="255" Text="v" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;Button Name="BoutonFin" X="288" Y="176" Width="32" Height="32" Alpha="255" Text="vv" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
-    &lt;TextBlock Name="TexteJournal" X="0" Y="0" Width="288" Height="208" Alpha="255" Text="" TextAlign="Left" TextVerticalAlign="Top" Font="2" FontColor="0" BackColor="" ShowBackColor="False"/&gt;
-  &lt;/Window&gt;
-&lt;/Glide&gt;</value>
-    <comment>Code de la fenêtre de traçage.</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="NinaB" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -184,5 +146,12 @@
   </data>
   <data name="small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\small.tinyfnt;System.Byte[], mscorlib, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="fenetrePhase" xml:space="preserve">
+    <value>&lt;Glide Version="1.0.7"&gt;
+  &lt;Window Name="instance115" Width="320" Height="240" BackColor="FFFFFF"&gt;
+    &lt;Image Name="instance1551" X="114" Y="95" Width="0" Height="0" Alpha="255"/&gt;
+  &lt;/Window&gt;
+&lt;/Glide&gt;</value>
   </data>
 </root>
