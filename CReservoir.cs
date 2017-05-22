@@ -38,27 +38,27 @@ namespace GR.Membres
             m_ax12Poussoir.setMode(AX12Mode.joint);
         }
 
-        public void rentrer(Couleur equipe)
+        public void Rentrer(Couleur equipe)
         {
             m_ax12Poussoir.move((int)positionReservoir.rentre);
             Thread.Sleep(500);
         }
 
-        public void deployer(Couleur equipe)
+        public void Deployer(Couleur equipe)
         {
             m_ax12Poussoir.move((int)positionReservoir.deploye);
             Thread.Sleep(500);
         }
 
-        public void sortir(Couleur equipe) 
+        public void Sortir(Couleur equipe) 
         {
-            deployer(equipe);
+            Deployer(equipe);
             Thread.Sleep(500);
-            rentrer(equipe);
+            Rentrer(equipe);
             Thread.Sleep(500);
         }
 
-        public void tourner(Couleur equipe)
+        public void Tourner(Couleur equipe)
         {
             m_rouletteIntelligente.mettreBonneCouleur(equipe);
         }

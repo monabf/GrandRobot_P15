@@ -32,14 +32,15 @@ namespace GR
 
     partial class GrandRobot
     {
-        public enum Axe { Null = 0, X, Y }
+       const int Y_TABLE = 2000;
+       const int X_TABLE = 3000;
+       public enum Axe { Null = 0, X, Y }
 
         public  GestionnaireStrategie Strategie;
 
-        public  Couleur Equipe;
         EtatRobot m_etatRobot;
 
-        public  ConfigurationPorts Ports;
+        public IHM m_ihm;
         public  Jack JackDemarrage;
         public  CBaseRoulante BaseRoulante;
         public  ControleurAX12 controleurAX12;
@@ -47,43 +48,40 @@ namespace GR
         public  CFunnyBras funnyBras;
         public  CReservoir reservoir;
         public  CBras bras;
-        public  CCapteurCouleur CapteurCouleur;
         public  GroupeInfrarouge IR;
-        public  CCapteurUltrason CapteurUltrason;
+    //    public  CCapteurUltrason CapteurUltrason;
        
         public positionBaseRoulante Position = new positionBaseRoulante();
-        public bool SortieOK = false;
         public static bool obstacle = false;
 
         public DateTime InstantDebut;
-        public int cylindresRecup;
+        public int cylindresRecup = 0;
 
-        public GrandRobot(ConfigurationPorts ports, Couleur equipe)
+        public GrandRobot(ConfigurationPorts ports, Couleur equipe, int disposition, IHM ihm)
         {
-            Ports = ports;
-            Equipe = equipe;
+            m_ihm = ihm;
+            m_etatRobot = new EtatRobot();
+            m_etatRobot.couleurEquipe = equipe;
+            m_etatRobot.disposition = disposition;
             Strategie = new GestionnaireStrategie();
-           // Tracage = new IHMTracage();
 
-            JackDemarrage = new Jack(Ports.IO, Ports.Jack);
-            Debug.Print("Ceration de la plateforme "+Ports.Plateforme);
-            BaseRoulante = new CBaseRoulante(Ports.Plateforme);
+            JackDemarrage = new Jack(ports.IO, ports.Jack);
+            Debug.Print("Ceration de la plateforme "+ports.Plateforme);
+            BaseRoulante = new CBaseRoulante(ports.Plateforme);
             Debug.Print("plateforme créée");
-            BaseRoulante.setCouleur(equipe);
+            BaseRoulante.setCouleur(m_etatRobot.couleurEquipe);
             BaseRoulante.getPosition(ref Position);
 
-            controleurAX12 = new ControleurAX12(Ports.contAX12);
+            controleurAX12 = new ControleurAX12(ports.contAX12);
             Debug.Print("Controleur actif");
-            pince = new CPince(controleurAX12, Ports.pince);
-            funnyBras = new CFunnyBras(controleurAX12, Ports.funnyBras);
+            pince = new CPince(controleurAX12, ports.pince);
+            funnyBras = new CFunnyBras(controleurAX12, ports.funnyBras);
             Debug.Print("funny bras actif");
-            bras = new CBras(controleurAX12, Ports.bras);
-            reservoir = new CReservoir(equipe, controleurAX12, Ports.reservoir);
+            bras = new CBras(controleurAX12, ports.bras);
+            reservoir = new CReservoir(m_etatRobot.couleurEquipe, controleurAX12, ports.reservoir);
+            Debug.Print("reservoir actif");
 
-
-            cylindresRecup = 0;
-
-            IR = new GroupeInfrarouge(Ports.IO, Ports.InfrarougeAVD, Ports.InfrarougeAVG, Ports.InfrarougeARD, ports.InfrarougeARG);
+            IR = new GroupeInfrarouge(ports.IO, ports.InfrarougeAVD, ports.InfrarougeAVG, ports.InfrarougeARD, ports.InfrarougeARG);
             Debug.Print("infrarouge actif");
             // NB : il n'y a pas de capteur ultrason sur notre grand robot
         }
@@ -102,8 +100,6 @@ namespace GR
         /// </summary>
         public void AttendreJack()
         {
-         //   Tracage.Ecrire("Veuillez retirer le jack pour demarrer.");
-
             while (!JackDemarrage.Etat) Thread.Sleep(1);
         }
 
@@ -113,8 +109,7 @@ namespace GR
         /// <param name="tempsImparti">Temps en secondes au bout du quel l'arrêt du robot est forcé</param>
         public void Demarrer(double tempsImparti)
         {
-
-
+            
             Timer timeout;
             DateTime fin = new DateTime();
             var thDecompte = new Thread(() =>
@@ -145,7 +140,8 @@ namespace GR
                     thStrat.Abort();
                 }
                 BaseRoulante.stop();
-               funnyBras.lancer();
+                Thread.Sleep(3000);
+                funnyBras.lancer();
 
             }, null, (int)(tempsImparti * 1000), -1);
         }
@@ -240,7 +236,7 @@ namespace GR
         {
             etatBR retour;
             Debug.Print("avant rotate " + alpha);
-            retour = BaseRoulante.tourner(alpha);
+            retour = BaseRoulante.Tourner(alpha);
             Debug.Print("après rotate " + alpha);
 
             return retour;

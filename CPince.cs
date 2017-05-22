@@ -35,13 +35,9 @@ namespace GR.Membres
         {
             m_ax12PinceSupport = new CAX12(config.idAx12PinceSupport, controleur.m_port, controleur.m_direction);
             m_ax12PinceModule = new CAX12(config.idAx12PinceModule, controleur.m_port, controleur.m_direction);
-           // m_ax12Pince.setMode(CAX12.AX12Mode.joint);
-            //position initiale
-            // m_ax12Pince.setMode(CAX12.AX12Mode.joint);
-
         }
 
-        public void sortir(Couleur equipe)
+        public void Sortir(Couleur equipe)
         {
             m_ax12PinceModule.move((int)positionPince.ouverte);
             Thread.Sleep(50);
@@ -50,7 +46,7 @@ namespace GR.Membres
             
         }
 
-        public void entrer(Couleur equipe)
+        public void Entrer(Couleur equipe)
         {
             m_ax12PinceModule.move((int)positionPince.fermee);
             Thread.Sleep(50);
@@ -58,7 +54,7 @@ namespace GR.Membres
             Thread.Sleep(50);
             
         }
-        public void deserrer(Couleur equipe)
+        public void Deserrer(Couleur equipe)
         {
             m_ax12PinceModule.move((int)positionPince.intermediaire);
             Thread.Sleep(50);

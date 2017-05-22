@@ -1,38 +1,13 @@
-﻿using GHI.Glide;
-using Microsoft.SPOT;
+﻿using Microsoft.SPOT;
 using System.Threading;
 
 namespace GR
 {
     public partial class Program
     {
-        private bool SelectionValidee;
-
         // This method is run when the mainboard is powered up or reset.   
         void ProgramStarted()
         {
-            GrandRobot robot;
-            //IHMSelection selection;
-
-            /*
-            ports.numIO= 5;
-            ports.pinJack = 8;
-            ports.pinAVG = 4;
-            ports.pinAVD = 5;
-            ports.pinARG = 6;
-            ports.pinARD = 7;
-            ports.numSocketUltrason = 6;
-            ports.numSerialPortBaseRoulante = 8;
-            ports.numSerialPortMembres = 11;
-            ports.confChasseNeige.idAX12BDroit = 3;
-            ports.confChasseNeige.idAX12BGauche = 2;
-            ports.confBras.idAX12Coude = 6;
-            ports.confBras.idAX12Poignet = 5;*/
-            // initialisation des ports
-
-            // numéros de ports à corriger
-
-            
 
             var ports = new ConfigurationPorts
             {
@@ -56,29 +31,16 @@ namespace GR
 
             ports.reservoir.idCapteurReservoir = 4; // pin de la spider
 
+            IHM ihm_principal;
+            ihm_principal = new IHM();
+            ihm_principal.Selection();
 
+            GrandRobot robot;
+            robot = new GrandRobot(ports, ihm_principal.getEquipe(), ihm_principal.getDisposition(), ihm_principal);
 
             
-            // initialisation de GHI Glide pour les IHMs
-           // GlideTouch.Initialize();
-           // Glide.FitToScreen = true;
-
-
-            // initialisation de l'IHM de sélection
-            //selection = new IHMSelection();
-           // selection.Validation += SelectionEffectuee;
-
-            // affiche l'IHM de sélection et attende de la validation
-            //selection.Afficher();
-            //while (!SelectionValidee) Thread.Sleep(1);
-            //selection.Fermer();
             Debug.Print("bienvenue les gens");
-            // initialisation du robot
-            robot = new GrandRobot(
-                ports,
-                //selection.Equipe
-                Couleur.Bleu
-            );
+
             Debug.Print("Grand robot construit !");
 
             // attente du jack

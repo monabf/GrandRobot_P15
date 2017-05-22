@@ -9,88 +9,29 @@ namespace GR
 {
     partial class GrandRobot
     {
+        // ATTENTION POUR LA COUPE METTRE HOMOLATION = TRUE POUR TOUTES LES DISPOSITIONS
         private bool SortirZoneDepart()
         {
-//IL FAUT UN CONSTRUCTEUR QUELQUE PART QUI CRÉE TOUTES LES INSTANCES des classes CPince etc
-#if HOMOLOGATION
-            Tracage.Ecrire("Homologation");
-
-            Tourner(12);
-            AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, sens.avancer);
-            Tracage.Ecrire("Recuperation du cylindre");
-            pince.ouvrir(Equipe); //À CODER : doit rentrer la pince et ouvrir en intermédiaire pour que le bras vienne récupérer le cylindre (le début du robot est à 5.8cm du cylindre)
-            Tourner(Equipe==Couleur.Bleu ? 78 : -78);
-            pince.fermer(Equipe); //À CODER : doit sortir et fermer
-            pince.ouvrir(Equipe);
-            bras.attraper(Equipe); //À CODER : doit descendre, attraper le cylindre laissé par la pince, remonter
-            bool SortieOK = AllerEn(205, Equipe == Couleur.Bleu ? 870 : 2120, sens.avancer) == etat.arrive;
-            bras.reposer(Equipe); //À CODER : doit redescendre et lâcher le cylindre qu'il tient
-            //il faudra voir expérimentalement si les emplacements pour redéposer le cylindre conviennent, sinon les bouger un peu
-
-//Homologation : récupérer le 1er cylindre et retourner dans la zone bleue pour l'y reposer, sans le mettre dans le réservoir
+//Homologation : récupérer le 1er cylindre et reTourner dans la zone bleue pour l'y reposer, sans le mettre dans le réservoir
 //entre les deux (le bras le garde simplement), s'arrêter si le capteur ultrasons réagit (l'arrêt est codé dans la classe capteur ultrasons)
-
-#else
-     //       Tracage.Ecrire("Sortie de la zone de depart");
-        //    robotGoToXY((ushort)1200, (ushort)920, sens.avancer);
-            
-           //Début stratégie Mohamed
-            reservoir.rentrer(Equipe);
-            pince.sortir(Equipe);
-            robotGoToXY(400, 974, sens.avancer);
-            pince.entrer(Equipe);
-            robotGoToXY(400, 1130, sens.avancer);
-          
-            //reservoir.sortir(Equipe);
-           // reservoir.rentrer(Equipe);
-
-          /*  robotGoToXY(240, 1130, sens.avancer);
-            BaseRoulante.getPosition(ref pos);
-            recalageX(180, 220, sens.avancer, 1, 800);
-            robotGoToXY(240, (ushort)pos.y, sens.reculer);
-            
-            for (int i = 0; i < 4; i++)
+            bool homologation = (robotGetDisposition() == 1);
+            m_ihm.retourPhase(Couleurs.violet);
+            reservoir.Rentrer(m_etatRobot.couleurEquipe);
+            pince.Sortir(m_etatRobot.couleurEquipe);
+            if (m_etatRobot.couleurEquipe == Couleur.Bleu)
             {
-                pince.sortir(Equipe);
-                pince.entrer(Equipe);
-                bras.semidescendre(Equipe);
-                if (i < 3)
-                {
-                    pince.semisortir(Equipe);
-                    pince.entrer(Equipe);
-                }
-                if (i == 2)
-                {
-                    pince.petiteavancee(Equipe);
-                    pince.entrer(Equipe);
-
-                }
-                pince.deserrer(Equipe);
-                bras.descendre(Equipe);
-                bras.Monter(Equipe);
-                if(i<3)
-                bras.lacher(Equipe);
+                robotGoToXY(400, 974, sens.avancer, homologation);
+                pince.Entrer(m_etatRobot.couleurEquipe);
+                robotGoToXY(400, 1130, sens.avancer, false);
             }
-            robotGoToXY(340, (ushort)pos.y, sens.reculer);
-            robotGoToXY(1120, 600, sens.avancer);
-            robotGoToXY(1280, 780, sens.avancer);
-            pince.sortir(Equipe);
-            pince.entrer(Equipe);
-            robotGoToXY(1240, 740, sens.avancer);
-            robotGoToXY(1320, 800, sens.reculer);
-            Thread.Sleep(5000);
-            */
-            //
-           // bool SortieOK = robotGoToXY((ushort) 341, (ushort) (Equipe == Couleur.Bleu ? 946 : 2054), sens.avancer) == etatBR.arrive;
-            //on prend la convention Couleur.Bleu == zone de départ bleue, sinon zone de départ jaune ; en cm pour l'instant, à voir ! Attention aussi aux conventions de repère, ici on a pris y vers le bas et angle positif en sens horaire mais pas forcément vrai
-            //rappeler à PED de coder etat car permet savoir si arrive/perdu... et adapter le nom en fonction de ce qu'il choisit
-            Debug.Print("Sortie");
-            //si SortieOk == etat.arrive alors on écrit Sortie reussie, sinon on écrit Sortie echouee
+            else
+            {
+                robotGoToXY(X_TABLE - 400, 974, sens.avancer, homologation);
+                pince.Entrer(m_etatRobot.couleurEquipe);
+                robotGoToXY(X_TABLE - 400, 1130, sens.avancer, false);
+            }
 
-#endif
-
-            return SortieOK;
-            //return true;
+            return true;
         }
 
 
@@ -99,187 +40,153 @@ namespace GR
         {
             cylindresRecup++;
             Debug.Print("RecupererCylindre1");
-
-            bras.semidescendre(Equipe);
-            pince.deserrer(Equipe);
-            bras.descendre(Equipe);
-            bras.Monter(Equipe);
-            bras.lacher(Equipe);
-            Thread.Sleep(200); //ne pas raccourcir
-            reservoir.tourner(Equipe);
-            robotGoToXY(240, 1130, sens.avancer);
-
-            for (int i = 0; i < 4; i++) //Une solution pour raccourcir la stratégie si on arrive pas en 90s : ignorer le dernier cylindre 
-            //for (int i = 0; i < 3; i++)
-            {
-                pince.sortir(Equipe);
-                pince.entrer(Equipe);
-
-                if (i < 3)
-                    robotGoToXY(300, 1130, sens.reculer);
-
-                bras.semidescendre(Equipe);
-                pince.deserrer(Equipe);
-                bras.descendre(Equipe);
-                bras.Monter(Equipe);
-                if (i < 3)
-                {
-                    bras.lacher(Equipe);
-                    robotGoToXY(240, 1130, sens.avancer);
-                }
-            }
-            robotGoToXY(350, 1130, sens.reculer);
-          robotGoToXY(1200, 720, sens.avancer);
-          robotGoToXY(1240, 755, sens.avancer);
-          pince.sortir(Equipe);
-          pince.entrer(Equipe);
-          robotGoToXY(1200, 725, sens.reculer);
-          robotGoToXY(1355, 878, sens.reculer);
-          for (int i = 1; i < 5; i++)
-          {
-              reservoir.sortir(Equipe);
-              Thread.Sleep(500);
-
-          }
-          bras.lacher(Equipe);
-          Thread.Sleep(500);
-          reservoir.sortir(Equipe);
-          bras.semidescendre(Equipe);
-          pince.deserrer(Equipe);
-          bras.descendre(Equipe);
-          bras.Monter(Equipe);
-          bras.lacher(Equipe);
-          Thread.Sleep(200);
-          reservoir.tourner(Equipe);
-          reservoir.sortir(Equipe);
-
-   //       Tracage.Ecrire("Recuperation du 1er cylindre");
-        //  pince.ouvrir(Equipe);
-          //Thread.Sleep(10000);
-
-          //BaseRoulante.m_kangaroo.allerEn(1000,1,unite.mm);
-         // Thread.Sleep(100000);
-         // robotRotate(Equipe==Couleur.Bleu ? 78 : -78);
-         // pince.fermer(Equipe);
-         // bras.attraper(Equipe);
-         // bras.lacher(Equipe);
-          //reservoir.tourner(Equipe);
-
-          return true;
+            m_ihm.retourPhase(Couleurs.indigo);
+            bras.SemiDescendre(m_etatRobot.couleurEquipe);
+            pince.Deserrer(m_etatRobot.couleurEquipe);
+            bras.Descendre(m_etatRobot.couleurEquipe);
+            bras.Monter(m_etatRobot.couleurEquipe);
+            bras.Lacher(m_etatRobot.couleurEquipe);
+            return true;
         }
 
         private bool RecupererCylindresFusee()
         {
-          cylindresRecup+=4; //int défini dans GrandRobot.cs
+            // dans toute cette partie la detection est coupee
+            m_ihm.retourPhase(Couleurs.bleu);
+            cylindresRecup+=4; //int défini dans GrandRobot.cs
+            var thReservoir = new Thread(() =>
+            {
+                reservoir.Tourner(m_etatRobot.couleurEquipe);
+            }
+            );
+            thReservoir.Start();
+            Thread.Sleep(200); //ne pas raccourcir
+            if (m_etatRobot.couleurEquipe == Couleur.Bleu)
+            {
+                robotGoToXY(240, 1130, sens.avancer);
+            }
+            else
+            {
+                robotGoToXY(X_TABLE - 240, 1130, sens.avancer);
+            }
 
-   //       Tracage.Ecrire("Positionnement devant la fusee et recuperation des 4 cylindres");
+            for (int i = 0; i < 4; i++) //Une solution pour raccourcir la stratégie si on arrive pas en 90s : ignorer le dernier cylindre 
+            //for (int i = 0; i < 3; i++)
+            {
+                pince.Sortir(m_etatRobot.couleurEquipe);
+                pince.Entrer(m_etatRobot.couleurEquipe);
 
-       //   robotGoToXY((ushort) 341, (ushort) (Equipe==Couleur.Bleu ? 1150 : 1850), sens.avancer);
-       //   Thread.Sleep(50);
-       //   robotRotate(Equipe == Couleur.Bleu ? 90 : -90);
-       //   Thread.Sleep(50);
-       //   robotGoToXY((ushort)310, (ushort)(Equipe == Couleur.Bleu ? 1150 : 1850), sens.avancer);
-          
+                if (i < 3) 
+                {
+                    if (m_etatRobot.couleurEquipe == Couleur.Bleu)
+                    {
+                        robotGoToXY(300, 1130, sens.reculer);
+                    }
+                    else
+                    {
+                        robotGoToXY(X_TABLE - 300, 1130, sens.reculer);
+                    }
+                }
+
+                bras.SemiDescendre(m_etatRobot.couleurEquipe);
+                pince.Deserrer(m_etatRobot.couleurEquipe);
+                bras.Descendre(m_etatRobot.couleurEquipe);
+                bras.Monter(m_etatRobot.couleurEquipe);
+                if (i < 3)
+                {
+                    bras.Lacher(m_etatRobot.couleurEquipe);
+                    {
+                        if (m_etatRobot.couleurEquipe == Couleur.Bleu)
+                        {
+                            robotGoToXY(240, 1130, sens.reculer);
+                        }
+                        else
+                        {
+                            robotGoToXY(X_TABLE - 240, 1130, sens.reculer);
+                        }
+                    }
+                }
+            }
         
-           Debug.Print("RecupererCylindreFusee");
+            Debug.Print("RecupererCylindreFusee");
 
-          return true;
+            return true;
         }
 
         private bool RecupererCylindre2()
         {
-          cylindresRecup++; //int défini dans GrandRobot.cs
-
-   //       Tracage.Ecrire("Recuperation du 2eme cylindre");
-         
-   //       robotGoToXY(850,1150, Equipe==Couleur.Bleu ? sens.avancer : sens.reculer);
-   //       Thread.Sleep(50);
-    //      robotRotate(180);
-   //       Thread.Sleep(50);
-   //       robotRotate(Equipe == Couleur.Bleu ? -45 : 45);
-   //       robotGoToXY((ushort) 1100, (ushort) (Equipe == Couleur.Bleu ? 900 : 2100), sens.avancer);
-   //       Thread.Sleep(50);
-   //       robotRotate(Equipe==Couleur.Bleu ? 45 : -45);
-   //       Thread.Sleep(50);
-   //       robotGoToXY((ushort) 1136, (ushort)(Equipe == Couleur.Bleu ? 900 : 2100), sens.avancer);
-
-          Debug.Print("RecupererCylindre2");
-
-          return true;
+            bool homologation = (robotGetDisposition() == 1);
+              cylindresRecup++; //int défini dans GrandRobot.cs
+              m_ihm.retourPhase(Couleurs.vert);
+              if (m_etatRobot.couleurEquipe == Couleur.Bleu)
+              {
+                  robotGoToXY(350, 1130, sens.reculer);
+                  robotGoToXY(1200, 720, sens.avancer, homologation);
+                  robotGoToXY(1240, 755, sens.avancer, homologation);
+                  pince.Sortir(m_etatRobot.couleurEquipe);
+                  pince.Entrer(m_etatRobot.couleurEquipe);
+                  robotGoToXY(1200, 725, sens.reculer, homologation);
+                  robotGoToXY(1355, 878, sens.reculer, homologation);
+              }
+              else
+              {
+                  robotGoToXY(X_TABLE - 350, 1130, sens.reculer, homologation);
+                  robotGoToXY(X_TABLE - 1200, 720, sens.avancer, homologation);
+                  robotGoToXY(X_TABLE - 1240, 755, sens.avancer, homologation);
+                  pince.Sortir(m_etatRobot.couleurEquipe);
+                  pince.Entrer(m_etatRobot.couleurEquipe);
+                  robotGoToXY(X_TABLE - 1200, 725, sens.reculer, homologation);
+                  robotGoToXY(X_TABLE - 1355, 878, sens.reculer, homologation);
+              }
+              Debug.Print("RecupererCylindre2");
+              return true;
         }
 
         private bool DeposerCylindres()
         {
+            m_ihm.retourPhase(Couleurs.jaune);
+            for (int i = 1; i < 5; i++)
+            {
+                reservoir.Sortir(m_etatRobot.couleurEquipe);
+                Thread.Sleep(500);
+            }
+            bras.Lacher(m_etatRobot.couleurEquipe);
+            Thread.Sleep(500);
+            var thReservoir2 = new Thread(() =>
+            {
+                reservoir.Sortir(m_etatRobot.couleurEquipe);
+                bras.SemiDescendre(m_etatRobot.couleurEquipe);
+                pince.Deserrer(m_etatRobot.couleurEquipe);
+                bras.Descendre(m_etatRobot.couleurEquipe);
+                bras.Monter(m_etatRobot.couleurEquipe);
+                bras.Lacher(m_etatRobot.couleurEquipe);
+            });
+            thReservoir2.Start();
+            reservoir.Tourner(m_etatRobot.couleurEquipe);
+            reservoir.Sortir(m_etatRobot.couleurEquipe);
+            // et deux sorties de plus au cas où
+            Thread.Sleep(500);
+            reservoir.Sortir(m_etatRobot.couleurEquipe);
+            Thread.Sleep(500);
+            reservoir.Sortir(m_etatRobot.couleurEquipe);
 
-   //       Tracage.Ecrire("Depot des cylindres");
-
-          
-   //       robotGoToXY((ushort)1125, (ushort) (Equipe == Couleur.Bleu ? 900 : 2100), sens.reculer);
-   //       Thread.Sleep(50);
-    //      robotRotate(Equipe==Couleur.Bleu ? -45 : 45);
-   //       robotGoToXY((ushort)1275, (ushort) (Equipe == Couleur.Bleu ? 750 : 2250), sens.avancer);
-   //       Thread.Sleep(50);
-   //       robotRotate(Equipe==Couleur.Bleu ? -90 : 90);
-    //      robotGoToXY((ushort)1427, (ushort) (Equipe == Couleur.Bleu ? 927 : 2073), sens.reculer);
-          Thread.Sleep(5000);
-      //    reservoir.sortir(Equipe); //À CODER : doit utiliser le petit poussoir pour faire sortir les cylindres du réservoir
-      //    reservoir.sortir(Equipe);
-      //    reservoir.sortir(Equipe);
-      //    reservoir.sortir(Equipe);
-
-     //     bras.lacher(Equipe); //on laisse tomber l'avant-dernier cylindre dans le réservoir et on le sort
-        //  reservoir.sortir(Equipe);
-
-   //       bras.lacher(Equipe);
-        //  reservoir.tourner(Equipe);
-       //   reservoir.sortir(Equipe);
-          Debug.Print("DeposerCylindre");
-
-          return true;
-        }
-
-  /*private bool DeployerParachute()  NE PAS OUBLIER LA FUNNY ACTION
-        {
-            Tracage.Ecrire("Attente de la fin du temps imparti");
-            while ((DateTime.Now - InstantDebut).Ticks < new TimeSpan(0, 1, 30).Ticks)
-                Thread.Sleep(1);
-
-            Tracage.Ecrire("Deploiement du parasol");
-            Parasol.deployer();
+            Debug.Print("DeposerCylindre");
+            m_ihm.retourPhase(Couleurs.orange);
 
             return true;
-        }*/
+        }
 
         private void InitialiserStrategie()
         {
             Debug.Print("stratégie active");
 
             Strategie.Ajouter(new ActionRobot(SortirZoneDepart, ()=>true, ()=> 100, executionUnique: true));
-            /*Permet de gérer l'enchaînement des actions : on ajoute une par une les actions qu'on veut exécuter, sous la forme
-            new ActionRobot(nom, condition, priorité, exécution unique (tous ces param sauf le nom sont optionnels)). La condition
-            est soit une fonction booléenne du type de celles au-dessus  (la suivante n'est exécutée que si la précédente a été appelée
-            avant), soit une condition temporelle du type ci-dessous dans le code P14*/
-
-        #if HOMOLOGATION
-              return;
-        #endif
-            Strategie.Ajouter(new ActionRobot(RecupererCylindre1, ()=>true, () => 100 - cylindresRecup, true));
-            Strategie.Ajouter(new ActionRobot(RecupererCylindresFusee, () => true, () => 100 - cylindresRecup, true));
-            Strategie.Ajouter(new ActionRobot(RecupererCylindre2, () => true, () => 100 - cylindresRecup, true));
-            Strategie.Ajouter(new ActionRobot(DeposerCylindres, () => true, () => 100 - cylindresRecup - 1, true));
-
+            Strategie.Ajouter(new ActionRobot(RecupererCylindre1, ()=>true, () => 100, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindresFusee, () => true, () => 99, true));
+            Strategie.Ajouter(new ActionRobot(RecupererCylindre2, () => true, () => 95, true));
+            Strategie.Ajouter(new ActionRobot(DeposerCylindres, () => true, () => 94, true));
 
         }
-
-
-
-
-
-
-
-
-
-
 
 
         //CODE POUR FAIRE UNE DÉMO!!!!!!!!!!! (pas d'action des servos moteurs, seulement des mouvements)
@@ -289,7 +196,7 @@ namespace GR
           Tracage.Ecrire("Sortie de la zone de depart");
 
           Tourner(12);
-          bool SortieOK = AllerEn(341, Equipe == Couleur.Bleu ? 946 : 2054, sens.avancer) == etat.arrive;
+          bool SortieOK = AllerEn(341, m_etatRobot.couleurEquipe == Couleur.Bleu ? 946 : 2054, sens.avancer) == etat.arrive;
           //on prend la convention Couleur.Bleu == zone de départ bleue, sinon zone de départ jaune ; en cm pour l'instant, à voir ! Attention aussi aux conventions de repère, ici on a pris y vers le bas et angle positif en sens horaire mais pas forcément vrai
           //rappeler à PED de coder etat car permet savoir si arrive/perdu... et adapter le nom en fonction de ce qu'il choisit
 
@@ -304,7 +211,7 @@ namespace GR
           cylindresRecup++; //À CODER (pas essentiel) : un entier haut niveau qui compte le nombre de cylindres déjà récupérés
 
           Tracage.Ecrire("Recuperation du 1er cylindre");
-          Tourner(Equipe==Couleur.Bleu ? 78 : -78);
+          Tourner(m_etatRobot.couleurEquipe==Couleur.Bleu ? 78 : -78);
           return true;
         }
 
@@ -314,9 +221,9 @@ namespace GR
 
           Tracage.Ecrire("Positionnement devant la fusee et recuperation des 4 cylindres");
 
-          AllerEn(341,Equipe==Couleur.Bleu ? 1150 : 1850, sens.avancer);
-          Tourner(Equipe==Couleur.Bleu ? 90 : -90);
-          AllerEn(310, Equipe==Couleur.Bleu ? 1150 : 1850, sens.avancer);
+          AllerEn(341,m_etatRobot.couleurEquipe==Couleur.Bleu ? 1150 : 1850, sens.avancer);
+          Tourner(m_etatRobot.couleurEquipe==Couleur.Bleu ? 90 : -90);
+          AllerEn(310, m_etatRobot.couleurEquipe==Couleur.Bleu ? 1150 : 1850, sens.avancer);
 
           return true;
         }
@@ -327,12 +234,12 @@ namespace GR
 
           Tracage.Ecrire("Recuperation du 2eme cylindre");
 
-          AllerEn(850,1150, Equipe==Couleur.Bleu ? sens.avancer : sens.reculer);
+          AllerEn(850,1150, m_etatRobot.couleurEquipe==Couleur.Bleu ? sens.avancer : sens.reculer);
           Tourner(180);
-          Tourner(Equipe==Couleur.Bleu ? -45 : 45);
-          AllerEn(1100, Equipe==Couleur.Bleu ? 900 : 2100, sens.avancer);
-          Tourner(Equipe==Couleur.Bleu ? 45 : -45);
-          AllerEn(1136, Equipe==Couleur.Bleu ? 900 : 2100);
+          Tourner(m_etatRobot.couleurEquipe==Couleur.Bleu ? -45 : 45);
+          AllerEn(1100, m_etatRobot.couleurEquipe==Couleur.Bleu ? 900 : 2100, sens.avancer);
+          Tourner(m_etatRobot.couleurEquipe==Couleur.Bleu ? 45 : -45);
+          AllerEn(1136, m_etatRobot.couleurEquipe==Couleur.Bleu ? 900 : 2100);
 
           return true;
         }
@@ -343,11 +250,11 @@ namespace GR
 
           Tracage.Ecrire("Depot des cylindres");
 
-          AllerEn(1125, Equipe==Couleur.Equipe ? 900 : 2100, sens.reculer);
-          Tourner(Equipe==Couleur.Bleu ? -45 : 45);
-          AllerEn(1275, Equipe==Couleur.Bleu ? 750 : 2250, sens.avancer);
-          Tourner(Equipe==Couleur.Bleu ? -90 : 90);
-          AllerEn(1427, Equipe==Couleur.Bleu ? 927 : 2073, sens.reculer);
+          AllerEn(1125, m_etatRobot.couleurEquipe==Couleur.m_etatRobot.couleurEquipe ? 900 : 2100, sens.reculer);
+          Tourner(m_etatRobot.couleurEquipe==Couleur.Bleu ? -45 : 45);
+          AllerEn(1275, m_etatRobot.couleurEquipe==Couleur.Bleu ? 750 : 2250, sens.avancer);
+          Tourner(m_etatRobot.couleurEquipe==Couleur.Bleu ? -90 : 90);
+          AllerEn(1427, m_etatRobot.couleurEquipe==Couleur.Bleu ? 927 : 2073, sens.reculer);
 
 
           return true;

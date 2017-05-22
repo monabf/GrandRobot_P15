@@ -11,22 +11,36 @@
 namespace GR {
     using Gadgeteer;
     using GTM = Gadgeteer.Modules;
-    
-    
-    public partial class Program : Gadgeteer.Program {
-        
+
+
+    public partial class Program : Gadgeteer.Program
+    {
+
+        /// <summary>The USB Client DP module using socket 1 of the mainboard.</summary>
+        private Gadgeteer.Modules.GHIElectronics.USBClientDP usbClientDP;
+
+        /// <summary>The Display TE35 module using sockets 14, 13, 12 and 10 of the mainboard.</summary>
+        private Gadgeteer.Modules.GHIElectronics.DisplayTE35 displayTE35;
+
+        /// <summary>The Display TE35 module (not connected).</summary>
+        private Gadgeteer.Modules.GHIElectronics.DisplayTE35 displayTE352;
+
         /// <summary>This property provides access to the Mainboard API. This is normally not necessary for an end user program.</summary>
-        protected new static GHIElectronics.Gadgeteer.FEZSpider Mainboard {
-            get {
+        protected new static GHIElectronics.Gadgeteer.FEZSpider Mainboard
+        {
+            get
+            {
                 return ((GHIElectronics.Gadgeteer.FEZSpider)(Gadgeteer.Program.Mainboard));
             }
-            set {
+            set
+            {
                 Gadgeteer.Program.Mainboard = value;
             }
         }
-        
+
         /// <summary>This method runs automatically when the device is powered, and calls ProgramStarted.</summary>
-        public static void Main() {
+        public static void Main()
+        {
             // Important to initialize the Mainboard first
             Program.Mainboard = new GHIElectronics.Gadgeteer.FEZSpider();
             Program p = new Program();
@@ -35,8 +49,12 @@ namespace GR {
             // Starts Dispatcher
             p.Run();
         }
-        
-        private void InitializeModules() {
+
+        private void InitializeModules()
+        {
+            this.usbClientDP = new GTM.GHIElectronics.USBClientDP(1);
+            this.displayTE35 = new GTM.GHIElectronics.DisplayTE35(14, 13, 12, 10);
+            Microsoft.SPOT.Debug.Print("The module \'displayTE352\' was not connected in the designer and will be null.");
         }
     }
 }

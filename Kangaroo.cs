@@ -193,7 +193,7 @@ namespace GR.BR
 
 
 
-        public bool tourner(double angle)
+        public bool Tourner(double angle)
         {
             String commande;
             bool retour = false;

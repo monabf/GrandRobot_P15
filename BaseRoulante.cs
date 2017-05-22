@@ -31,7 +31,7 @@ namespace GR.BR
         public CKangaroo m_kangaroo;
         public positionBaseRoulante m_posBR;
         public etatBR m_status = 0;
-        RelayX1 relai = new RelayX1(10);//@P16 : valeur à changer
+      //  RelayX1 relai = new RelayX1(9);//@P16 : valeur à changer
 
         public CBaseRoulante(int numPort)
         {
@@ -48,17 +48,15 @@ namespace GR.BR
         {
             if (c == Couleur.Bleu)
             {
-                //NB: constantes à modifier
                 m_posBR.x = 200;//30 //85
                 m_posBR.y = 920;//157 //157
                 m_posBR.alpha = 0;//0 //0
             }
             else
             {
-                // idem
-                m_posBR.x = 244;
-                m_posBR.y = 2500;
-                m_posBR.alpha = -90;//-
+                m_posBR.x = 2800;
+                m_posBR.y = 920;
+                m_posBR.alpha = 0;
             }
         }
 
@@ -141,7 +139,7 @@ namespace GR.BR
             return beta;
         }
 
-        public etatBR tourner(int alphaConsigne)
+        public etatBR Tourner(int alphaConsigne)
         {
 
             int erreur = 0;
@@ -149,7 +147,7 @@ namespace GR.BR
             double delta = 0;
             m_status = 0;
             Debug.Print("BR 174 Avant Kangaroo");
-            m_kangaroo.tourner(alphaConsigne);
+            m_kangaroo.Tourner(alphaConsigne);
             Debug.Print("BR 176 Après Kangaroo");
             Debug.Print("status " + (m_status != etatBR.arrive && m_status != etatBR.bloque && m_status != etatBR.stope));
 
@@ -167,9 +165,9 @@ namespace GR.BR
                 if (erreur.Equals(0xE3))
                 {
                     m_status = etatBR.bloque;
-                    relai.TurnOn();
+                    //relai.TurnOn();
                     Thread.Sleep(1000);
-                    relai.TurnOff();
+                    //relai.TurnOff();
                     Thread.Sleep(1000);
                     m_kangaroo.init();
                 }
@@ -188,7 +186,7 @@ namespace GR.BR
             //m_posBR.alpha = m_posBR.alpha + alphaReel;
             m_posBR.alpha = m_posBR.alpha + alphaConsigne;
 
-            //QUOI QU'IL ARRIVE on réactualise l'angle en l'indentant de combien on vient de tourner
+            //QUOI QU'IL ARRIVE on réactualise l'angle en l'indentant de combien on vient de Tourner
             return m_status;
          }
 
@@ -209,9 +207,9 @@ namespace GR.BR
                 alphaConsigne = (int)(alphaConsigne + 180);
             }
             alphaConsigne = recallerAngle(alphaConsigne);
-            //   m_status= tourner(alphaConsigne);  
+            //   m_status= Tourner(alphaConsigne);  
             m_status = 0;
-            m_kangaroo.tourner(alphaConsigne);
+            m_kangaroo.Tourner(alphaConsigne);
             //attente d'être arrive ou bloque ou stoppe
             do
             {
@@ -223,9 +221,9 @@ namespace GR.BR
                 {
                     alphaReel = alphaReel_tm1;
                     m_status = etatBR.bloque;
-                    relai.TurnOn();
+                    //relai.TurnOn();
                     Thread.Sleep(1000);
-                    relai.TurnOff();
+                    //relai.TurnOff();
                     Thread.Sleep(1000);
                     m_kangaroo.init();
                 }
@@ -281,9 +279,9 @@ namespace GR.BR
                 {
                     distanceReelle = distanceReelle_tm1;
                     m_status = etatBR.bloque;
-                    relai.TurnOn();
+                    //relai.TurnOn();
                     Thread.Sleep(1000);
-                    relai.TurnOff();
+                    //relai.TurnOff();
                     Thread.Sleep(1000);
                     m_kangaroo.init();
 
@@ -299,7 +297,6 @@ namespace GR.BR
             /*  m_kangaroo.powerdown(mode.drive);
               m_kangaroo.powerdown(mode.turn);
               m_kangaroo.init();*/
-            m_kangaroo.start(mode.drive);
 
             return m_status;
         }
@@ -323,10 +320,10 @@ namespace GR.BR
                 alphaConsigne = (int)(alphaConsigne + 180);
             }
             alphaConsigne = recallerAngle(alphaConsigne);
-            //   m_status= tourner(alphaConsigne);  
+            //   m_status= Tourner(alphaConsigne);  
             m_status = 0;
             int a = 1;
-            m_kangaroo.tourner(alphaConsigne);
+            m_kangaroo.Tourner(alphaConsigne);
             //attente d'être arrive ou bloque ou stoppe
             do
             {
@@ -337,9 +334,9 @@ namespace GR.BR
                 {
                     alphaReel = alphaReel_tm1;
                     m_status = etatBR.bloque;
-                    relai.TurnOn();
+                    //relai.TurnOn();
                     Thread.Sleep(1000);
-                    relai.TurnOff();
+                    //relai.TurnOff();
                     Thread.Sleep(1000);
                     m_kangaroo.init();
                 }
@@ -405,9 +402,9 @@ namespace GR.BR
                 {
                     distanceReelle = distanceReelle_tm1;
                     m_status = etatBR.bloque;
-                    relai.TurnOn();
+                    //relai.TurnOn();
                     Thread.Sleep(1000);
-                    relai.TurnOff();
+                    //relai.TurnOff();
                     Thread.Sleep(1000);
                     m_kangaroo.init();
 
@@ -419,19 +416,16 @@ namespace GR.BR
             m_posBR.alpha = m_posBR.alpha + alphaReel;
             m_posBR.x = m_posBR.x + (int)((-distanceReelle - (int)distanceSF) * System.Math.Cos(m_posBR.alpha * System.Math.PI / 180));//distanceReelle + (int)distanceSF
             m_posBR.y = m_posBR.y + (int)((-distanceReelle - (int)distanceSF) * System.Math.Sin(m_posBR.alpha * System.Math.PI / 180));//distanceReelle + (int)distanceSF
-            /*  m_kangaroo.powerdown(mode.drive);
-              m_kangaroo.powerdown(mode.turn);
-              m_kangaroo.init();*/
             return m_status;
         }
 
 
-        /*  public void tourner(int angle)
+        /*  public void Tourner(int angle)
           {
               int posCodeur = 0;
               int alpha = 0;
                        
-              m_kangaroo.tourner(angle);
+              m_kangaroo.Tourner(angle);
               m_kangaroo.getPosition(mode.turn, ref posCodeur);
               alpha = (int)(posCodeur / (int)unite.degre);
               m_posBR.alpha = m_posBR.alpha + alpha;

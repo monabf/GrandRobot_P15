@@ -7,6 +7,7 @@ using GHI.Glide;
 using GHI.Glide.Display;
 using GHI.Glide.UI;
 using System.Threading;
+using Grand_Robot;
 
 enum Couleurs { rouge, orange, jaune, vert, bleu, indigo, violet };
 namespace GR
@@ -140,7 +141,7 @@ namespace GR
                                                            TexteDispo.Invalidate(); });
 
             BoutonDispo2.TapEvent += new OnTap(sender => { m_disposition = 2;
-                                                           TexteDispo.Text = "Dispo. no. 2";
+                                                           TexteDispo.Text = "Match";
                                                            fenetreSelection.FillRect(TexteDispo.Rect);
                                                            TexteDispo.Invalidate(); });
 

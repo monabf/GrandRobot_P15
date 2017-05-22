@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GR
+namespace Grand_Robot
 {
     
     internal partial class Resources

@@ -2,7 +2,7 @@ using System;
 
 namespace GR
 {
-    enum Couleur { Null = 0, Bleu, Jaune, Vert, Violet, Neutre }
+    enum Couleur { Null = 0, Bleu, Jaune, Neutre }
 
     struct Vecteur2
     {
