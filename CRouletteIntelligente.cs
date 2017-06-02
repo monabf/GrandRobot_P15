@@ -7,7 +7,7 @@ namespace GR.Membres
   class CRouletteIntelligente
   {
 
-    CAX12 m_ax12Roulette;
+    public CAX12 m_ax12Roulette;
     CCapteurCouleur m_capteurCouleur;
 
     public CRouletteIntelligente(CCapteurCouleur capteurCouleur, CAX12 ax12Roulette)
@@ -15,6 +15,11 @@ namespace GR.Membres
       m_capteurCouleur = capteurCouleur;
       m_ax12Roulette = ax12Roulette;
       m_ax12Roulette.setMode(AX12Mode.wheel);
+    }
+
+    public CAX12 getRoulette()
+    {
+        return m_ax12Roulette;
     }
 
     public void mettreBonneCouleur(Couleur equipe) {

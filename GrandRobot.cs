@@ -32,8 +32,8 @@ namespace GR
 
     partial class GrandRobot
     {
-       const int Y_TABLE = 2000;
-       const int X_TABLE = 3000;
+       const int Y_TABLE = 3000;
+       const int X_TABLE = 2000;
        public enum Axe { Null = 0, X, Y }
 
         public  GestionnaireStrategie Strategie;
@@ -57,6 +57,9 @@ namespace GR
         public DateTime InstantDebut;
         public int cylindresRecup = 0;
 
+        public int deltafusee = 10;
+
+
         public GrandRobot(ConfigurationPorts ports, Couleur equipe, int disposition, IHM ihm)
         {
             m_ihm = ihm;
@@ -75,12 +78,13 @@ namespace GR
             controleurAX12 = new ControleurAX12(ports.contAX12);
             Debug.Print("Controleur actif");
             pince = new CPince(controleurAX12, ports.pince);
-            funnyBras = new CFunnyBras(controleurAX12, ports.funnyBras);
+            //funnyBras = new CFunnyBras(controleurAX12, ports.funnyBras);
             Debug.Print("funny bras actif");
             bras = new CBras(controleurAX12, ports.bras);
             reservoir = new CReservoir(m_etatRobot.couleurEquipe, controleurAX12, ports.reservoir);
             Debug.Print("reservoir actif");
 
+            // à la date d'aujourd'hui, veille de la coupe, l'infrarouge avant gauche ne marche pas
             IR = new GroupeInfrarouge(ports.IO, ports.InfrarougeAVD, ports.InfrarougeAVG, ports.InfrarougeARD, ports.InfrarougeARG);
             Debug.Print("infrarouge actif");
             // NB : il n'y a pas de capteur ultrason sur notre grand robot
@@ -101,17 +105,18 @@ namespace GR
         public void AttendreJack()
         {
             while (!JackDemarrage.Etat) Thread.Sleep(1);
+            Debug.Print(JackDemarrage.Etat+" plop jzck");
+            m_ihm.retourPhase(Couleurs.vert);
+
         }
 
-        /// <summary>
-        /// Démarre asynchronement le robot
-        /// </summary>
         /// <param name="tempsImparti">Temps en secondes au bout du quel l'arrêt du robot est forcé</param>
         public void Demarrer(double tempsImparti)
         {
             
             Timer timeout;
             DateTime fin = new DateTime();
+            /*
             var thDecompte = new Thread(() =>
             {
                 while (Strategie.ExecutionPossible() && DateTime.Now < fin)
@@ -120,28 +125,87 @@ namespace GR
                     Thread.Sleep(10000);
                 }
             });
+           */
             InitialiserStrategie();
 
-            var thStrat = new Thread(() => EffectuerStrategie());
+            Thread thStrat = new Thread(() => EffectuerStrategie());
+
 
             InstantDebut = DateTime.Now;
             fin = InstantDebut.AddSeconds(tempsImparti);
 
 
-            thDecompte.Start();
+//            thDecompte.Start();
             thStrat.Start();
+         //   if (thStrat.IsAlive) m_ihm.retourPhase(Couleurs.bleu); 
 
             timeout = new Timer(state =>
             {
+                m_ihm.retourPhase(Couleurs.orange);
+
             //    Tracage.Ecrire("Fin du temps imparti.");
+
+                /*if (thRanger.IsAlive)
+                {
+                    Debug.Print("plop ran");
+                    thRanger.Suspend();
+                }
+
+                if (thReservoir.IsAlive)
+                {
+                    Debug.Print("plop res 1");
+                    thReservoir.Suspend();
+                }
+                 * */
+               
+
+                
+
+               // reservoir.arretUrgenceRoulette();
+/*
+                Thread thFunny = new Thread(() =>
+                {
+                    Thread.Sleep(3000);
+                    funnyBras.lancer();
+                });
+
+                thFunny.Start();
+ */
+
+                funnyBras = new CFunnyBras(controleurAX12, 7);
+                Thread.Sleep(2000);
+                funnyBras.lancer();
+
+                m_ihm.retourPhase(Couleurs.rouge);
+
+                BaseRoulante.stop();
+                m_ihm.retourPhase(Couleurs.vert);
+
+                pince.killPince();
+                bras.killBras();
+                reservoir.killReservoir();
+
                 if (thStrat.IsAlive)
                 {
                     Debug.Print("kill main thread");
                     thStrat.Abort();
                 }
-                BaseRoulante.stop();
-                Thread.Sleep(3000);
-                funnyBras.lancer();
+                
+
+                m_ihm.retourPhase(Couleurs.bleu);
+
+
+                //reservoir.m_rouletteIntelligente.m_ax12Roulette.setMode(AX12Mode.joint);
+                //reservoir.m_rouletteIntelligente.m_ax12Roulette.
+                    /*  var thBase = new Thread(() =>
+                {
+                });
+                thBase.Start();
+                var thReservoir = new Thread(() =>
+                {
+                });
+                thReservoir.Start();
+                */
 
             }, null, (int)(tempsImparti * 1000), -1);
         }
@@ -170,7 +234,7 @@ namespace GR
             return m_etatRobot.disposition;
         }  
 
-        etatBR robotGoToXY(ushort x, ushort y, sens s, bool boolDetection = false, int speed = 3)
+        etatBR robotGoToXY(ushort x, ushort y, sens s, bool boolDetection = false, int speed = 2)
         {
             etatBR retour;
             if (boolDetection)
@@ -214,7 +278,7 @@ namespace GR
                 if ((!IR.AVG.Read() || !IR.AVD.Read()))// infrarouge OK.. et c'est une condition et && obstacleUS
                 {
                     obstacle = true;
-                                    }
+                }
                 else obstacle = false;
 
             }

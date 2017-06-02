@@ -1,4 +1,3 @@
-
 using GR.Membres;
 namespace GR
 {

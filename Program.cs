@@ -45,17 +45,12 @@ namespace GR
 
             // attente du jack
             robot.AttendreJack();
+
             Debug.Print("on n'attend plus !");
             // démarre le robot
             robot.Demarrer(90d);
             Debug.Print("demarrage ok");
         }
-        /*
 
-        private void SelectionEffectuee(object sender, EventArgs e)
-        {
-            SelectionValidee = selection.Equipe != Couleur.Null && selection.Disposition > 0;
-        }
-         * */
     }
 }

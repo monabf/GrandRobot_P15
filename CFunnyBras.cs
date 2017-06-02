@@ -18,6 +18,7 @@ namespace GR.Membres
         public CFunnyBras(ControleurAX12 controleur, byte idAx12FunnyBras)
         {
             m_ax12FunnyBras = new CAX12(idAx12FunnyBras, controleur.m_port, controleur.m_direction);
+            m_ax12FunnyBras.setMode(AX12Mode.joint);
 
         }
 

@@ -1,6 +1,7 @@
 using System;
 using Microsoft.SPOT;
 
+using GR;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using Gadgeteer.Modules.GHIElectronics;
@@ -44,6 +45,13 @@ namespace GR.BR
 
         }
 
+        public void setPosition(int x, int y, int alpha)
+        {
+            m_posBR.x = x;
+            m_posBR.y = y;
+            m_posBR.alpha = alpha;
+        }
+
         public void setCouleur(Couleur c)
         {
             if (c == Couleur.Bleu)
@@ -54,19 +62,21 @@ namespace GR.BR
             }
             else
             {
-                m_posBR.x = 2800;
-                m_posBR.y = 920;
+                m_posBR.x = 200;
+                m_posBR.y = 3000 - 920;
                 m_posBR.alpha = 0;
             }
         }
+
+
 
         public void recalagePosX(int angle, int x, int speed, sens s, int temps)
         {
 
             m_posBR.alpha = angle;
             m_posBR.x = x;
-
-            m_kangaroo.allerEn((int)(s) * 100, speed, unite.mm);
+            // essaye de s'avancer 10 cm
+            m_kangaroo.allerEn((int)(s) * 150, speed, unite.mm);
             Thread.Sleep(temps);
             m_kangaroo.start(mode.drive);
 
@@ -77,8 +87,8 @@ namespace GR.BR
 
             m_posBR.alpha = angle;
             m_posBR.y = y;
-
-            m_kangaroo.allerEn((int)(s) * 100, speed, unite.mm);
+            // essaye de s'avancer 10 cm
+            m_kangaroo.allerEn((int)(s) * 150, speed, unite.mm);
             Thread.Sleep(temps);
             m_kangaroo.start(mode.drive);
 
@@ -174,7 +184,7 @@ namespace GR.BR
                 else
                 {
                     delta = System.Math.Abs(alphaConsigne - alphaReel);
-                    if (delta <= 3)
+                    if (delta < 3)
                     {
                         m_status = etatBR.arrive;
                         Thread.Sleep(500);
@@ -222,9 +232,9 @@ namespace GR.BR
                     alphaReel = alphaReel_tm1;
                     m_status = etatBR.bloque;
                     //relai.TurnOn();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     //relai.TurnOff();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     m_kangaroo.init();
                 }
                 else
@@ -232,10 +242,11 @@ namespace GR.BR
 
                     delta = System.Math.Abs(alphaConsigne - alphaReel);
                     Debug.Print("delta " + delta);
-                    if (delta < 5)
+                    if (delta < 3)
                     {
                         m_status = etatBR.arrive;
-                        Thread.Sleep(500);
+                        // pour l'inertie
+                        Thread.Sleep(100);
                         getAngleTourne(ref alphaReel);
                     }
                 }
@@ -267,11 +278,10 @@ namespace GR.BR
                     dureeBlocage = 0;
 
                 delta = System.Math.Abs(distanceConsigne - distanceReelle);
-                Debug.Print("+delta"+delta);
-                if (delta < 5)//5
+                if (delta < 3)//5
                 {
                     m_status = etatBR.arrive;
-                    Thread.Sleep(1000);
+                    Thread.Sleep(200);
                     erreur = getDistanceParcourue(ref distanceReelle);
                 }
 
@@ -280,9 +290,9 @@ namespace GR.BR
                     distanceReelle = distanceReelle_tm1;
                     m_status = etatBR.bloque;
                     //relai.TurnOn();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     //relai.TurnOff();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     m_kangaroo.init();
 
 
@@ -335,19 +345,19 @@ namespace GR.BR
                     alphaReel = alphaReel_tm1;
                     m_status = etatBR.bloque;
                     //relai.TurnOn();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     //relai.TurnOff();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     m_kangaroo.init();
                 }
                 else
                 {
 
                     delta = System.Math.Abs(alphaConsigne - alphaReel);
-                    if (delta < 5)
+                    if (delta < 3)
                     {
                         m_status = etatBR.arrive;
-                        Thread.Sleep(500);
+                        Thread.Sleep(200);
                         getAngleTourne(ref alphaReel);
                     }
                 }
@@ -368,7 +378,9 @@ namespace GR.BR
                     m_kangaroo.start(mode.drive);
                     distanceSF += distanceStop;
                     while (GrandRobot.obstacle) Thread.Sleep(100);
-                    m_kangaroo.allerEn(distanceConsigne + distanceSF, speed, unite.mm);//distanceConsigne - distanceSF
+                    Debug.Print(distanceSF+"");
+                   // m_kangaroo.allerEn(distanceConsigne + distanceSF, speed, unite.mm);//distanceConsigne - distanceSF
+                    allerDect(x, y, s);
                     Debug.Print("sortie de la fonction check");
 
                 }
@@ -390,11 +402,10 @@ namespace GR.BR
                     dureeBlocage = 0;
 
                 delta = System.Math.Abs(distanceConsigne - distanceReelle - (int)distanceSF);//(int) s*distanceSF
-                Debug.Print("delta " + delta);
-                if (delta < 5)
+                if (delta < 3)
                 {
                     m_status = etatBR.arrive;
-                    Thread.Sleep(1000);
+                    Thread.Sleep(200);
                     erreur = getDistanceParcourue(ref distanceReelle);
                 }
 
@@ -403,9 +414,9 @@ namespace GR.BR
                     distanceReelle = distanceReelle_tm1;
                     m_status = etatBR.bloque;
                     //relai.TurnOn();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     //relai.TurnOff();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     m_kangaroo.init();
 
 

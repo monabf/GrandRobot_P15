@@ -30,7 +30,15 @@ namespace GR
       {
           m_ax12BrasSupport = new CAX12(config.idAx12BrasSupport, controleur.m_port, controleur.m_direction);
           m_ax12BrasModule = new CAX12(config.idAx12BrasModule, controleur.m_port, controleur.m_direction);
-                }
+          m_ax12BrasModule.setMode(AX12Mode.joint);
+          m_ax12BrasSupport.setMode(AX12Mode.joint);
+      }
+
+      public void killBras()
+      {
+          m_ax12BrasSupport.setMode(AX12Mode.wheel);
+          m_ax12BrasModule.setMode(AX12Mode.wheel);
+      }
 
       public void Descendre(Couleur equipe)
       {
@@ -51,7 +59,7 @@ namespace GR
       public void Lacher(Couleur equipe)
       {
           m_ax12BrasModule.move((int) positionBras.ouverte);
-          Thread.Sleep(50);
+          Thread.Sleep(150);
       }
 
 

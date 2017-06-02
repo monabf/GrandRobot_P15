@@ -3,6 +3,8 @@ using System;
 namespace GR
 {
     enum Couleur { Null = 0, Bleu, Jaune, Neutre }
+    enum Table { X_TABLE = 2000, Y_TABLE = 3000}
+
 
     struct Vecteur2
     {

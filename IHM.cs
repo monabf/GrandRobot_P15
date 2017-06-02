@@ -125,23 +125,23 @@ namespace GR
 
             BoutonBleu.TapEvent += new OnTap(sender => { m_equipe = Couleur.Bleu;
                                                          TexteCouleur.Text = "Equipe bleue";
-                                                         TexteCouleur.BackColor = (Color)0x1E7FCB;
+                                                         TexteCouleur.BackColor = (Color)0xE8D630;
                                                          fenetreSelection.FillRect(TexteCouleur.Rect);
                                                          TexteCouleur.Invalidate(); });
 
             BoutonJaune.TapEvent += new OnTap(sender => { m_equipe = Couleur.Jaune;
                                                            TexteCouleur.Text = "Equipe jaune";
-                                                           TexteCouleur.BackColor = (Color)0xE8D630;
+                                                           TexteCouleur.BackColor = (Color)0x1E7FCB;
                                                            fenetreSelection.FillRect(TexteCouleur.Rect);
                                                            TexteCouleur.Invalidate(); });
 
             BoutonDispo1.TapEvent += new OnTap(sender => { m_disposition = 1;
-                                                           TexteDispo.Text = "Homologation";
+                                                           TexteDispo.Text = "Stratégie 1";
                                                            fenetreSelection.FillRect(TexteDispo.Rect);
                                                            TexteDispo.Invalidate(); });
 
             BoutonDispo2.TapEvent += new OnTap(sender => { m_disposition = 2;
-                                                           TexteDispo.Text = "Match";
+                                                           TexteDispo.Text = "Stratégie 2";
                                                            fenetreSelection.FillRect(TexteDispo.Rect);
                                                            TexteDispo.Invalidate(); });
 
